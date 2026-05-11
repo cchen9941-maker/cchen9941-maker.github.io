@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="鎴樼暐璁?鈥?鍏ㄥ钩鍙拌嚜濯掍綋杩愯惀 / 鐢靛奖瀹ｅ彂鍓緫 / 瑙嗚涓浗绛剧害鎽勫奖甯堛€傚悎浣滅幆鐞冨奖涓氥€佷竾杈剧數褰便€佺尗鐪笺€?>
+<title>鎴樼暐璁?路 鍐呭鍒涗綔鑰?& 鐢靛奖鍓緫</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600&family=Inter:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#1a1614;--surface:#241f1b;--surface2:#2d2620;
+  --text:#e8e0d5;--muted:#a89880;--subtle:#6b5e50;
+  --gold:#c4a25a;--gold-dim:#8a6e3a;--gold-glow:rgba(196,162,90,.12);
+  --green:#5a7a4a;--green-dark:#3a5030;--green-glow:rgba(90,122,74,.1);
+  --burgundy:#7a3a3a;--cream:#f0e6d3;
+  --radius:8px;--radius-lg:16px;--radius-xl:24px;
+  --spring:.5s cubic-bezier(.34,1.56,.64,1);
+  --ease:.4s cubic-bezier(.4,0,.2,1);
+}
+html{font-size:16px;-webkit-font-smoothing:antialiased;scroll-behavior:smooth}
+body{
+  font-family:'Inter',-apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei',sans-serif;
+  background:var(--bg);color:var(--text);line-height:1.7;overflow-x:hidden;
+  background-image:url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='60' height='60' filter='url(%23n)' opacity='.03'/%3E%3C/svg%3E");
+}
+::-webkit-scrollbar{width:5px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--subtle);border-radius:3px}
+
+/* ===== TYPOGRAPHY ===== */
+h1,h2,h3,.serif{font-family:'Playfair Display','Cormorant Garamond',serif}
+
+/* ===== NAV ===== */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  background:rgba(26,22,20,.9);backdrop-filter:blur(20px);
+  border-bottom:1px solid rgba(196,162,90,.08);
+  display:flex;justify-content:center;gap:36px;padding:18px 24px;
+}
+nav a{
+  color:var(--muted);text-decoration:none;font-size:12px;font-weight:500;
+  letter-spacing:.1em;text-transform:uppercase;transition:all var(--ease);
+  position:relative;
+}
+nav a::after{
+  content:'';position:absolute;bottom:-4px;left:50%;transform:translateX(-50%);
+  width:0;height:1px;background:var(--gold);transition:width var(--ease);
+}
+nav a:hover{color:var(--cream)}
+nav a:hover::after{width:100%}
+
+/* ===== BOTANICAL DIVIDER ===== */
+.botanical-divider{
+  display:flex;align-items:center;justify-content:center;gap:16px;
+  margin:0 auto;padding:8px 0;opacity:.5;
+}
+.botanical-divider .line{width:60px;height:1px;background:var(--gold-dim)}
+.botanical-divider svg{width:24px;height:24px;fill:none;stroke:var(--gold-dim);stroke-width:1.2}
+
+/* ===== SECTIONS ===== */
+section{padding:100px 24px;max-width:960px;margin:0 auto}
+@media(max-width:768px){section{padding:64px 20px}}
+
+.section-label{
+  font-size:10px;font-weight:600;letter-spacing:.14em;color:var(--gold);
+  text-transform:uppercase;margin-bottom:12px;
+}
+.section-title{
+  font-size:clamp(28px,4vw,40px);font-weight:700;letter-spacing:-.02em;
+  margin-bottom:12px;line-height:1.2;
+}
+.section-subtitle{font-size:15px;color:var(--muted);margin-bottom:48px;max-width:500px}
+
+/* ===== HERO ===== */
+.hero{
+  min-height:100vh;display:flex;flex-direction:column;justify-content:center;
+  padding:120px 24px 80px;max-width:960px;margin:0 auto;position:relative;
+}
+.hero-ornament{
+  position:absolute;pointer-events:none;opacity:.06;
+}
+.hero-ornament.tl{top:80px;left:0;width:120px;height:120px}
+.hero-ornament.br{bottom:40px;right:0;width:160px;height:160px}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:8px 20px;border-radius:2px;
+  border:1px solid var(--gold-dim);color:var(--gold);
+  font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;
+  margin-bottom:36px;animation:fadeUp .8s ease-out;
+  background:rgba(196,162,90,.03);
+}
+.hero h1{font-size:clamp(42px,8vw,80px);font-weight:800;letter-spacing:-.03em;line-height:1.05;margin-bottom:20px;animation:fadeUp .8s ease-out .1s backwards}
+.hero h1 em{font-style:italic;color:var(--gold);font-weight:400}
+.hero .tagline{font-size:17px;color:var(--muted);max-width:500px;margin-bottom:48px;line-height:1.7;animation:fadeUp .8s ease-out .2s backwards}
+.hero-stats{display:flex;gap:48px;flex-wrap:wrap;animation:fadeUp .8s ease-out .3s backwards}
+.hero-stat{cursor:default}
+.hero-stat .num{font-size:38px;font-weight:700;color:var(--gold);letter-spacing:-.02em;font-family:'Playfair Display',serif}
+.hero-stat .lbl{font-size:11px;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;margin-top:4px}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+
+/* ===== ABOUT CARDS ===== */
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+@media(max-width:768px){.about-grid{grid-template-columns:1fr}}
+.about-card{
+  background:var(--surface);border:1px solid rgba(196,162,90,.06);
+  border-radius:var(--radius-lg);padding:32px 28px;
+  transition:all var(--ease);position:relative;overflow:hidden;
+  cursor:default;
+}
+.about-card::before{
+  content:'';position:absolute;top:0;left:0;width:3px;height:100%;
+  background:linear-gradient(180deg,var(--gold-dim),transparent);
+  opacity:0;transition:opacity var(--ease);
+}
+.about-card:hover{border-color:rgba(196,162,90,.15);transform:translateY(-3px);box-shadow:0 12px 40px rgba(0,0,0,.3)}
+.about-card:hover::before{opacity:1}
+.about-card .card-icon{font-size:28px;margin-bottom:16px;opacity:.7}
+.about-card h4{font-size:16px;font-weight:600;margin-bottom:8px;font-family:'Playfair Display',serif}
+.about-card p{font-size:13px;color:var(--muted);line-height:1.8}
+
+/* ===== SKILL BARS ===== */
+.skills-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:20px}
+.skill-item{
+  background:var(--surface);border:1px solid rgba(90,122,74,.06);
+  border-radius:var(--radius-lg);padding:24px;
+  cursor:default;transition:all var(--ease);
+}
+.skill-item:hover{border-color:var(--green-dark);box-shadow:0 8px 32px rgba(0,0,0,.25);transform:translateY(-3px)}
+.skill-item .skill-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.skill-item .skill-name{font-size:14px;font-weight:600}
+.skill-item .skill-pct{font-size:12px;color:var(--gold);font-weight:600}
+.skill-bar-wrap{height:4px;background:rgba(255,255,255,.04);border-radius:2px;overflow:hidden}
+.skill-bar-fill{height:100%;background:linear-gradient(90deg,var(--green),var(--gold));border-radius:2px;transition:width 1.2s cubic-bezier(.4,0,.2,1);width:0}
+.skill-item .skill-desc{font-size:12px;color:var(--muted);margin-top:10px;line-height:1.6}
+
+/* ===== TIMELINE ===== */
+.timeline{position:relative;padding-left:32px}
+.timeline::before{
+  content:'';position:absolute;left:8px;top:0;bottom:0;
+  width:2px;background:linear-gradient(180deg,var(--gold-dim),var(--green-dark),transparent);
+}
+.timeline-item{position:relative;margin-bottom:36px;padding-left:24px}
+.timeline-item::before{
+  content:'';position:absolute;left:-28px;top:8px;
+  width:10px;height:10px;border-radius:50%;
+  background:var(--gold);box-shadow:0 0 14px var(--gold-glow);
+}
+.timeline-item:last-child::after{
+  content:'';position:absolute;left:-26px;top:18px;bottom:-36px;
+  width:6px;background:var(--bg);
+}
+.timeline-date{
+  font-size:10px;font-weight:600;letter-spacing:.12em;color:var(--gold);
+  text-transform:uppercase;margin-bottom:6px;
+}
+.timeline-title{font-size:18px;font-weight:700;font-family:'Playfair Display',serif;margin-bottom:4px}
+.timeline-role{font-size:13px;color:var(--muted);margin-bottom:12px}
+.timeline-details{list-style:none;padding:0}
+.timeline-details li{font-size:13px;color:var(--muted);padding:4px 0 4px 16px;position:relative;line-height:1.6}
+.timeline-details li::before{content:'鈥?;position:absolute;left:0;color:var(--subtle);font-size:10px}
+
+/* ===== BRANDS ===== */
+.brands-section{text-align:center}
+.brands-group{display:flex;gap:16px;flex-wrap:wrap;justify-content:center;margin-bottom:20px}
+.brand-chip{
+  padding:12px 28px;border-radius:2px;
+  background:var(--surface);border:1px solid rgba(196,162,90,.08);
+  color:var(--text);font-size:13px;font-weight:500;
+  cursor:default;transition:all var(--ease);
+  font-family:'Playfair Display',serif;letter-spacing:.02em;
+}
+.brand-chip:hover{border-color:var(--gold-dim);background:var(--surface2);box-shadow:0 4px 20px var(--gold-glow);transform:translateY(-2px)}
+.brand-chip.highlight{background:rgba(196,162,90,.06);border-color:var(--gold-dim);color:var(--gold)}
+
+/* ===== CONTACT ===== */
+.contact-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px}
+.contact-card{
+  background:var(--surface);border:1px solid rgba(255,255,255,.04);
+  border-radius:var(--radius-lg);padding:24px;
+  text-decoration:none;color:var(--text);
+  transition:all var(--ease);display:flex;align-items:center;gap:14px;
+  cursor:default;
+}
+.contact-card:hover{border-color:var(--gold-dim);transform:translateY(-3px);box-shadow:0 8px 28px rgba(0,0,0,.3)}
+.contact-card .cc-icon{font-size:22px;opacity:.7;flex-shrink:0}
+.contact-card .cc-info{font-size:13px;line-height:1.5}
+.contact-card .cc-info strong{display:block;font-size:13px;font-weight:600;margin-bottom:2px}
+
+/* ===== RESUME BAR ===== */
+.resume-bar{
+  background:var(--surface);border:1px solid rgba(196,162,90,.1);
+  border-radius:var(--radius-lg);padding:28px 32px;
+  display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:16px;margin-top:48px;
+}
+.resume-bar p{font-size:14px;color:var(--muted)}
+.resume-bar p strong{color:var(--cream);font-family:'Playfair Display',serif}
+.btn{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:12px 28px;border-radius:2px;border:1px solid var(--gold-dim);
+  background:transparent;color:var(--gold);font-size:13px;font-weight:600;
+  cursor:pointer;transition:all var(--ease);
+  text-decoration:none;letter-spacing:.04em;
+  font-family:'Inter',sans-serif;
+}
+.btn:hover{background:rgba(196,162,90,.08);border-color:var(--gold);box-shadow:0 4px 20px var(--gold-glow)}
+.btn.filled{background:var(--gold-dim);border-color:var(--gold-dim);color:var(--bg)}
+.btn.filled:hover{background:var(--gold);color:var(--bg)}
+
+/* ===== FOOTER ===== */
+footer{
+  text-align:center;padding:48px 24px;color:var(--subtle);font-size:11px;
+  border-top:1px solid rgba(196,162,90,.06);
+  letter-spacing:.06em;
+}
+footer .footer-ornament{margin-bottom:16px;opacity:.3}
+
+/* ===== SCROLL REVEAL ===== */
+.reveal{opacity:0;transform:translateY(24px);transition:all .7s cubic-bezier(.4,0,.2,1)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* ===== COUNTER ===== */
+.counter{transition:all .3s}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:768px){
+  nav{gap:20px;padding:14px 16px;flex-wrap:wrap}
+  nav a{font-size:10px;letter-spacing:.06em}
+  .hero-ornament{display:none}
+  .hero-stats{gap:28px}
+  .hero-stat .num{font-size:28px}
+  .about-grid{grid-template-columns:1fr}
+  .skills-grid{grid-template-columns:1fr}
+  .timeline{padding-left:20px}
+  .timeline-item{padding-left:16px}
+  .brands-group{gap:10px}
+  .brand-chip{padding:10px 18px;font-size:12px}
+  .resume-bar{flex-direction:column;text-align:center}
+  .contact-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== NAV ===== -->
+<nav>
+  <a href="#home">Home</a>
+  <a href="#about">About</a>
+  <a href="#skills">Skills</a>
+  <a href="#experience">Experience</a>
+  <a href="#brands">Brands</a>
+  <a href="#contact">Contact</a>
+</nav>
+
+<!-- ===== HERO ===== -->
+<section class="hero" id="home">
+  <svg class="hero-ornament tl" viewBox="0 0 120 120"><path d="M0 60 Q0 0 60 0" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M0 40 Q0 0 40 0" fill="none" stroke="currentColor" stroke-width="1"/></svg>
+  <svg class="hero-ornament br" viewBox="0 0 160 160"><path d="M80 160 Q160 160 160 80" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M100 160 Q160 160 160 100" fill="none" stroke="currentColor" stroke-width="1"/></svg>
+
+  <div class="hero-badge">Content Creator &amp; Film Editor</div>
+  <h1>鎴樼暐璁?br><em>Zhanlueji</em></h1>
+  <p class="tagline">
+    鍏ㄥ钩鍙板唴瀹瑰垱浣滆€?路 鐢靛奖瀹ｅ彂鍓緫 路 瑙嗚涓浗绛剧害鎽勫奖甯?br>
+    涓虹幆鐞冨奖涓氥€佷竾杈剧數褰便€佺尗鐪肩瓑椤剁骇鍝佺墝鎻愪緵绀惧獟鍒涙剰鍐呭
+  </p>
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <div class="num"><span class="counter" data-target="100000">0</span>+</div>
+      <div class="lbl">鍏ㄧ綉绮変笣</div>
+    </div>
+    <div class="hero-stat">
+      <div class="num"><span class="counter" data-target="1000000">0</span>+</div>
+      <div class="lbl">绱璧炶棌</div>
+    </div>
+    <div class="hero-stat">
+      <div class="num"><span class="counter" data-target="5">0</span> 骞?/div>
+      <div class="lbl">娴峰杩愯惀缁忛獙</div>
+    </div>
+    <div class="hero-stat">
+      <div class="num"><span class="counter" data-target="16000">0</span>+</div>
+      <div class="lbl">YouTube 璁㈤槄</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== BOTANICAL DIVIDER ===== -->
+<div class="botanical-divider reveal">
+  <span class="line"></span>
+  <svg viewBox="0 0 24 24"><path d="M12 2c-1 3-3 8-3 12s2 8 3 8M12 2c1 3 3 8 3 12s-2 8-3 8M12 6c-2 1-5 3-7 6M12 6c2 1 5 3 7 6M12 18c-2-1-5-3-7-6M12 18c2-1 5-3 7-6"/></svg>
+  <span class="line"></span>
+</div>
+
+<!-- ===== ABOUT ===== -->
+<section id="about">
+  <div class="section-label reveal">鉁?Core Competencies</div>
+  <h2 class="section-title reveal">涓汉浼樺娍</h2>
+  <p class="section-subtitle reveal">浜斿勾娣辫€曞唴瀹瑰垱浣滐紝浠庝釜浜鸿处鍙峰埌椤剁骇鍝佺墝鍚堜綔锛屽缁堜互瑙嗚鍙欎簨涓烘牳蹇冦€?/p>
+  <div class="about-grid">
+    <div class="about-card reveal">
+      <div class="card-icon">馃寪</div>
+      <h4>鍏ㄥ钩鍙拌繍钀ュ疄鎴?/h4>
+      <p>缁熺杩愯惀 Bilibili銆佸皬绾功銆乊ouTube銆乀ikTok 绛夊浗鍐呭涓绘祦骞冲彴锛岀嫭绔嬭窇閫氶€夐銆佽剼鏈€佹媿鎽勩€佸悗鏈熷叏娴佺▼锛屽叏缃戠矇涓濈疮璁¤繎 10 涓囥€?/p>
+    </div>
+    <div class="about-card reveal">
+      <div class="card-icon">鉁?/div>
+      <h4>楂樼垎鍙戝唴瀹逛骇鍑?/h4>
+      <p>鍑€熸晱閿愮殑褰辫瀹＄編涓庤鍚瑷€鎶婃彙锛屼釜浜轰綔鍝佺疮璁¤禐钘忛噺绐佺牬 1,000,000+锛屽叿澶囦骇鍑虹幇璞＄骇鐖嗘鍐呭鐨勯€昏緫涓庤兘鍔涖€?/p>
+    </div>
+    <div class="about-card reveal">
+      <div class="card-icon">馃彌锔?/div>
+      <h4>椤剁骇鍝佺墝鍚堜綔鑳屼功</h4>
+      <p>涓虹幆鐞冨奖涓氥€佷竾杈剧數褰便€佺尗鐪肩瓑鏈烘瀯鍒朵綔绀惧獟瀹ｄ紶瑙嗛锛屾兜鐩栥€婇樋鍑¤揪銆嬨€併€婇瓟娉曞潖濂冲帆銆嬬瓑澶氶儴鍏ㄧ悆鐭ュ悕 IP锛屾暟鎹〃鐜颁紭寮傘€?/p>
+    </div>
+    <div class="about-card reveal">
+      <div class="card-icon">馃實</div>
+      <h4>璺ㄦ枃鍖栦紶鎾兘鍔?/h4>
+      <p>5 骞存捣澶栫ぞ濯掔嫭绔嬭繍钀ョ粡楠岋紝鐔熸倝娴峰鍙椾紬鍋忓ソ銆佺増鏉冭鍒欎笌 SEO 浼樺寲锛岃嫳璇彲浣滀负宸ヤ綔璇█娴佺晠娌熼€氾紙闆呮€濇ā鑰?6.0锛夈€?/p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SKILLS ===== -->
+<section id="skills">
+  <div class="section-label reveal">鉁?Technical Skills</div>
+  <h2 class="section-title reveal">涓撲笟鎶€鑳?/h2>
+  <p class="section-subtitle reveal">鍚勫伐鍏风啛缁冨害鍩轰簬瀹為檯椤圭洰缁忛獙璇勪及锛岄紶鏍囨偓鍋滄煡鐪嬭鎯呫€?/p>
+  <div class="skills-grid">
+    <div class="skill-item reveal">
+      <div class="skill-top"><span class="skill-name">Premiere Pro</span><span class="skill-pct">95%</span></div>
+      <div class="skill-bar-wrap"><div class="skill-bar-fill" data-width="95"></div></div>
+      <div class="skill-desc">涓诲姏鍓緫宸ュ叿锛岀簿閫氬鏈轰綅鍓緫銆佸姩鎬侀摼鎺ャ€佽皟鑹插伐浣滄祦</div>
+    </div>
+    <div class="skill-item reveal">
+      <div class="skill-top"><span class="skill-name">After Effects</span><span class="skill-pct">88%</span></div>
+      <div class="skill-bar-wrap"><div class="skill-bar-fill" data-width="88"></div></div>
+      <div class="skill-desc">鍔ㄦ晥璁捐銆佽〃杈惧紡鍔ㄧ敾銆佸姩鎬佸浘褰€佽瑙夊悎鎴?/div>
+    </div>
+    <div class="skill-item reveal">
+      <div class="skill-top"><span class="skill-name">DaVinci Resolve</span><span class="skill-pct">85%</span></div>
+      <div class="skill-bar-wrap"><div class="skill-bar-fill" data-width="85"></div></div>
+      <div class="skill-desc">涓撲笟璋冭壊銆佽壊褰╃鐞嗐€丠DR 宸ヤ綔娴併€佽妭鐐硅皟鑹?/div>
+    </div>
+    <div class="skill-item reveal">
+      <div class="skill-top"><span class="skill-name">Topaz Video AI</span><span class="skill-pct">80%</span></div>
+      <div class="skill-bar-wrap"><div class="skill-bar-fill" data-width="80"></div></div>
+      <div class="skill-desc">AI 鐢昏川澧炲己銆侀檷鍣€佹參鍔ㄤ綔鎻掑抚銆佽€佺墖淇</div>
+    </div>
+    <div class="skill-item reveal">
+      <div class="skill-top"><span class="skill-name">鎽勫奖 / 鎽勫儚</span><span class="skill-pct">82%</span></div>
+      <div class="skill-bar-wrap"><div class="skill-bar-fill" data-width="82"></div></div>
+      <div class="skill-desc">鍚勫瀷鍙锋棤鍙?鍗曞弽鎿嶄綔銆佺伅鍏夊竷鎺с€佹瀯鍥句笌鑹插僵鐞嗚</div>
+    </div>
+    <div class="skill-item reveal">
+      <div class="skill-top"><span class="skill-name">English Communication</span><span class="skill-pct">75%</span></div>
+      <div class="skill-bar-wrap"><div class="skill-bar-fill" data-width="75"></div></div>
+      <div class="skill-desc">Professional Working Proficiency锛屼簲骞磋嫳鏂囪繍钀ュ疄鎴?/div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== EXPERIENCE TIMELINE ===== -->
+<section id="experience">
+  <div class="section-label reveal">鉁?Professional Experience</div>
+  <h2 class="section-title reveal">宸ヤ綔缁忓巻</h2>
+  <p class="section-subtitle reveal">浠庝釜浜哄垱浣滆€呭埌椤剁骇鍝佺墝鍚堜綔锛屾瘡涓€姝ラ兘寤虹珛鍦ㄥ唴瀹硅川閲忎箣涓娿€?/p>
+  <div class="timeline">
+    <div class="timeline-item reveal">
+      <div class="timeline-date">鑷充粖</div>
+      <div class="timeline-title">涓汉鑷獟浣撲富鐞嗕汉</div>
+      <div class="timeline-role">鍥藉唴澶栧骞冲彴鐭╅樀 路 YouTube / TikTok / Bilibili / 灏忕孩涔?/div>
+      <ul class="timeline-details">
+        <li>鐙珛杩愯惀 YouTube (1.6w+ 璁㈤槄)銆乀ikTok 鍙婂浗鍐呭骞冲彴锛岀簿鍑嗘妸鎻″悇骞冲彴绠楁硶閫昏緫</li>
+        <li>鍏ㄨ嫳鏂囨挵鍐欐爣棰樸€佹弿杩般€丼EO 鍏抽敭璇嶅強璇勮鍖轰簰鍔紝瀹炵幇娴峰绮変笣绋冲仴澧為暱</li>
+        <li>娣辫€曞奖瑙嗙礌鏉愪簩娆″垱浣滐紝鍏ㄧ綉绱鐧句竾绾ц禐钘忚瘉鏄庡唴瀹圭殑甯傚満鍚稿紩鍔?/li>
+      </ul>
+    </div>
+    <div class="timeline-item reveal">
+      <div class="timeline-date">椤圭洰鍒跺悎浣?/div>
+      <div class="timeline-title">鍟嗕笟鐢靛奖瀹ｅ彂椤圭洰</div>
+      <div class="timeline-role">鐚溂 路 涓囪揪鐢靛奖 路 鐜悆褰变笟</div>
+      <ul class="timeline-details">
+        <li>鍙楅個瀵规帴椤剁骇瀹ｅ彂骞冲彴鍙婄墖鏂癸紝璐熻矗鐢靛奖绀惧獟瀹ｄ紶鐭墖鐨勫壀杈戜笌浜屾鍒涗綔</li>
+        <li>鍚堜綔 IP锛氥€婇樋鍑¤揪銆嬨€婇瓟娉曞潖濂冲帆銆嬨€婄柉鐙傚姩鐗╁煄銆嬨€婂繉鏃ュ揩涔愩€嬨€婃绁炴潵浜嗐€?/li>
+        <li>鍦ㄦ弧瓒冲畼鏂瑰搧鐗岃皟鎬у熀纭€涓婏紝閫氳繃鍒涙剰鍓緫鏄捐憲鎻愬崌璇濋鐑害涓庝簰鍔ㄦ暟鎹?/li>
+      </ul>
+    </div>
+    <div class="timeline-item reveal">
+      <div class="timeline-date">鑷充粖</div>
+      <div class="timeline-title">瑙嗚涓浗 500px 路 绛剧害鎽勫奖甯?/div>
+      <div class="timeline-role">楂樿川閲忚瑙夊唴瀹逛緵绋?/div>
+      <ul class="timeline-details">
+        <li>閫氳繃涓撲笟瀹＄編瀹℃牳绛剧害锛屼綔鍝佸叿澶囧晢涓氭巿鏉冭祫璐?/li>
+      </ul>
+    </div>
+    <div class="timeline-item reveal">
+      <div class="timeline-date">楂樹腑鏃舵湡</div>
+      <div class="timeline-title">瀛︾敓浼氬浼犻儴鏍稿績鎴愬憳</div>
+      <div class="timeline-role">鏍＄骇娲诲姩鐨勮瑙夎褰?/div>
+      <ul class="timeline-details">
+        <li>閫氳繃闈㈣瘯鍏ラ€夛紝鐙珛涓诲骞跺畬鎴愮彮绾ф瘯涓氱邯蹇佃棰戝埗浣滐紝鑾峰緱鏋侀珮璇勪环</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ===== BRANDS ===== -->
+<section id="brands" class="brands-section">
+  <div class="section-label reveal">鉁?Brand Collaborations</div>
+  <h2 class="section-title reveal">鍚堜綔鍝佺墝涓?IP</h2>
+  <p class="section-subtitle reveal" style="margin-left:auto;margin-right:auto">鏇剧洿鎺ヤ负浠ヤ笅鏈烘瀯鍙婂奖鐗囧埗浣滅ぞ濯掑浼犲唴瀹?/p>
+  <div class="brands-group reveal">
+    <span class="brand-chip highlight">鐜悆褰变笟</span>
+    <span class="brand-chip highlight">涓囪揪鐢靛奖</span>
+    <span class="brand-chip highlight">鐚溂</span>
+    <span class="brand-chip highlight">瑙嗚涓浗 500px</span>
+  </div>
+  <div class="brands-group reveal">
+    <span class="brand-chip">銆婇樋鍑¤揪銆?/span>
+    <span class="brand-chip">銆婇瓟娉曞潖濂冲帆銆?/span>
+    <span class="brand-chip">銆婄柉鐙傚姩鐗╁煄銆?/span>
+    <span class="brand-chip">銆婂繉鏃ュ揩涔愩€?/span>
+    <span class="brand-chip">銆婃绁炴潵浜嗐€?/span>
+  </div>
+</section>
+
+<!-- ===== CONTACT ===== -->
+<section id="contact">
+  <div class="section-label reveal">鉁?Get in Touch</div>
+  <h2 class="section-title reveal">鑱旂郴鏂瑰紡</h2>
+  <p class="section-subtitle reveal">娆㈣繋鍝佺墝鍚堜綔銆侀」鐩個绾︿笌宸ヤ綔鏈轰細鑱旂郴銆?/p>
+  <div class="contact-grid reveal">
+    <span class="contact-card">
+      <span class="cc-icon">鉁夛笍</span>
+      <span class="cc-info"><strong>閭</strong>浣犵殑閭@example.com</span>
+    </span>
+    <span class="contact-card">
+      <span class="cc-icon">馃幍</span>
+      <span class="cc-info"><strong>TikTok / 鎶栭煶</strong>鍝堝埄鐨勫眮鑲¤泲</span>
+    </span>
+    <span class="contact-card">
+      <span class="cc-icon">馃摃</span>
+      <span class="cc-info"><strong>灏忕孩涔?/strong>鍝堝埄鐨勫眮鑲¤泲</span>
+    </span>
+    <span class="contact-card">
+      <span class="cc-icon">鈻讹笍</span>
+      <span class="cc-info"><strong>YouTube / Bilibili</strong>鎴樼暐璁?/ zhanlueji</span>
+    </span>
+  </div>
+  <div class="resume-bar reveal">
+    <p><strong>涓嬭浇绠€鍘?/strong> 路 瀹屾暣鐨勮亴涓氱粡鍘嗕笌浣滃搧灞曠ず</p>
+    <a href="#" class="btn filled" onclick="alert('绠€鍘嗘枃浠跺皢鍦ㄥ悗缁坊鍔狅紒')">猬?Download Resume</a>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-ornament">
+    <svg width="40" height="20" viewBox="0 0 40 20" fill="none" stroke="currentColor" stroke-width=".8">
+      <path d="M20 2c-2 4-5 10-5 16s3 0 3 0M20 2c2 4 5 10 5 16s-3 0-3 0"/>
+      <path d="M10 10c3 2 7 3 10 3s7-1 10-3"/>
+    </svg>
+  </div>
+  &copy; 2026 鎴樼暐璁?Zhanlueji. All rights reserved.<br>
+  <span style="opacity:.5">Built with care 路 Dark Academia</span>
+</footer>
+
+<script>
+// ===== SCROLL REVEAL + SKILL BAR ANIMATION =====
+const observer=new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.classList.add('visible');
+      // Animate skill bars inside
+      e.target.querySelectorAll('.skill-bar-fill').forEach(b=>{
+        b.style.width=b.dataset.width+'%';
+      });
+      // Animate counters
+      e.target.querySelectorAll('.counter[data-target]').forEach(c=>{
+        animateCounter(c);
+      });
+    }
+  });
+},{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+
+// ===== COUNTER ANIMATION =====
+function animateCounter(el){
+  if(el.dataset.animated)return;el.dataset.animated='1';
+  const target=parseInt(el.dataset.target);
+  const duration=2000;
+  const start=performance.now();
+  function update(now){
+    const elapsed=now-start;
+    const progress=Math.min(elapsed/duration,1);
+    const eased=1-Math.pow(1-progress,3);
+    const current=Math.floor(eased*target);
+    if(target>=100000){el.textContent=(current/10000).toFixed(1)+'w'}
+    else{el.textContent=current.toLocaleString()}
+    if(progress<1)requestAnimationFrame(update);
+    else{
+      if(target>=100000){el.textContent=(target/10000).toFixed(1)+'w'}
+      else{el.textContent=target.toLocaleString()}
+    }
+  }
+  requestAnimationFrame(update);
+}
+
+// ===== NAV ACTIVE STATE =====
+window.addEventListener('scroll',()=>{
+  const nav=document.querySelector('nav');
+  nav.style.boxShadow=window.scrollY>10?'0 1px 30px rgba(0,0,0,.4)':'none';
+  const y=window.scrollY+120;
+  document.querySelectorAll('section[id]').forEach(sec=>{
+    const top=sec.offsetTop;
+    if(y>=top&&y<top+sec.offsetHeight){
+      document.querySelectorAll('nav a').forEach(a=>{
+        const match=a.getAttribute('href')==='#'+sec.id;
+        a.style.color=match?'var(--cream)':'';
+        a.style.opacity=match?'1':'';
+      });
+    }
+  });
+});
+
+// ===== TRIGGER HERO COUNTERS ON LOAD =====
+setTimeout(()=>{
+  // Animate hero counters immediately
+  document.querySelectorAll('.counter[data-target]').forEach(c=>animateCounter(c));
+  // Animate already-visible skill bars
+  document.querySelectorAll('.reveal.visible .skill-bar-fill').forEach(b=>{
+    b.style.width=b.dataset.width+'%';
+  });
+},300);
+</script>
+</body>
+</html>
