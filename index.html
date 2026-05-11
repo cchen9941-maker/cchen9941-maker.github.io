@@ -21,20 +21,23 @@
   --spring:.55s cubic-bezier(.34,1.56,.64,1);
   --ease:.4s cubic-bezier(.4,0,.2,1);
 }
-html{font-size:16px;-webkit-font-smoothing:antialiased;scroll-behavior:smooth}
+html{font-size:16px;-webkit-font-smoothing:antialiased;scroll-behavior:smooth;scroll-padding-top:80px}
 body{
   font-family:'Inter',-apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei',sans-serif;
   background:var(--sky-top);color:var(--ink);line-height:1.7;overflow-x:hidden;
 }
-::-webkit-scrollbar{width:5px}
+::-webkit-scrollbar{width:4px}
 ::-webkit-scrollbar-track{background:var(--sky-top)}
-::-webkit-scrollbar-thumb{background:var(--ink-subtle);border-radius:3px}
+::-webkit-scrollbar-thumb{background:var(--ink-subtle);border-radius:2px}
 
-/* ===== NIGHT CITYSCAPE (compact) ===== */
+/* ===== DUST PARTICLES CANVAS ===== */
+#dust{position:fixed;inset:0;pointer-events:none;z-index:9998}
+
+/* ===== NIGHT CITYSCAPE ===== */
 .city{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
 .city .sky{position:absolute;inset:0;background:linear-gradient(180deg,#0a0c1a 0%,#0f1225 20%,#141830 45%,#1a1f38 70%,#1c2240 100%)}
 .city .stars{position:absolute;top:0;left:0;right:0;height:60%;
-  background-image:radial-gradient(1px 1px at 10% 8%,rgba(255,250,235,.7),transparent),radial-gradient(1px 1px at 25% 15%,rgba(255,250,235,.5),transparent),radial-gradient(1.5px 1.5px at 40% 5%,rgba(255,250,235,.8),transparent),radial-gradient(1px 1px at 55% 18%,rgba(255,250,235,.4),transparent),radial-gradient(1px 1px at 65% 10%,rgba(255,250,235,.6),transparent),radial-gradient(1.5px 1.5px at 78% 6%,rgba(255,250,235,.7),transparent),radial-gradient(1px 1px at 85% 20%,rgba(255,250,235,.5),transparent),radial-gradient(1px 1px at 15% 25%,rgba(255,250,235,.35),transparent),radial-gradient(1px 1px at 48% 22%,rgba(255,250,235,.45),transparent),radial-gradient(1px 1px at 70% 14%,rgba(255,250,235,.55),transparent),radial-gradient(1px 1px at 92% 12%,rgba(255,250,235,.4),transparent)}
+  background-image:radial-gradient(1px 1px at 10% 8%,rgba(255,250,235,.7),transparent),radial-gradient(1.5px 1.5px at 28% 12%,rgba(255,250,235,.5),transparent),radial-gradient(1px 1px at 42% 5%,rgba(255,250,235,.8),transparent),radial-gradient(1px 1px at 55% 18%,rgba(255,250,235,.4),transparent),radial-gradient(1.5px 1.5px at 68% 9%,rgba(255,250,235,.6),transparent),radial-gradient(1px 1px at 80% 6%,rgba(255,250,235,.7),transparent),radial-gradient(1px 1px at 88% 16%,rgba(255,250,235,.5),transparent),radial-gradient(1px 1px at 15% 22%,rgba(255,250,235,.35),transparent),radial-gradient(1px 1px at 48% 20%,rgba(255,250,235,.45),transparent),radial-gradient(1px 1px at 72% 14%,rgba(255,250,235,.55),transparent),radial-gradient(1px 1px at 93% 10%,rgba(255,250,235,.4),transparent)}
 .city .moon{position:absolute;top:7%;right:16%;width:56px;height:56px;background:radial-gradient(circle,#faf5e8 0%,#f0e8d0 60%,transparent 70%);border-radius:50%;opacity:.85;box-shadow:0 0 40px rgba(250,240,220,.15),0 0 80px rgba(250,240,220,.08)}
 .city .bld{position:absolute;bottom:25%;background:#12162a}
 .city .b1{left:2%;width:8%;height:30%;border-radius:2px 2px 0 0}.city .b2{left:11%;width:6%;height:38%;border-radius:2px 2px 0 0;background:#111428}
@@ -54,84 +57,128 @@ body{
 .city .refl{position:absolute;bottom:5%;left:0;right:0;height:20%;background:linear-gradient(0deg,rgba(255,230,160,.06) 0%,transparent 40%),linear-gradient(90deg,transparent 0%,rgba(255,220,140,.04) 15%,transparent 20%,rgba(255,220,140,.05) 40%,transparent 50%,rgba(255,220,140,.03) 65%,transparent 70%,rgba(255,220,140,.04) 85%,transparent 100%)}
 .city .fog{position:absolute;bottom:20%;left:0;right:0;height:30%;background:linear-gradient(180deg,transparent 0%,rgba(160,170,190,.04) 50%,rgba(140,150,170,.06) 100%);filter:blur(20px)}
 
+/* Watercolor wash overlay */
+.watercolor{position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.04;
+  background:radial-gradient(ellipse at 20% 50%,#8b6b4a 0%,transparent 50%),radial-gradient(ellipse at 80% 20%,#6b8b6b 0%,transparent 40%),radial-gradient(ellipse at 50% 80%,#4a6b8b 0%,transparent 45%);
+}
+
+/* ===== SIDE BOOKMARK NAV ===== */
+.side-nav{position:fixed;right:20px;top:50%;transform:translateY(-50%);z-index:200;display:flex;flex-direction:column;gap:14px}
+.side-nav a{
+  width:8px;height:8px;border-radius:50%;background:rgba(200,180,150,.2);
+  transition:all var(--spring);display:block;position:relative;text-indent:-9999px;overflow:hidden;
+}
+.side-nav a:hover{background:rgba(200,180,150,.5);transform:scale(1.6)}
+.side-nav a.active{background:var(--gold);box-shadow:0 0 10px var(--gold-glow);transform:scale(1.4)}
+.side-nav a::after{content:attr(data-label);position:absolute;right:18px;top:50%;transform:translateY(-50%);white-space:nowrap;font-size:10px;color:var(--paper);letter-spacing:.06em;text-transform:uppercase;opacity:0;transition:opacity var(--ease);text-indent:0;font-weight:500}
+.side-nav a:hover::after{opacity:.8}
+@media(max-width:768px){.side-nav{right:10px;gap:10px}.side-nav a{width:6px;height:6px}}
+
 /* ===== NAV ===== */
 nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(10,12,26,.88);backdrop-filter:blur(12px);border-bottom:1px solid rgba(200,180,140,.08);display:flex;justify-content:center;gap:28px;padding:15px 20px}
 nav a{color:var(--ink-subtle);text-decoration:none;font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;transition:color var(--ease)}
-nav a:hover{color:#e8d8b0}
+nav a:hover,nav a.active{color:#e8d8b0}
 
 /* ===== CONTENT ===== */
 section{padding:72px 24px;max-width:860px;margin:0 auto;position:relative;z-index:1}
 @media(max-width:768px){section{padding:48px 18px}}
 .s-tag{display:inline-block;font-size:10px;font-weight:600;letter-spacing:.15em;color:var(--gold);text-transform:uppercase;margin-bottom:8px}
-.s-title{font-family:'NightSerif','Playfair Display',serif;font-size:clamp(28px,4vw,40px);font-weight:700;letter-spacing:-.01em;margin-bottom:8px;line-height:1.2;color:var(--paper)}
+.s-title{font-family:'NightSerif','Playfair Display',serif;font-size:clamp(28px,4vw,40px);font-weight:700;letter-spacing:-.01em;margin-bottom:8px;line-height:1.2;color:var(--paper);position:relative}
+/* Sketch underline */
+.s-title::after{content:'';display:block;width:40px;height:2px;margin-top:6px;background:var(--gold-dim);opacity:.4;border-radius:1px}
 .s-note{font-size:14px;color:rgba(220,210,190,.55);margin-bottom:36px;max-width:480px}
 
-/* ===== EXPANDABLE PAGE CARDS ===== */
-.page-stack{display:flex;flex-direction:column;gap:14px}
+/* ===== TORN PAPER CARD ===== */
+.page-stack{display:flex;flex-direction:column;gap:16px}
 .page-card{
-  background:var(--paper);border-radius:3px 8px 3px 7px;
-  box-shadow:var(--shadow-paper);overflow:hidden;cursor:pointer;
-  transition:all var(--spring);position:relative;
+  background:var(--paper);position:relative;cursor:pointer;
+  transition:all var(--spring);overflow:visible;
   background-image:url("data:image/svg+xml,%3Csvg width='100' height='100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23n)' opacity='.025'/%3E%3C/svg%3E");
-  /* Brush-stroke edge via layered box-shadows */
-  border:1px solid rgba(180,160,130,.25);
+  /* Torn paper edges */
+  clip-path:polygon(0% 3px,3px 0%,97% 0%,100% 4px,100% 96%,98% 100%,2% 100%,0% 97%);
+  border:none;
+  box-shadow:var(--shadow-paper),0 0 0 1px rgba(180,160,130,.2);
 }
-.page-card:hover{transform:translateY(-3px) scale(1.01);box-shadow:var(--shadow-lift)}
-.page-card.open{transform:translateY(-2px);box-shadow:var(--shadow-lift);cursor:default}
+/* Torn edge variation */
+.page-card:nth-child(odd){clip-path:polygon(0% 2px,2px 0%,98% 0%,100% 3px,100% 98%,97% 100%,3% 100%,0% 97%)}
+.page-card:nth-child(3n){clip-path:polygon(0% 4px,4px 0%,96% 0%,100% 2px,100% 97%,99% 100%,1% 100%,0% 98%)}
+.page-card:hover{transform:translateY(-4px) scale(1.01);box-shadow:var(--shadow-lift),0 0 0 1px rgba(180,160,130,.3)}
+.page-card.open{transform:translateY(-2px);box-shadow:var(--shadow-lift),0 0 0 1px rgba(180,160,130,.3);cursor:default;overflow:hidden}
 
-/* Card header */
-.page-head{display:flex;align-items:center;justify-content:space-between;padding:22px 26px;gap:16px}
+/* Watercolor smudge on card */
+.page-card::before{content:'';position:absolute;inset:0;pointer-events:none;opacity:.06;z-index:0;
+  background:radial-gradient(ellipse at 30% 20%,rgba(139,107,74,.5) 0%,transparent 60%),radial-gradient(ellipse at 70% 80%,rgba(74,107,139,.3) 0%,transparent 50%);
+}
+
+/* Page head */
+.page-head{display:flex;align-items:center;justify-content:space-between;padding:22px 28px;gap:16px;position:relative;z-index:1}
 .page-head .ph-left{display:flex;align-items:center;gap:14px;flex:1;min-width:0}
-.page-num{font-family:'NightSerif',serif;font-size:40px;color:var(--gold-dim);opacity:.25;line-height:1;flex-shrink:0;min-width:44px}
+.page-num{font-family:'NightSerif',serif;font-size:42px;color:var(--gold-dim);opacity:.22;line-height:1;flex-shrink:0;min-width:44px}
 .page-head h3{font-family:'NightSerif','Playfair Display',serif;font-size:19px;font-weight:600;color:var(--ink);letter-spacing:-.01em;line-height:1.2}
 .page-head .ph-preview{font-size:12px;color:var(--ink-muted);margin-top:2px}
-.page-toggle{
-  width:32px;height:32px;border-radius:50%;flex-shrink:0;
-  display:flex;align-items:center;justify-content:center;
-  background:var(--paper-dark);transition:all var(--spring);
-  font-size:18px;font-weight:300;color:var(--ink-muted);line-height:1;
-}
+.page-toggle{width:30px;height:30px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;background:var(--paper-dark);transition:all var(--spring);font-size:18px;font-weight:300;color:var(--ink-muted);line-height:1}
 .page-card.open .page-toggle{transform:rotate(45deg);background:var(--ink);color:var(--paper)}
 
-/* Card body (collapsible) */
-.page-body{max-height:0;overflow:hidden;transition:max-height .7s cubic-bezier(.4,0,.2,1)}
-.page-card.open .page-body{max-height:500px}
-.page-body-inner{padding:0 26px 24px 80px}
-@media(max-width:768px){.page-body-inner{padding:0 16px 20px 16px}}
-.page-body-inner p,.page-body-inner li{font-size:13px;color:var(--ink-muted);line-height:1.9}
+/* Card body */
+.page-body{max-height:0;overflow:hidden;transition:max-height .7s cubic-bezier(.4,0,.2,1);position:relative;z-index:1}
+.page-card.open .page-body{max-height:600px}
+.page-body-inner{padding:0 28px 24px 86px}
+@media(max-width:768px){.page-body-inner{padding:0 18px 20px 18px}}
+.page-body-inner p,.page-body-inner li{font-size:13px;color:var(--ink-muted);line-height:2}
 .page-body-inner ul{list-style:none;padding:0;margin-top:8px}
-.page-body-inner li{padding:3px 0 3px 14px;position:relative}
+.page-body-inner li{padding:3px 0 3px 16px;position:relative}
 .page-body-inner li::before{content:'—';position:absolute;left:0;color:var(--ink-subtle);font-size:9px}
-.page-body-inner .highlight-box{
-  background:rgba(196,138,48,.06);border-left:2px solid var(--gold-dim);
-  padding:12px 16px;margin:12px 0;border-radius:0 4px 4px 0;
-}
 
-/* ===== SKILL BARS (inside expandable) ===== */
-.skill-row{display:flex;align-items:center;gap:12px;margin:6px 0}
+/* Drop cap */
+.dropcap::first-letter{font-family:'NightSerif',serif;font-size:3.2em;float:left;line-height:.75;padding-right:8px;padding-top:4px;color:var(--gold-dim)}
+
+/* Highlight box (blockquote style) */
+.highlight-box{background:rgba(196,138,48,.05);border-left:2px solid var(--gold-dim);padding:14px 18px;margin:14px 0;border-radius:0 4px 4px 0;font-style:italic;position:relative}
+.highlight-box::before{content:'\201C';font-family:'NightSerif',serif;font-size:40px;color:var(--gold-dim);opacity:.2;position:absolute;top:-8px;left:8px;line-height:1}
+.highlight-box strong{font-style:normal}
+
+/* Sketch line separator */
+.sketch-line{width:60px;height:8px;margin:16px 0;background:url("data:image/svg+xml,%3Csvg width='60' height='8' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 4 Q15 2 30 5 Q45 7 60 3' fill='none' stroke='%23a07028' stroke-width='.8' opacity='.3'/%3E%3C/svg%3E") no-repeat center}
+
+/* ===== SKILL BARS ===== */
+.skill-row{display:flex;align-items:center;gap:12px;margin:5px 0}
 .skill-row .s-name{width:140px;font-size:13px;font-weight:600;color:var(--ink);flex-shrink:0}
 .skill-row .s-bar-wrap{flex:1;height:4px;background:var(--paper-dark);border-radius:2px;overflow:hidden}
 .skill-row .s-bar{height:100%;background:linear-gradient(90deg,var(--gold-dim),var(--gold-light));border-radius:2px;transition:width 1.4s cubic-bezier(.4,0,.2,1);width:0}
 .skill-row .s-pct{width:36px;font-size:11px;color:var(--gold-dim);font-weight:600;text-align:right;flex-shrink:0}
 
-/* ===== BRAND STAMPS ===== */
-.brands-grid{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
-.stamp{padding:10px 22px;background:var(--paper);border-radius:2px 6px 2px 5px;box-shadow:var(--shadow-paper);font-family:'NightSerif','Playfair Display',serif;font-size:13px;font-weight:600;color:var(--ink);transition:all var(--spring);cursor:default;text-align:center}
+/* ===== PORTFOLIO GALLERY ===== */
+.portfolio-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px}
+.port-card{perspective:800px;height:200px}
+.port-card-inner{position:relative;width:100%;height:100%;transition:transform .7s cubic-bezier(.4,0,.2,1);transform-style:preserve-3d}
+.port-card:hover .port-card-inner{transform:rotateY(180deg)}
+.port-front,.port-back{position:absolute;inset:0;backface-visibility:hidden;border-radius:3px 8px 3px 7px;overflow:hidden;box-shadow:var(--shadow-paper)}
+.port-front{background:var(--paper);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px;background-image:url("data:image/svg+xml,%3Csvg width='100' height='100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23n)' opacity='.025'/%3E%3C/svg%3E")}
+.port-front .pf-icon{font-size:36px;margin-bottom:10px;opacity:.5}
+.port-front .pf-title{font-family:'NightSerif',serif;font-size:15px;font-weight:600;color:var(--ink);text-align:center}
+.port-front .pf-sub{font-size:11px;color:var(--ink-muted);margin-top:4px}
+.port-back{background:var(--ink);color:var(--paper);transform:rotateY(180deg);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px;text-align:center}
+.port-back h4{font-family:'NightSerif',serif;font-size:15px;font-weight:600;margin-bottom:6px}
+.port-back p{font-size:11px;opacity:.7;line-height:1.6;max-width:180px}
+
+/* ===== BRANDS ===== */
+.brands-grid{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-bottom:10px}
+.stamp{padding:10px 22px;background:var(--paper);border-radius:2px 6px 2px 5px;box-shadow:var(--shadow-paper);font-family:'NightSerif','Playfair Display',serif;font-size:13px;font-weight:600;color:var(--ink);transition:all var(--spring);cursor:default;text-align:center;background-image:url("data:image/svg+xml,%3Csvg width='100' height='100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23n)' opacity='.02'/%3E%3C/svg%3E")}
 .stamp:hover{transform:translateY(-3px) rotate(-.5deg);box-shadow:var(--shadow-lift)}
 .stamp.dark{background:#3a3020;color:var(--paper);box-shadow:0 2px 8px rgba(20,10,5,.35)}
 .stamp.dark:hover{background:#4a3a28}
 
 /* ===== HERO ===== */
 .hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:120px 24px 80px;max-width:860px;margin:0 auto;position:relative;z-index:1}
-.hero .ticket{display:inline-flex;align-items:center;gap:8px;padding:8px 18px;background:var(--paper);border-radius:2px 8px 2px 6px;box-shadow:var(--shadow-paper);font-size:10px;font-weight:600;letter-spacing:.12em;color:var(--gold-dim);text-transform:uppercase;margin-bottom:28px}
+.hero .ticket{display:inline-flex;align-items:center;gap:8px;padding:8px 18px;background:var(--paper);clip-path:polygon(0% 2px,2px 0%,98% 0%,100% 2px,100% 98%,97% 100%,3% 100%,0% 97%);font-size:10px;font-weight:600;letter-spacing:.12em;color:var(--gold-dim);text-transform:uppercase;margin-bottom:28px}
 .hero .ticket::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--gold);opacity:.7}
-.hero .aka{font-size:15px;color:rgba(220,210,190,.4);margin-bottom:24px;font-style:italic;letter-spacing:.02em}
-.hero .aka span{margin:0 12px}
-.hero h1{font-family:'NightSerif','Playfair Display',serif;font-size:clamp(42px,8vw,80px);font-weight:800;letter-spacing:-.02em;line-height:1.06;margin-bottom:18px;color:var(--paper);text-shadow:0 2px 16px rgba(0,0,0,.5)}
+.hero .aka{font-size:15px;color:rgba(220,210,190,.35);margin-bottom:20px;font-style:italic;letter-spacing:.02em}
+.hero .aka span{margin:0 10px}
+.hero h1{font-family:'NightSerif','Playfair Display',serif;font-size:clamp(44px,8vw,84px);font-weight:800;letter-spacing:-.02em;line-height:1.05;margin-bottom:18px;color:var(--paper);text-shadow:0 2px 16px rgba(0,0,0,.5)}
 .hero h1 em{font-style:italic;color:var(--gold-light);font-weight:400}
-.hero .tagline{font-size:16px;color:rgba(230,220,200,.65);max-width:460px;margin-bottom:40px;line-height:1.7}
-.hero-stats{display:flex;gap:24px;flex-wrap:wrap}
-.hero-stat{background:var(--paper);padding:14px 20px;border-radius:2px 6px 2px 5px;box-shadow:var(--shadow-paper);transition:all var(--spring);cursor:default;min-width:90px}
+.hero .tagline{font-size:16px;color:rgba(230,220,200,.6);max-width:460px;margin-bottom:40px;line-height:1.7}
+.hero-stats{display:flex;gap:20px;flex-wrap:wrap}
+.hero-stat{background:var(--paper);padding:14px 20px;clip-path:polygon(0% 3px,3px 0%,97% 0%,100% 3px,100% 97%,98% 100%,2% 100%,0% 97%);box-shadow:var(--shadow-paper);transition:all var(--spring);cursor:default;min-width:90px}
 .hero-stat:hover{transform:translateY(-3px) rotate(-.5deg);box-shadow:var(--shadow-lift)}
 .hero-stat:nth-child(even):hover{transform:translateY(-3px) rotate(.5deg)}
 .hero-stat .num{font-family:'NightSerif',serif;font-size:26px;font-weight:700;color:var(--gold-dim)}
@@ -139,9 +186,10 @@ section{padding:72px 24px;max-width:860px;margin:0 auto;position:relative;z-inde
 
 /* ===== CONTACT ===== */
 .contact-row{display:flex;gap:12px;flex-wrap:wrap}
-.contact-card{flex:1;min-width:160px}
-.contact-card .cc-label{font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:var(--gold-dim);margin-bottom:4px}
-.contact-card .cc-val{font-size:13px;color:var(--ink);font-weight:500}
+.cc-item{flex:1;min-width:140px;background:var(--paper);padding:18px 20px;clip-path:polygon(0% 3px,3px 0%,97% 0%,100% 3px,100% 97%,98% 100%,2% 100%,0% 97%);box-shadow:var(--shadow-paper);transition:all var(--spring);cursor:default}
+.cc-item:hover{transform:translateY(-3px);box-shadow:var(--shadow-lift)}
+.cc-item .cc-label{font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:var(--gold-dim);margin-bottom:4px}
+.cc-item .cc-val{font-size:13px;color:var(--ink);font-weight:500}
 
 /* ===== MUSIC BTN ===== */
 .music-btn{position:fixed;bottom:24px;right:24px;z-index:200;width:38px;height:38px;border-radius:50%;background:var(--paper);border:none;cursor:pointer;box-shadow:var(--shadow-paper);transition:all var(--spring);display:flex;align-items:center;justify-content:center;font-size:15px;opacity:.65}
@@ -149,34 +197,44 @@ section{padding:72px 24px;max-width:860px;margin:0 auto;position:relative;z-inde
 .music-btn.off{opacity:.3}.music-btn.off::after{content:'';position:absolute;width:1.5px;height:16px;background:var(--ink-muted);transform:rotate(-45deg);border-radius:1px}
 
 /* ===== RESUME BAR ===== */
-.resume-ticket{background:var(--paper);border-radius:3px 8px 3px 7px;box-shadow:var(--shadow-paper);padding:22px 26px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-top:40px}
+.resume-ticket{background:var(--paper);clip-path:polygon(0% 3px,3px 0%,97% 0%,100% 3px,100% 97%,98% 100%,2% 100%,0% 97%);box-shadow:var(--shadow-paper);padding:22px 28px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-top:40px}
 .resume-ticket p{font-size:13px;color:var(--ink-muted)}
 .resume-ticket strong{color:var(--ink);font-family:'NightSerif','Playfair Display',serif}
-.btn{display:inline-flex;align-items:center;gap:6px;padding:10px 22px;border-radius:2px 5px 2px 4px;background:var(--ink);color:var(--paper);font-size:12px;font-weight:600;cursor:pointer;text-decoration:none;letter-spacing:.04em;border:none;transition:all var(--spring);font-family:inherit}
+.btn{display:inline-flex;align-items:center;gap:6px;padding:10px 22px;clip-path:polygon(0% 2px,2px 0%,98% 0%,100% 2px,100% 98%,97% 100%,3% 100%,0% 97%);background:var(--ink);color:var(--paper);font-size:12px;font-weight:600;cursor:pointer;text-decoration:none;letter-spacing:.04em;border:none;transition:all var(--spring);font-family:inherit}
 .btn:hover{transform:translateY(-2px) rotate(-.3deg);box-shadow:0 4px 16px rgba(20,10,5,.35)}
 
 /* ===== FOOTER ===== */
-footer{text-align:center;padding:36px 24px;position:relative;z-index:1;color:rgba(200,180,150,.3);font-size:10px;letter-spacing:.06em}
-footer .ft-icon{margin-bottom:8px;opacity:.2}
+footer{text-align:center;padding:36px 24px;position:relative;z-index:1;color:rgba(200,180,150,.25);font-size:10px;letter-spacing:.06em}
+footer .ft-icon{margin-bottom:8px;opacity:.18}
 
 /* ===== REVEAL ===== */
 .reveal{opacity:0;transform:translateY(16px);transition:all .7s cubic-bezier(.4,0,.2,1)}
 .reveal.on{opacity:1;transform:translateY(0)}
 
+/* ===== RESPONSIVE ===== */
 @media(max-width:768px){
   nav{gap:16px;padding:12px 10px;flex-wrap:wrap}
   nav a{font-size:10px}
   .hero h1{font-size:38px}
-  .hero-stats{gap:14px}
-  .page-head{padding:16px}
-  .page-body-inner{padding:0 14px 16px 14px}
+  .hero-stats{gap:12px}
+  .page-head{padding:18px 16px}
+  .page-body-inner{padding:0 16px 18px 16px}
   .page-num{font-size:30px;min-width:34px}
   .page-head h3{font-size:16px}
-  .skill-row .s-name{width:100px;font-size:12px}
+  .skill-row .s-name{width:90px;font-size:12px}
+  .portfolio-grid{grid-template-columns:1fr 1fr}
+  .port-card{height:150px}
+  .side-nav{right:8px;gap:8px}
 }
 </style>
 </head>
 <body>
+
+<!-- Dust particles -->
+<canvas id="dust"></canvas>
+
+<!-- Watercolor overlay -->
+<div class="watercolor"></div>
 
 <!-- Cityscape -->
 <div class="city">
@@ -188,9 +246,20 @@ footer .ft-icon{margin-bottom:8px;opacity:.2}
   <div class="street"></div><div class="refl"></div><div class="fog"></div>
 </div>
 
-<!-- Nav -->
+<!-- Side bookmark nav -->
+<div class="side-nav" id="sideNav">
+  <a href="#home" data-label="Home"></a>
+  <a href="#about" data-label="About"></a>
+  <a href="#skills" data-label="Skills"></a>
+  <a href="#portfolio" data-label="Works"></a>
+  <a href="#experience" data-label="Experience"></a>
+  <a href="#brands" data-label="Brands"></a>
+  <a href="#contact" data-label="Contact"></a>
+</div>
+
+<!-- Top nav -->
 <nav>
-  <a href="#home">Home</a><a href="#about">About</a><a href="#skills">Skills</a><a href="#experience">Experience</a><a href="#brands">Brands</a><a href="#contact">Contact</a>
+  <a href="#home">Home</a><a href="#about">About</a><a href="#skills">Skills</a><a href="#portfolio">Works</a><a href="#experience">Experience</a><a href="#brands">Brands</a><a href="#contact">Contact</a>
 </nav>
 
 <!-- Hero -->
@@ -214,47 +283,37 @@ footer .ft-icon{margin-bottom:8px;opacity:.2}
   <p class="s-note reveal">五年深耕内容创作，从个人账号到顶级品牌，始终以视觉叙事为核心驱动力。</p>
   <div class="page-stack">
     <div class="page-card reveal" onclick="toggleCard(this)">
-      <div class="page-head">
-        <div class="ph-left"><span class="page-num">01</span><div><h3>全平台运营实战</h3><p class="ph-preview">Bilibili · 小红书 · YouTube · TikTok 多矩阵统筹</p></div></div>
-        <div class="page-toggle">+</div>
-      </div>
+      <div class="page-head"><div class="ph-left"><span class="page-num">01</span><div><h3>全平台运营实战</h3><p class="ph-preview">Bilibili · 小红书 · YouTube · TikTok 多矩阵统筹</p></div></div><div class="page-toggle">+</div></div>
       <div class="page-body"><div class="page-body-inner">
-        <p>统筹运营 Bilibili、小红书、YouTube、TikTok 等<strong>国内外主流平台</strong>，不仅独立跑通选题策划、脚本撰写、实拍执行、后期剪辑全流程，更擅长针对不同平台的算法逻辑与受众画像制定差异化内容策略。</p>
+        <p class="dropcap">统筹运营 Bilibili、小红书、YouTube、TikTok 等<strong>国内外主流平台</strong>，不仅独立跑通选题策划、脚本撰写、实拍执行、后期剪辑全流程，更擅长针对不同平台的算法逻辑与受众画像制定差异化内容策略。</p>
+        <div class="sketch-line"></div>
         <div class="highlight-box">全网粉丝累计近 <strong>10 万</strong>，YouTube 频道突破 <strong>1.6 万订阅</strong>，实现跨平台内容生态矩阵。</div>
-        <p>核心能力在于将单一内容资产进行多平台适配分发，最大化内容复用率与传播效率。</p>
+        <p>核心能力在于将单一内容资产进行多平台适配分发，最大化内容复用率与传播效率——这是每一位高效创作者都需要掌握的底层能力。</p>
       </div></div>
     </div>
     <div class="page-card reveal" onclick="toggleCard(this)">
-      <div class="page-head">
-        <div class="ph-left"><span class="page-num">02</span><div><h3>高爆发内容产出</h3><p class="ph-preview">累计赞藏 1,000,000+ · 现象级爆款逻辑</p></div></div>
-        <div class="page-toggle">+</div>
-      </div>
+      <div class="page-head"><div class="ph-left"><span class="page-num">02</span><div><h3>高爆发内容产出</h3><p class="ph-preview">累计赞藏 1,000,000+ · 现象级爆款逻辑</p></div></div><div class="page-toggle">+</div></div>
       <div class="page-body"><div class="page-body-inner">
-        <p>凭借对影视节奏、画面张力与情绪曲线的敏锐把控，个人作品累计赞藏量突破 <strong>1,000,000+</strong>，具备持续产出现象级爆款内容的底层方法论。</p>
+        <p class="dropcap">凭借对影视节奏、画面张力与情绪曲线的敏锐把控，个人作品累计赞藏量突破 <strong>1,000,000+</strong>，具备持续产出现象级爆款内容的底层方法论。</p>
         <div class="highlight-box">不只是「运气好出一款爆款」——而是理解爆款背后的<strong>叙事结构、节奏曲线、情绪触发点</strong>，可复制、可预测。</div>
-        <p>擅长类型：影视混剪、情绪短片、品牌宣传、社媒短视频。</p>
+        <div class="sketch-line"></div>
+        <p>擅长类型：影视混剪、情绪短片、品牌宣传、社媒短视频。每一种类型都有成熟的内容模板和制作流程。</p>
       </div></div>
     </div>
     <div class="page-card reveal" onclick="toggleCard(this)">
-      <div class="page-head">
-        <div class="ph-left"><span class="page-num">03</span><div><h3>顶级品牌合作背书</h3><p class="ph-preview">环球影业 · 万达电影 · 猫眼 · 网易云音乐</p></div></div>
-        <div class="page-toggle">+</div>
-      </div>
+      <div class="page-head"><div class="ph-left"><span class="page-num">03</span><div><h3>顶级品牌合作背书</h3><p class="ph-preview">环球影业 · 万达电影 · 猫眼 · 网易云音乐</p></div></div><div class="page-toggle">+</div></div>
       <div class="page-body"><div class="page-body-inner">
-        <p>曾直接为<strong>环球影业、万达电影、猫眼</strong>等头部平台及<strong>网易云音乐</strong>制作社媒宣传视频，涵盖多部全球知名 IP。</p>
-        <div class="highlight-box">合作影片：《阿凡达》《魔法坏女巫》《疯狂动物城》《忌日快乐》《死神来了》……</div>
-        <p>在严格遵守官方品牌调性的前提下，通过创意剪辑与叙事重构，显著提升影片在各大社媒平台的话题热度与互动数据。理解「品牌想传达什么」与「观众想看什么」之间的平衡点。</p>
+        <p class="dropcap">曾直接为<strong>环球影业、万达电影、猫眼</strong>等头部平台及<strong>网易云音乐</strong>制作社媒宣传视频，涵盖多部全球知名 IP。</p>
+        <div class="highlight-box">合作影片：《阿凡达》《魔法坏女巫》《疯狂动物城》《忌日快乐》《死神来了》——每一部都是全球观众熟知的名字。</div>
+        <p>在严格遵守官方品牌调性的前提下，通过创意剪辑与叙事重构，显著提升影片在各大社媒平台的话题热度与互动数据。</p>
       </div></div>
     </div>
     <div class="page-card reveal" onclick="toggleCard(this)">
-      <div class="page-head">
-        <div class="ph-left"><span class="page-num">04</span><div><h3>跨文化传播能力</h3><p class="ph-preview">5 年海外运营 · 英文工作语言 · SEO 优化</p></div></div>
-        <div class="page-toggle">+</div>
-      </div>
+      <div class="page-head"><div class="ph-left"><span class="page-num">04</span><div><h3>跨文化传播能力</h3><p class="ph-preview">5 年海外运营 · 英文工作语言 · SEO 优化</p></div></div><div class="page-toggle">+</div></div>
       <div class="page-body"><div class="page-body-inner">
-        <p>拥有 <strong>5 年海外社交媒体独立运营经验</strong>，深入了解海外受众的内容消费偏好、平台版权规则（Fair Use、Content ID）与 SEO 优化策略。</p>
-        <div class="highlight-box">全英文撰写标题、描述、标签及评论区互动，英语具备 Professional Working Proficiency（雅思模考 6.0）。</div>
-        <p>理解中西方内容审美差异，能在两种文化语境中自如切换创作视角——既懂国内流量玩法，也懂海外内容生态。</p>
+        <p class="dropcap">拥有 <strong>5 年海外社交媒体独立运营经验</strong>，深入了解海外受众的内容消费偏好、平台版权规则（Fair Use、Content ID）与 SEO 优化策略。</p>
+        <div class="highlight-box">全英文撰写标题、描述、标签及评论区互动，英语具备 Professional Working Proficiency（雅思模考 6.0），理解中西方内容审美差异。</div>
+        <p>能在两种文化语境中自如切换创作视角——既懂国内流量玩法，也懂海外内容生态。这是稀缺的复合能力。</p>
       </div></div>
     </div>
   </div>
@@ -267,32 +326,59 @@ footer .ft-icon{margin-bottom:8px;opacity:.2}
   <p class="s-note reveal">点击展开查看各工具的详细熟练度与具体应用场景。</p>
   <div class="page-stack">
     <div class="page-card reveal" onclick="toggleCard(this)">
-      <div class="page-head">
-        <div class="ph-left"><span class="page-num">🎬</span><div><h3>视频后期工具链</h3><p class="ph-preview">Premiere Pro · After Effects · DaVinci Resolve · Topaz Video AI</p></div></div>
-        <div class="page-toggle">+</div>
-      </div>
+      <div class="page-head"><div class="ph-left"><span class="page-num">🎬</span><div><h3>视频后期工具链</h3><p class="ph-preview">Premiere Pro · After Effects · DaVinci Resolve · Topaz Video AI</p></div></div><div class="page-toggle">+</div></div>
       <div class="page-body"><div class="page-body-inner">
         <div class="skill-row"><span class="s-name">Premiere Pro</span><div class="s-bar-wrap"><div class="s-bar" data-width="95"></div></div><span class="s-pct">95%</span></div>
-        <p style="margin-bottom:12px">主力剪辑工具。精通多机位同步剪辑、动态链接 Ae、Lumetri 调色工作流、代理剪辑流程、多格式输出。日常项目均在 Pr 中完成全流程。</p>
+        <p style="margin-bottom:14px">主力剪辑工具。精通多机位同步剪辑、动态链接 Ae、Lumetri 调色、代理剪辑、多格式输出。所有日常项目均在 Pr 完成全流程。</p>
         <div class="skill-row"><span class="s-name">After Effects</span><div class="s-bar-wrap"><div class="s-bar" data-width="88"></div></div><span class="s-pct">88%</span></div>
-        <p style="margin-bottom:12px">动效设计与视觉合成。擅长表达式动画、动态图形模板（MOGRTs）、关键帧动画、粒子特效、绿幕抠像与合成。社媒宣传视频的视觉特效均在 Ae 完成。</p>
+        <p style="margin-bottom:14px">动效设计与视觉合成。擅长表达式动画、MOGRTs、粒子特效、绿幕抠像。社媒宣传视频的视觉特效均在 Ae 完成。</p>
         <div class="skill-row"><span class="s-name">DaVinci Resolve</span><div class="s-bar-wrap"><div class="s-bar" data-width="85"></div></div><span class="s-pct">85%</span></div>
-        <p style="margin-bottom:12px">专业调色与色彩管理。精通节点调色逻辑、HDR 工作流、色彩空间转换、LUT 设计与应用。所有电影宣发项目均使用达芬奇完成最终调色。</p>
+        <p style="margin-bottom:14px">专业调色与色彩管理。精通节点调色、HDR 工作流、色彩空间转换。所有电影宣发项目均使用达芬奇完成最终调色。</p>
         <div class="skill-row"><span class="s-name">Topaz Video AI</span><div class="s-bar-wrap"><div class="s-bar" data-width="80"></div></div><span class="s-pct">80%</span></div>
-        <p>AI 画质增强工具。熟练运用降噪、锐化、慢动作插帧、老片修复、低分辨率素材放大等功能，显著提升素材可用性与视觉品质。</p>
+        <p>AI 画质增强。熟练运用降噪、锐化、慢动作插帧、老片修复、低分辨率放大，显著提升素材可用性。</p>
       </div></div>
     </div>
     <div class="page-card reveal" onclick="toggleCard(this)">
-      <div class="page-head">
-        <div class="ph-left"><span class="page-num">📷</span><div><h3>摄影摄像 & 语言能力</h3><p class="ph-preview">各型号无反/单反 · 灯光布控 · English Communication</p></div></div>
-        <div class="page-toggle">+</div>
-      </div>
+      <div class="page-head"><div class="ph-left"><span class="page-num">📷</span><div><h3>摄影摄像 & 语言能力</h3><p class="ph-preview">各型号无反/单反 · 灯光布控 · English Communication</p></div></div><div class="page-toggle">+</div></div>
       <div class="page-body"><div class="page-body-inner">
         <div class="skill-row"><span class="s-name">摄影 / 摄像</span><div class="s-bar-wrap"><div class="s-bar" data-width="82"></div></div><span class="s-pct">82%</span></div>
-        <p style="margin-bottom:12px">熟练操作各型号无反/单反相机，精通三点布光法、自然光利用、构图理论与色彩理论。视觉中国 500px 签约摄影师。</p>
+        <p style="margin-bottom:14px">熟练操作各型号无反/单反相机，精通三点布光法、自然光利用、构图理论与色彩理论。视觉中国 500px 签约摄影师。</p>
         <div class="skill-row"><span class="s-name">English</span><div class="s-bar-wrap"><div class="s-bar" data-width="75"></div></div><span class="s-pct">75%</span></div>
-        <p>Professional Working Proficiency。五年英文社媒运营实战经验，能流畅进行英文标题/描述撰写、评论区互动及商务邮件沟通。雅思模考 6.0。</p>
+        <p>Professional Working Proficiency。五年英文社媒运营实战，能流畅进行英文标题/描述撰写、评论区互动及商务邮件沟通。</p>
       </div></div>
+    </div>
+  </div>
+</section>
+
+<!-- Portfolio Gallery -->
+<section id="portfolio">
+  <div class="s-tag reveal">✦ Selected Works</div>
+  <h2 class="s-title reveal">作品集</h2>
+  <p class="s-note reveal">悬停卡片翻转查看详情。更多作品请前往各平台主页。</p>
+  <div class="portfolio-grid reveal">
+    <div class="port-card">
+      <div class="port-card-inner">
+        <div class="port-front"><div class="pf-icon">🎬</div><div class="pf-title">电影宣发剪辑</div><div class="pf-sub">环球影业 · 万达电影</div></div>
+        <div class="port-back"><h4>电影宣发剪辑</h4><p>为《阿凡达》《魔法坏女巫》等好莱坞大片制作社媒宣传短片，显著提升话题热度。</p></div>
+      </div>
+    </div>
+    <div class="port-card">
+      <div class="port-card-inner">
+        <div class="port-front"><div class="pf-icon">🎵</div><div class="pf-title">音乐内容创作</div><div class="pf-sub">网易云音乐合作</div></div>
+        <div class="port-back"><h4>音乐内容创作</h4><p>为网易云音乐制作视觉化音乐内容，融合旋律与影像的跨媒介叙事。</p></div>
+      </div>
+    </div>
+    <div class="port-card">
+      <div class="port-card-inner">
+        <div class="port-front"><div class="pf-icon">▶️</div><div class="pf-title">YouTube 频道</div><div class="pf-sub">1.6w+ 订阅</div></div>
+        <div class="port-back"><h4>YouTube 频道</h4><p>独立运营影视二次创作频道，全英文 SEO 优化，累计百万级播放。</p></div>
+      </div>
+    </div>
+    <div class="port-card">
+      <div class="port-card-inner">
+        <div class="port-front"><div class="pf-icon">📷</div><div class="pf-title">签约摄影</div><div class="pf-sub">视觉中国 500px</div></div>
+        <div class="port-back"><h4>签约摄影</h4><p>通过视觉中国专业审核签约，作品具备商业授权资质，高质量视觉供稿。</p></div>
+      </div>
     </div>
   </div>
 </section>
@@ -304,56 +390,33 @@ footer .ft-icon{margin-bottom:8px;opacity:.2}
   <p class="s-note reveal">从个人创作者到顶级品牌合作——内容质量是贯穿始终的核心。</p>
   <div class="page-stack">
     <div class="page-card reveal" onclick="toggleCard(this)">
-      <div class="page-head">
-        <div class="ph-left"><span class="page-num">01</span><div><h3>个人自媒体主理人</h3><p class="ph-preview">YouTube · TikTok · Bilibili · 小红书 · 全平台矩阵</p></div></div>
-        <div class="page-toggle">+</div>
-      </div>
+      <div class="page-head"><div class="ph-left"><span class="page-num">01</span><div><h3>个人自媒体主理人</h3><p class="ph-preview">YouTube · TikTok · Bilibili · 小红书 · 全平台矩阵</p></div></div><div class="page-toggle">+</div></div>
       <div class="page-body"><div class="page-body-inner">
-        <p style="color:var(--gold-dim);font-size:11px;text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px">至今</p>
-        <p>独立运营国内外多平台内容矩阵，从零搭建账号体系，精准把握各平台算法逻辑与内容生态差异。</p>
-        <ul>
-          <li>YouTube 频道突破 <strong>1.6 万订阅</strong>，累计播放量稳步增长</li>
-          <li>TikTok 多账号运营，熟悉短视频算法推荐机制与趋势捕捉</li>
-          <li>Bilibili / 小红书同步分发，根据国内受众调整选题与剪辑节奏</li>
-          <li>全英文 SEO 优化（标题/描述/标签），实现海外搜索流量稳健增长</li>
-          <li>深耕影视素材二次创作，全网累计 <strong>百万级赞藏</strong></li>
-        </ul>
+        <p style="color:var(--gold-dim);font-size:11px;text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px">至今</p>
+        <p class="dropcap">独立运营国内外多平台内容矩阵，从零搭建账号体系，精准把握各平台算法逻辑与内容生态差异。</p>
+        <ul><li>YouTube 频道突破 <strong>1.6 万订阅</strong>，累计播放量稳步增长</li><li>TikTok 多账号运营，熟悉短视频算法推荐机制与趋势捕捉</li><li>Bilibili / 小红书同步分发，根据国内受众调整选题与剪辑节奏</li><li>全英文 SEO 优化（标题/描述/标签），实现海外搜索流量稳健增长</li><li>深耕影视素材二次创作，全网累计 <strong>百万级赞藏</strong></li></ul>
       </div></div>
     </div>
     <div class="page-card reveal" onclick="toggleCard(this)">
-      <div class="page-head">
-        <div class="ph-left"><span class="page-num">02</span><div><h3>商业电影宣发项目</h3><p class="ph-preview">猫眼 · 万达电影 · 环球影业 · 网易云音乐</p></div></div>
-        <div class="page-toggle">+</div>
-      </div>
+      <div class="page-head"><div class="ph-left"><span class="page-num">02</span><div><h3>商业电影宣发项目</h3><p class="ph-preview">猫眼 · 万达电影 · 环球影业 · 网易云音乐</p></div></div><div class="page-toggle">+</div></div>
       <div class="page-body"><div class="page-body-inner">
-        <p style="color:var(--gold-dim);font-size:11px;text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px">项目制合作</p>
-        <p>受邀对接国内顶级宣发平台及好莱坞片方，负责电影社媒宣传短片的剪辑与二次创作。</p>
-        <ul>
-          <li>合作机构：<strong>猫眼、万达电影、环球影业、网易云音乐</strong></li>
-          <li>合作 IP：《阿凡达》《魔法坏女巫》《疯狂动物城》《忌日快乐》《死神来了》等</li>
-          <li>在满足品牌官方调性的基础上，通过创意剪辑与叙事重构显著提升话题热度</li>
-          <li>理解院线电影宣发周期与社媒内容节奏的配合逻辑</li>
-        </ul>
+        <p style="color:var(--gold-dim);font-size:11px;text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px">项目制合作</p>
+        <p class="dropcap">受邀对接国内顶级宣发平台及好莱坞片方，负责电影社媒宣传短片的剪辑与二次创作。</p>
+        <ul><li>合作机构：<strong>猫眼、万达电影、环球影业、网易云音乐</strong></li><li>合作 IP：《阿凡达》《魔法坏女巫》《疯狂动物城》《忌日快乐》《死神来了》等</li><li>在满足品牌官方调性的基础上，通过创意剪辑与叙事重构显著提升话题热度</li><li>理解院线电影宣发周期与社媒内容节奏的配合逻辑</li></ul>
       </div></div>
     </div>
     <div class="page-card reveal" onclick="toggleCard(this)">
-      <div class="page-head">
-        <div class="ph-left"><span class="page-num">03</span><div><h3>视觉中国 500px · 签约摄影师</h3><p class="ph-preview">商业授权 · 高质量视觉供稿</p></div></div>
-        <div class="page-toggle">+</div>
-      </div>
+      <div class="page-head"><div class="ph-left"><span class="page-num">03</span><div><h3>视觉中国 500px · 签约摄影师</h3><p class="ph-preview">商业授权 · 高质量视觉供稿</p></div></div><div class="page-toggle">+</div></div>
       <div class="page-body"><div class="page-body-inner">
-        <p style="color:var(--gold-dim);font-size:11px;text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px">至今</p>
+        <p style="color:var(--gold-dim);font-size:11px;text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px">至今</p>
         <p>通过视觉中国专业审美审核签约，作品具备商业授权资质。定期供稿高质量视觉内容，涵盖城市风光、自然景观、创意摄影等领域。</p>
         <div class="highlight-box">签约意味着作品达到<strong>可商业变现的专业水准</strong>，同时也是审美能力的有力背书。</div>
       </div></div>
     </div>
     <div class="page-card reveal" onclick="toggleCard(this)">
-      <div class="page-head">
-        <div class="ph-left"><span class="page-num">04</span><div><h3>学生会宣传部 · 视觉叙事起点</h3><p class="ph-preview">校级活动记录 · 毕业纪念视频</p></div></div>
-        <div class="page-toggle">+</div>
-      </div>
+      <div class="page-head"><div class="ph-left"><span class="page-num">04</span><div><h3>学生会宣传部 · 起点</h3><p class="ph-preview">校级活动记录 · 毕业纪念视频</p></div></div><div class="page-toggle">+</div></div>
       <div class="page-body"><div class="page-body-inner">
-        <p style="color:var(--gold-dim);font-size:11px;text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px">高中时期</p>
+        <p style="color:var(--gold-dim);font-size:11px;text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px">高中时期</p>
         <p>通过面试入选学生会宣传部核心成员，负责校级活动的视觉记录。独立主导并完成班级毕业纪念视频制作——从策划、拍摄到剪辑的全流程实践，获得师生极高评价。</p>
         <div class="highlight-box">正是这段经历，种下了对<strong>视觉叙事</strong>的热爱。从那时起，一直在用镜头讲述故事。</div>
       </div></div>
@@ -367,7 +430,7 @@ footer .ft-icon{margin-bottom:8px;opacity:.2}
   <h2 class="s-title reveal" style="text-align:center">合作品牌与 IP</h2>
   <p class="s-note reveal" style="text-align:center;margin-left:auto;margin-right:auto">曾直接为以下机构及影片制作社媒宣传内容</p>
   <div class="brands-grid reveal"><span class="stamp dark">环球影业</span><span class="stamp dark">万达电影</span><span class="stamp dark">猫眼</span><span class="stamp dark">网易云音乐</span><span class="stamp dark">视觉中国 500px</span></div>
-  <div class="brands-grid reveal" style="margin-top:10px"><span class="stamp">《阿凡达》</span><span class="stamp">《魔法坏女巫》</span><span class="stamp">《疯狂动物城》</span><span class="stamp">《忌日快乐》</span><span class="stamp">《死神来了》</span></div>
+  <div class="brands-grid reveal"><span class="stamp">《阿凡达》</span><span class="stamp">《魔法坏女巫》</span><span class="stamp">《疯狂动物城》</span><span class="stamp">《忌日快乐》</span><span class="stamp">《死神来了》</span></div>
 </section>
 
 <!-- Contact -->
@@ -376,18 +439,10 @@ footer .ft-icon{margin-bottom:8px;opacity:.2}
   <h2 class="s-title reveal">联系方式</h2>
   <p class="s-note reveal">欢迎品牌合作、项目邀约与工作机会联系。</p>
   <div class="contact-row reveal">
-    <div class="page-card contact-card" style="flex:1;min-width:140px;cursor:default;padding:18px 20px">
-      <div class="cc-label">邮箱</div><div class="cc-val">你的邮箱@example.com</div>
-    </div>
-    <div class="page-card contact-card" style="flex:1;min-width:140px;cursor:default;padding:18px 20px">
-      <div class="cc-label">TikTok / 抖音</div><div class="cc-val">哈利的屁股蛋</div>
-    </div>
-    <div class="page-card contact-card" style="flex:1;min-width:140px;cursor:default;padding:18px 20px">
-      <div class="cc-label">小红书</div><div class="cc-val">哈利的屁股蛋</div>
-    </div>
-    <div class="page-card contact-card" style="flex:1;min-width:140px;cursor:default;padding:18px 20px">
-      <div class="cc-label">YouTube / Bilibili</div><div class="cc-val">战略计 / zhanlueji</div>
-    </div>
+    <div class="cc-item"><div class="cc-label">邮箱</div><div class="cc-val">你的邮箱@example.com</div></div>
+    <div class="cc-item"><div class="cc-label">TikTok / 抖音</div><div class="cc-val">哈利的屁股蛋</div></div>
+    <div class="cc-item"><div class="cc-label">小红书</div><div class="cc-val">哈利的屁股蛋</div></div>
+    <div class="cc-item"><div class="cc-label">YouTube / Bilibili</div><div class="cc-val">战略计 / zhanlueji</div></div>
   </div>
   <div class="resume-ticket reveal">
     <p><strong>下载简历</strong> · 完整的职业经历与作品集</p>
@@ -401,38 +456,48 @@ footer .ft-icon{margin-bottom:8px;opacity:.2}
 <footer><div class="ft-icon">&#9670;</div>&copy; 2026 陈晨 Chenchen. All rights reserved.</footer>
 
 <script>
+// ===== DUST PARTICLES =====
+const dc=document.getElementById('dust'),dx=dc.getContext('2d');
+let dusts=[],dW,dH;
+function resizeDust(){dW=dc.width=innerWidth;dH=dc.height=innerHeight}
+resizeDust();window.addEventListener('resize',resizeDust);
+// Seed dust
+for(let i=0;i<40;i++)dusts.push({x:Math.random()*dW,y:Math.random()*dH,r:.3+Math.random()*1.5,vx:(Math.random()-.5)*.15,vy:-(.1+Math.random()*.25),o:.1+Math.random()*.35,phase:Math.random()*Math.PI*2});
+function animDust(t){
+  dx.clearRect(0,0,dW,dH);
+  dusts.forEach(d=>{
+    d.x+=d.vx+Math.sin(t*.001+d.phase)*.08;d.y+=d.vy;
+    if(d.x<0)d.x=dW;if(d.x>dW)d.x=0;if(d.y<-10)d.y=dH+10;if(d.y>dH+10)d.y=-10;
+    dx.beginPath();dx.arc(d.x,d.y,d.r,0,Math.PI*2);
+    dx.fillStyle=`rgba(255,240,210,${(d.o*.5+Math.sin(t*.002+d.phase)*.15).toFixed(2)})`;dx.fill();
+  });
+  requestAnimationFrame(animDust);
+}
+requestAnimationFrame(animDust);
+
 // ===== PAPER SOUND ENGINE =====
-const AC=window.AudioContext||window.webkitAudioContext;let actx=null,paperBuffer=null;
+const AC=window.AudioContext||window.webkitAudioContext;let actx=null,pb=null;
 function ctx(){if(!actx)actx=new AC();return actx}
-
-// Preload paper sound
-fetch('paper.mp3').then(r=>r.arrayBuffer()).then(buf=>ctx().decodeAudioData(buf)).then(b=>{paperBuffer=b}).catch(()=>{})
-
-function playPaper(vol=.06,rate=1){
+fetch('paper.mp3').then(r=>r.arrayBuffer()).then(b=>ctx().decodeAudioData(b)).then(b=>{pb=b}).catch(()=>{})
+function playPaper(v=.06,r=1){
   const a=ctx();
-  if(paperBuffer){const s=a.createBufferSource();s.buffer=paperBuffer;s.playbackRate.value=rate+.2*Math.random();const g=a.createGain();g.gain.value=vol;s.connect(g);g.connect(a.destination);s.start();return}
-  // Fallback: synthesised paper rustle
+  if(pb){const s=a.createBufferSource();s.buffer=pb;s.playbackRate.value=r+.2*Math.random();const g=a.createGain();g.gain.value=v;s.connect(g);g.connect(a.destination);s.start();return}
   const buf=a.createBuffer(1,a.sampleRate*.04,a.sampleRate),d=buf.getChannelData(0);
   for(let i=0;i<d.length;i++)d[i]=(Math.random()*2-1)*Math.exp(-i/(a.sampleRate*.008));
-  const s=a.createBufferSource();s.buffer=buf;const bp=a.createBiquadFilter();bp.type='bandpass';bp.frequency.value=2800;bp.Q.value=1.5;
-  const g=a.createGain();g.gain.setValueAtTime(vol,t);g.gain.exponentialRampToValueAtTime(.001,a.currentTime+.04);
-  s.connect(bp);bp.connect(g);g.connect(a.destination);s.start();s.stop(a.currentTime+.04)
+  const src=a.createBufferSource();src.buffer=buf;const bp=a.createBiquadFilter();bp.type='bandpass';bp.frequency.value=2800;bp.Q.value=1.5;
+  const g=a.createGain();g.gain.setValueAtTime(v,a.currentTime);g.gain.exponentialRampToValueAtTime(.001,a.currentTime+.04);
+  src.connect(bp);bp.connect(g);g.connect(a.destination);src.start();src.stop(a.currentTime+.04)
 }
-
-// Attach sounds
-document.addEventListener('click',e=>{if(e.target.closest('.page-card,.stamp,.hero-stat,.btn,.contact-card'))playPaper(.05,.9)})
-document.querySelectorAll('.page-card,.stamp,.hero-stat,.btn,.contact-card').forEach(el=>{el.addEventListener('mouseenter',()=>playPaper(.02,1.3))})
+document.addEventListener('click',e=>{if(e.target.closest('.page-card,.stamp,.hero-stat,.btn,.cc-item,.port-card'))playPaper(.05,.9)})
+document.querySelectorAll('.page-card,.stamp,.hero-stat,.btn,.cc-item,.port-card').forEach(el=>{el.addEventListener('mouseenter',()=>playPaper(.02,1.3))})
 
 // ===== EXPANDABLE CARDS =====
 function toggleCard(card){
   const wasOpen=card.classList.contains('open');
-  // Close all siblings
   card.parentElement.querySelectorAll('.page-card').forEach(c=>c.classList.remove('open'));
-  // Toggle this one
   if(!wasOpen){card.classList.add('open');playPaper(.07,.8);
-    // Animate skill bars inside
     setTimeout(()=>card.querySelectorAll('.s-bar').forEach(b=>b.style.width=b.dataset.width+'%'),200)}
-  else{playPaper(.03,1.5)}
+  else playPaper(.03,1.5)
 }
 
 // ===== COUNTER =====
@@ -443,14 +508,26 @@ setTimeout(()=>document.querySelectorAll('.counter[data-target]').forEach(c=>ani
 const obs=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('on')})},{threshold:.1})
 document.querySelectorAll('.reveal').forEach(el=>obs.observe(el))
 
+// ===== SIDE NAV ACTIVE =====
+const sideLinks=document.querySelectorAll('.side-nav a');
+const sections=[];
+document.querySelectorAll('section[id]').forEach(s=>sections.push({id:s.id,top:0}));
+function updateSections(){sections.forEach(s=>{const el=document.getElementById(s.id);if(el)s.top=el.offsetTop})}
+updateSections();window.addEventListener('resize',updateSections);
+window.addEventListener('scroll',()=>{
+  const y=window.scrollY+200;
+  let active=null;
+  sections.forEach(s=>{if(y>=s.top)active=s.id});
+  sideLinks.forEach(a=>{a.classList.toggle('active',a.getAttribute('href')==='#'+active)});
+  // Top nav style
+  document.querySelector('nav').style.boxShadow=window.scrollY>10?'0 1px 20px rgba(0,0,0,.5)':'none';
+});
+
 // ===== MUSIC =====
 const bgm=document.getElementById('bgm'),mb=document.getElementById('musicBtn');let mo=false
 function toggleMusic(){ctx();if(mo){bgm.pause();mb.classList.add('off');mb.textContent='🎵'}else{bgm.play().catch(()=>{});mb.classList.remove('off');mb.textContent='♪'}mo=!mo}
 function firstPlay(){ctx();bgm.volume=.3;bgm.play().then(()=>{mo=true;mb.classList.remove('off');mb.textContent='♪'}).catch(()=>{});document.removeEventListener('click',firstPlay)}
 document.addEventListener('click',firstPlay,{once:true})
-
-// Nav shadow
-window.addEventListener('scroll',()=>{document.querySelector('nav').style.boxShadow=window.scrollY>10?'0 1px 20px rgba(0,0,0,.5)':'none'})
 </script>
 </body>
 </html>
