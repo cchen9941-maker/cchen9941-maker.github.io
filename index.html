@@ -229,6 +229,24 @@ section{padding:80px 24px;max-width:920px;margin:0 auto;position:relative;z-inde
   text-shadow:0 2px 12px rgba(0,0,0,.5);
 }
 .hero h1 em{font-style:italic;color:var(--gold-light);font-weight:400}
+.hero .aka{font-size:14px;color:rgba(220,210,190,.45);margin-bottom:28px;font-style:italic}
+.hero .aka span{margin:0 10px}
+
+/* Music toggle */
+.music-btn{
+  position:fixed;bottom:28px;right:28px;z-index:200;
+  width:40px;height:40px;border-radius:50%;
+  background:var(--paper);border:none;cursor:pointer;
+  box-shadow:var(--shadow-paper);transition:all var(--spring);
+  display:flex;align-items:center;justify-content:center;
+  font-size:16px;opacity:.7;
+}
+.music-btn:hover{transform:scale(1.1);opacity:1}
+.music-btn.off{opacity:.35}
+.music-btn.off::after{
+  content:'';position:absolute;width:1.5px;height:18px;
+  background:var(--ink-muted);transform:rotate(-45deg);border-radius:1px;
+}
 .hero .tagline{
   font-size:16px;color:rgba(230,220,200,.7);max-width:460px;
   margin-bottom:44px;line-height:1.7;
@@ -405,7 +423,8 @@ footer .ft-icon{margin-bottom:10px;opacity:.25}
 <!-- ===== HERO ===== -->
 <section class="hero" id="home">
   <div class="hero-ticket">Content Creator &amp; Film Editor</div>
-  <h1>战略计<br><em>Zhanlueji</em></h1>
+  <div class="aka">陈晨 / Chenchen &nbsp;·&nbsp; 战略计 / Zhanlueji &nbsp;·&nbsp; 哈利的屁股蛋</div>
+  <h1>陈晨<br><em>Chenchen</em></h1>
   <p class="tagline">
     全平台内容创作者 · 电影宣发剪辑 · 视觉中国签约摄影师<br>
     为环球影业、万达电影、猫眼、网易云音乐等品牌提供社媒创意内容
@@ -573,9 +592,13 @@ footer .ft-icon{margin-bottom:10px;opacity:.25}
   </div>
 </section>
 
+<button class="music-btn off" id="musicBtn" title="背景音乐" onclick="toggleMusic()">🎵</button>
+
+<audio id="bgm" loop preload="auto" src="bgm.mp3"></audio>
+
 <footer>
   <div class="ft-icon">&#9670;</div>
-  &copy; 2026 战略计 Zhanlueji. All rights reserved.
+  &copy; 2026 陈晨 Chenchen. All rights reserved.
 </footer>
 
 <script>
@@ -603,6 +626,71 @@ function animateCounter(el){
 
 // Init counters immediately (hero stats)
 setTimeout(()=>document.querySelectorAll('.counter[data-target]').forEach(c=>animateCounter(c)),400);
+
+// ===== PAPER CLICK SOUNDS =====
+const AudioCtx=window.AudioContext||window.webkitAudioContext;
+let actx=null;
+
+function ensureCtx(){if(!actx)actx=new AudioCtx();return actx}
+
+function paperClick(){
+  const a=ensureCtx(),t=a.currentTime;
+  // Paper rustle - filtered noise burst
+  const buf=a.createBuffer(1,a.sampleRate*.04,a.sampleRate);
+  const d=buf.getChannelData(0);
+  for(let i=0;i<d.length;i++)d[i]=(Math.random()*2-1)*Math.exp(-i/(a.sampleRate*.008));
+  const src=a.createBufferSource();src.buffer=buf;
+  const bp=a.createBiquadFilter();bp.type='bandpass';
+  bp.frequency.setValueAtTime(2800,t);bp.Q.setValueAtTime(1.5,t);
+  const gn=a.createGain();gn.gain.setValueAtTime(.06,t);
+  gn.gain.exponentialRampToValueAtTime(.001,t+.04);
+  src.connect(bp);bp.connect(gn);gn.connect(a.destination);
+  src.start(t);src.stop(t+.04);
+  // Soft low tap
+  const o=a.createOscillator();const g2=a.createGain();
+  o.type='sine';o.frequency.setValueAtTime(180,t);
+  g2.gain.setValueAtTime(.03,t);g2.gain.exponentialRampToValueAtTime(.001,t+.03);
+  o.connect(g2);g2.connect(a.destination);
+  o.start(t);o.stop(t+.03);
+}
+
+function paperHover(){
+  const a=ensureCtx(),t=a.currentTime;
+  const buf=a.createBuffer(1,a.sampleRate*.025,a.sampleRate);
+  const d=buf.getChannelData(0);
+  for(let i=0;i<d.length;i++)d[i]=(Math.random()*2-1)*Math.exp(-i/(a.sampleRate*.005));
+  const src=a.createBufferSource();src.buffer=buf;
+  const bp=a.createBiquadFilter();bp.type='bandpass';
+  bp.frequency.setValueAtTime(3500,t);bp.Q.setValueAtTime(1,t);
+  const gn=a.createGain();gn.gain.setValueAtTime(.02,t);
+  gn.gain.exponentialRampToValueAtTime(.001,t+.025);
+  src.connect(bp);bp.connect(gn);gn.connect(a.destination);
+  src.start(t);src.stop(t+.025);
+}
+
+// Attach paper sounds to all interactive elements
+document.addEventListener('click',e=>{
+  const t=e.target.closest('a,button,.paper-card,.brand-stamp,.hero-stat,.contact-card');
+  if(t)paperClick();
+});
+document.querySelectorAll('.paper-card,.brand-stamp,.hero-stat,.contact-card,.btn').forEach(el=>{
+  el.addEventListener('mouseenter',()=>paperHover());
+});
+
+// ===== BACKGROUND MUSIC =====
+const bgm=document.getElementById('bgm');
+const musicBtn=document.getElementById('musicBtn');
+let musicOn=false;
+
+function toggleMusic(){
+  ensureCtx();
+  if(musicOn){bgm.pause();musicBtn.classList.add('off');musicBtn.textContent='🎵'}
+  else{bgm.play().catch(()=>{});musicBtn.classList.remove('off');musicBtn.textContent='♪'}
+  musicOn=!musicOn;
+}
+// Start music on first user interaction
+function firstPlay(){ensureCtx();bgm.volume=.35;bgm.play().then(()=>{musicOn=true;musicBtn.classList.remove('off');musicBtn.textContent='♪'}).catch(()=>{});document.removeEventListener('click',firstPlay)}
+document.addEventListener('click',firstPlay,{once:true});
 
 // Nav
 window.addEventListener('scroll',()=>{
