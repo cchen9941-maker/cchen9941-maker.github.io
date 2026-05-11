@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="战略计 — 全平台自媒体运营 / 电影宣发剪辑 / 视觉中国签约摄影师。合作环球影业、万达电影、猫眼、网易云音乐。">
-<title>战略计 · 内容创作者 & 电影剪辑</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600&family=Inter:wght@300;400;500;600&family=Ma+Shan+Zheng&family=ZCOOL+XiaoWei&display=swap" rel="stylesheet">
+<meta name="description" content="陈晨 Chenchen — 全平台自媒体运营 / 电影宣发剪辑 / 视觉中国签约摄影师。合作环球影业、万达电影、猫眼、网易云音乐。">
+<title>陈晨 Chenchen · 内容创作者 & 电影剪辑</title>
 <style>
+@font-face{font-family:'NightSerif';src:url('font-heading.ttf') format('truetype');font-display:swap}
+@font-face{font-family:'AccentBrush';src:url('font-accent.ttf') format('truetype');font-display:swap}
+
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 :root{
   --sky-top:#0a0c1a;--sky-bot:#1a1e35;
@@ -18,7 +18,7 @@
   --window-lit:#ffe8a0;--lamp:#ffd870;
   --shadow-paper:0 2px 8px rgba(20,10,5,.25),0 6px 20px rgba(20,10,5,.15);
   --shadow-lift:0 6px 16px rgba(20,10,5,.3),0 14px 36px rgba(20,10,5,.18);
-  --spring:.5s cubic-bezier(.34,1.56,.64,1);
+  --spring:.55s cubic-bezier(.34,1.56,.64,1);
   --ease:.4s cubic-bezier(.4,0,.2,1);
 }
 html{font-size:16px;-webkit-font-smoothing:antialiased;scroll-behavior:smooth}
@@ -30,673 +30,427 @@ body{
 ::-webkit-scrollbar-track{background:var(--sky-top)}
 ::-webkit-scrollbar-thumb{background:var(--ink-subtle);border-radius:3px}
 
-/* ===== NIGHT CITY ILLUSTRATION ===== */
-.cityscape{
-  position:fixed;inset:0;pointer-events:none;z-index:0;
-  overflow:hidden;
-}
-/* Sky */
-.cityscape .sky{
-  position:absolute;inset:0;
-  background:linear-gradient(180deg,#0a0c1a 0%,#0f1225 20%,#141830 45%,#1a1f38 70%,#1c2240 100%);
-}
-/* Stars */
-.cityscape .stars{
-  position:absolute;top:0;left:0;right:0;height:60%;
-  background-image:
-    radial-gradient(1px 1px at 10% 8%,rgba(255,250,235,.7),transparent),
-    radial-gradient(1px 1px at 25% 15%,rgba(255,250,235,.5),transparent),
-    radial-gradient(1.5px 1.5px at 40% 5%,rgba(255,250,235,.8),transparent),
-    radial-gradient(1px 1px at 55% 18%,rgba(255,250,235,.4),transparent),
-    radial-gradient(1px 1px at 65% 10%,rgba(255,250,235,.6),transparent),
-    radial-gradient(1.5px 1.5px at 78% 6%,rgba(255,250,235,.7),transparent),
-    radial-gradient(1px 1px at 85% 20%,rgba(255,250,235,.5),transparent),
-    radial-gradient(1px 1px at 15% 25%,rgba(255,250,235,.35),transparent),
-    radial-gradient(1px 1px at 48% 22%,rgba(255,250,235,.45),transparent),
-    radial-gradient(1px 1px at 70% 14%,rgba(255,250,235,.55),transparent),
-    radial-gradient(1px 1px at 92% 12%,rgba(255,250,235,.4),transparent),
-    radial-gradient(1px 1px at 33% 3%,rgba(255,250,235,.6),transparent);
-}
-/* Moon */
-.cityscape .moon{
-  position:absolute;top:8%;right:18%;width:60px;height:60px;
-  background:radial-gradient(circle,#faf5e8 0%,#f0e8d0 60%,transparent 70%);
-  border-radius:50%;opacity:.85;
-  box-shadow:0 0 40px rgba(250,240,220,.15),0 0 80px rgba(250,240,220,.08),0 0 120px rgba(250,240,220,.04);
-}
-/* Distant buildings */
-.cityscape .bg-buildings{
-  position:absolute;bottom:25%;left:0;right:0;height:35%;
-  background:
-    linear-gradient(180deg,transparent 0%,#111528 100%);
-}
-/* Building silhouettes - CSS shapes */
-.cityscape .building{position:absolute;bottom:25%;background:#12162a}
-.cityscape .b1{left:2%;width:8%;height:30%;border-radius:2px 2px 0 0}
-.cityscape .b2{left:11%;width:6%;height:38%;border-radius:2px 2px 0 0;background:#111428}
-.cityscape .b3{left:18%;width:10%;height:25%;border-radius:3px 3px 0 0}
-.cityscape .b4{left:29%;width:7%;height:42%;border-radius:2px 2px 0 0}
-.cityscape .b5{left:37%;width:12%;height:32%;border-radius:2px 2px 0 0;background:#111528}
-.cityscape .b6{left:50%;width:9%;height:28%;border-radius:3px 3px 0 0}
-.cityscape .b7{left:60%;width:8%;height:36%;border-radius:2px 2px 0 0;background:#111428}
-.cityscape .b8{left:69%;width:11%;height:24%;border-radius:2px 2px 0 0}
-.cityscape .b9{left:81%;width:7%;height:34%;border-radius:2px 2px 0 0}
-.cityscape .b10{left:89%;width:9%;height:28%;border-radius:3px 3px 0 0;background:#111528}
-
-/* Clock tower */
-.cityscape .tower{
-  position:absolute;bottom:25%;left:44%;width:14px;height:55%;
-  background:#151830;border-radius:3px 3px 0 0;
-}
-.cityscape .tower-top{
-  position:absolute;bottom:calc(25% + 55%);left:calc(44% - 4px);width:22px;height:18px;
-  background:#181a32;border-radius:3px 3px 1px 1px;
-}
-.cityscape .tower-spire{
-  position:absolute;bottom:calc(25% + 55% + 18px);left:calc(44% + 2px);
-  width:10px;height:14px;
-  background:linear-gradient(180deg,#1a1d35,#151830);border-radius:50% 50% 0 0;
-}
-.cityscape .clock-face{
-  position:absolute;bottom:calc(25% + 45%);left:calc(44% - 3px);width:20px;height:20px;
-  background:#fffef8;border-radius:50%;opacity:.9;
-  box-shadow:0 0 8px rgba(255,240,200,.3);
-}
-
-/* Glowing windows */
-.cityscape .windows{
-  position:absolute;bottom:25%;left:0;right:0;height:35%;
-}
-.cityscape .win{
-  position:absolute;width:3px;height:4px;background:var(--window-lit);
-  border-radius:.5px;opacity:.8;
-}
-/* Scatter windows across buildings */
-.win.w1{left:19%;bottom:40%}.win.w2{left:20%;bottom:48%}.win.w3{left:21%;bottom:55%}
-.win.w4{left:38%;bottom:42%}.win.w5{left:39%;bottom:50%}.win.w6{left:40%;bottom:44%}
-.win.w7{left:12%;bottom:38%}.win.w8{left:13%;bottom:45%}
-.win.w9{left:30%;bottom:35%}.win.w10{left:31%;bottom:42%}
-.win.w11{left:51%;bottom:40%}.win.w12{left:52%;bottom:48%}
-.win.w13{left:62%;bottom:36%}.win.w14{left:63%;bottom:44%}.win.w15{left:61%;bottom:50%}
-.win.w16{left:70%;bottom:38%}.win.w17{left:71%;bottom:45%}
-.win.w18{left:82%;bottom:35%}.win.w19{left:83%;bottom:42%}
-.win.w20{left:91%;bottom:40%}
-/* Warm window variations */
-.win.w21{left:5%;bottom:32%;background:#ffd870}.win.w22{left:17%;bottom:52%;background:#ffe4a0}
-.win.w23{left:35%;bottom:46%;background:#ffd870}.win.w24{left:55%;bottom:44%;background:#ffe4a0}
-.win.w25{left:75%;bottom:42%;background:#ffd870}
-
-/* Street lamps */
-.cityscape .lamp{
-  position:absolute;width:4px;height:3px;background:var(--lamp);
-  border-radius:50%;opacity:.9;
-  box-shadow:0 0 6px rgba(255,216,112,.5),0 0 14px rgba(255,216,112,.25),0 0 24px rgba(255,216,112,.1);
-}
-.cityscape .lp1{bottom:26%;left:8%}.cityscape .lp2{bottom:26%;left:35%}
-.cityscape .lp3{bottom:26%;left:58%}.cityscape .lp4{bottom:26%;left:82%}
-
-/* Wet street reflection */
-.cityscape .street{
-  position:absolute;bottom:0;left:0;right:0;height:25%;
-  background:linear-gradient(180deg,rgba(20,24,40,.6) 0%,rgba(15,18,30,.85) 30%,#0d0f1e 100%);
-}
-.cityscape .reflection{
-  position:absolute;bottom:5%;left:0;right:0;height:20%;
-  background:
-    linear-gradient(0deg,rgba(255,230,160,.06) 0%,transparent 40%),
-    linear-gradient(90deg,transparent 0%,rgba(255,220,140,.04) 15%,transparent 20%,rgba(255,220,140,.05) 40%,transparent 50%,rgba(255,220,140,.03) 65%,transparent 70%,rgba(255,220,140,.04) 85%,transparent 100%);
-}
-
-/* Fog layer */
-.cityscape .fog{
-  position:absolute;bottom:20%;left:0;right:0;height:30%;
-  background:linear-gradient(180deg,transparent 0%,rgba(160,170,190,.04) 50%,rgba(140,150,170,.06) 100%);
-  filter:blur(20px);
-}
+/* ===== NIGHT CITYSCAPE (compact) ===== */
+.city{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.city .sky{position:absolute;inset:0;background:linear-gradient(180deg,#0a0c1a 0%,#0f1225 20%,#141830 45%,#1a1f38 70%,#1c2240 100%)}
+.city .stars{position:absolute;top:0;left:0;right:0;height:60%;
+  background-image:radial-gradient(1px 1px at 10% 8%,rgba(255,250,235,.7),transparent),radial-gradient(1px 1px at 25% 15%,rgba(255,250,235,.5),transparent),radial-gradient(1.5px 1.5px at 40% 5%,rgba(255,250,235,.8),transparent),radial-gradient(1px 1px at 55% 18%,rgba(255,250,235,.4),transparent),radial-gradient(1px 1px at 65% 10%,rgba(255,250,235,.6),transparent),radial-gradient(1.5px 1.5px at 78% 6%,rgba(255,250,235,.7),transparent),radial-gradient(1px 1px at 85% 20%,rgba(255,250,235,.5),transparent),radial-gradient(1px 1px at 15% 25%,rgba(255,250,235,.35),transparent),radial-gradient(1px 1px at 48% 22%,rgba(255,250,235,.45),transparent),radial-gradient(1px 1px at 70% 14%,rgba(255,250,235,.55),transparent),radial-gradient(1px 1px at 92% 12%,rgba(255,250,235,.4),transparent)}
+.city .moon{position:absolute;top:7%;right:16%;width:56px;height:56px;background:radial-gradient(circle,#faf5e8 0%,#f0e8d0 60%,transparent 70%);border-radius:50%;opacity:.85;box-shadow:0 0 40px rgba(250,240,220,.15),0 0 80px rgba(250,240,220,.08)}
+.city .bld{position:absolute;bottom:25%;background:#12162a}
+.city .b1{left:2%;width:8%;height:30%;border-radius:2px 2px 0 0}.city .b2{left:11%;width:6%;height:38%;border-radius:2px 2px 0 0;background:#111428}
+.city .b3{left:18%;width:10%;height:25%;border-radius:3px 3px 0 0}.city .b4{left:29%;width:7%;height:42%;border-radius:2px 2px 0 0}
+.city .b5{left:37%;width:12%;height:32%;border-radius:2px 2px 0 0;background:#111528}.city .b6{left:50%;width:9%;height:28%;border-radius:3px 3px 0 0}
+.city .b7{left:60%;width:8%;height:36%;border-radius:2px 2px 0 0;background:#111428}.city .b8{left:69%;width:11%;height:24%;border-radius:2px 2px 0 0}
+.city .b9{left:81%;width:7%;height:34%;border-radius:2px 2px 0 0}.city .b10{left:89%;width:9%;height:28%;border-radius:3px 3px 0 0}
+.city .tower{position:absolute;bottom:25%;left:44%;width:14px;height:55%;background:#151830;border-radius:3px 3px 0 0}
+.city .tower-top{position:absolute;bottom:calc(25% + 55%);left:calc(44% - 4px);width:22px;height:18px;background:#181a32;border-radius:3px 3px 1px 1px}
+.city .tower-spire{position:absolute;bottom:calc(25% + 55% + 18px);left:calc(44% + 2px);width:10px;height:14px;background:linear-gradient(180deg,#1a1d35,#151830);border-radius:50% 50% 0 0}
+.city .clock-face{position:absolute;bottom:calc(25% + 45%);left:calc(44% - 3px);width:20px;height:20px;background:#fffef8;border-radius:50%;opacity:.9;box-shadow:0 0 8px rgba(255,240,200,.3)}
+.city .win{position:absolute;width:3px;height:4px;background:var(--window-lit);border-radius:.5px;opacity:.8}
+.city .w1{left:19%;bottom:40%}.city .w2{left:20%;bottom:48%}.city .w3{left:21%;bottom:55%}.city .w4{left:38%;bottom:42%}.city .w5{left:39%;bottom:50%}.city .w6{left:40%;bottom:44%}.city .w7{left:12%;bottom:38%}.city .w8{left:13%;bottom:45%}.city .w9{left:30%;bottom:35%}.city .w10{left:31%;bottom:42%}.city .w11{left:51%;bottom:40%}.city .w12{left:52%;bottom:48%}.city .w13{left:62%;bottom:36%}.city .w14{left:63%;bottom:44%}.city .w15{left:61%;bottom:50%}.city .w16{left:70%;bottom:38%}.city .w17{left:71%;bottom:45%}.city .w18{left:82%;bottom:35%}.city .w19{left:83%;bottom:42%}.city .w20{left:91%;bottom:40%}.city .ww1{left:5%;bottom:32%;background:#ffd870}.city .ww2{left:17%;bottom:52%;background:#ffe4a0}.city .ww3{left:35%;bottom:46%;background:#ffd870}.city .ww4{left:55%;bottom:44%;background:#ffe4a0}.city .ww5{left:75%;bottom:42%;background:#ffd870}
+.city .lamp{position:absolute;width:4px;height:3px;background:var(--lamp);border-radius:50%;opacity:.9;box-shadow:0 0 6px rgba(255,216,112,.5),0 0 14px rgba(255,216,112,.25)}
+.city .lp1{bottom:26%;left:8%}.city .lp2{bottom:26%;left:35%}.city .lp3{bottom:26%;left:58%}.city .lp4{bottom:26%;left:82%}
+.city .street{position:absolute;bottom:0;left:0;right:0;height:25%;background:linear-gradient(180deg,rgba(20,24,40,.6) 0%,rgba(15,18,30,.85) 30%,#0d0f1e 100%)}
+.city .refl{position:absolute;bottom:5%;left:0;right:0;height:20%;background:linear-gradient(0deg,rgba(255,230,160,.06) 0%,transparent 40%),linear-gradient(90deg,transparent 0%,rgba(255,220,140,.04) 15%,transparent 20%,rgba(255,220,140,.05) 40%,transparent 50%,rgba(255,220,140,.03) 65%,transparent 70%,rgba(255,220,140,.04) 85%,transparent 100%)}
+.city .fog{position:absolute;bottom:20%;left:0;right:0;height:30%;background:linear-gradient(180deg,transparent 0%,rgba(160,170,190,.04) 50%,rgba(140,150,170,.06) 100%);filter:blur(20px)}
 
 /* ===== NAV ===== */
-nav{
-  position:fixed;top:0;left:0;right:0;z-index:100;
-  background:rgba(10,12,26,.85);backdrop-filter:blur(12px);
-  border-bottom:1px solid rgba(200,180,140,.08);
-  display:flex;justify-content:center;gap:32px;padding:16px 24px;
-}
-nav a{
-  color:var(--ink-subtle);text-decoration:none;font-size:11px;font-weight:500;
-  letter-spacing:.1em;text-transform:uppercase;transition:all var(--ease);
-  font-family:'Inter',sans-serif;
-}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(10,12,26,.88);backdrop-filter:blur(12px);border-bottom:1px solid rgba(200,180,140,.08);display:flex;justify-content:center;gap:28px;padding:15px 20px}
+nav a{color:var(--ink-subtle);text-decoration:none;font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;transition:color var(--ease)}
 nav a:hover{color:#e8d8b0}
 
 /* ===== CONTENT ===== */
-section{padding:80px 24px;max-width:920px;margin:0 auto;position:relative;z-index:1}
-@media(max-width:768px){section{padding:56px 20px}}
+section{padding:72px 24px;max-width:860px;margin:0 auto;position:relative;z-index:1}
+@media(max-width:768px){section{padding:48px 18px}}
+.s-tag{display:inline-block;font-size:10px;font-weight:600;letter-spacing:.15em;color:var(--gold);text-transform:uppercase;margin-bottom:8px}
+.s-title{font-family:'NightSerif','Playfair Display',serif;font-size:clamp(28px,4vw,40px);font-weight:700;letter-spacing:-.01em;margin-bottom:8px;line-height:1.2;color:var(--paper)}
+.s-note{font-size:14px;color:rgba(220,210,190,.55);margin-bottom:36px;max-width:480px}
 
-.section-tag{
-  display:inline-block;font-size:10px;font-weight:600;letter-spacing:.14em;
-  color:var(--gold);text-transform:uppercase;margin-bottom:10px;
-  font-family:'Inter',sans-serif;
+/* ===== EXPANDABLE PAGE CARDS ===== */
+.page-stack{display:flex;flex-direction:column;gap:14px}
+.page-card{
+  background:var(--paper);border-radius:3px 8px 3px 7px;
+  box-shadow:var(--shadow-paper);overflow:hidden;cursor:pointer;
+  transition:all var(--spring);position:relative;
+  background-image:url("data:image/svg+xml,%3Csvg width='100' height='100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23n)' opacity='.025'/%3E%3C/svg%3E");
+  /* Brush-stroke edge via layered box-shadows */
+  border:1px solid rgba(180,160,130,.25);
 }
-.section-title{
-  font-family:'Playfair Display','ZCOOL XiaoWei',serif;
-  font-size:clamp(26px,4vw,38px);font-weight:700;letter-spacing:-.01em;
-  margin-bottom:10px;line-height:1.25;color:var(--ink);
-}
-.section-note{font-size:14px;color:var(--ink-muted);margin-bottom:40px;max-width:460px}
+.page-card:hover{transform:translateY(-3px) scale(1.01);box-shadow:var(--shadow-lift)}
+.page-card.open{transform:translateY(-2px);box-shadow:var(--shadow-lift);cursor:default}
 
-/* ===== PAPER CARD ===== */
-.paper-card{
-  background:var(--paper);
-  border-radius:2px 8px 3px 6px;
-  padding:28px 26px;position:relative;
-  box-shadow:var(--shadow-paper);
-  transition:all var(--spring);
-  cursor:default;
-  /* Paper texture */
-  background-image:url("data:image/svg+xml,%3Csvg width='80' height='80' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='80' height='80' filter='url(%23n)' opacity='.03'/%3E%3C/svg%3E");
+/* Card header */
+.page-head{display:flex;align-items:center;justify-content:space-between;padding:22px 26px;gap:16px}
+.page-head .ph-left{display:flex;align-items:center;gap:14px;flex:1;min-width:0}
+.page-num{font-family:'NightSerif',serif;font-size:40px;color:var(--gold-dim);opacity:.25;line-height:1;flex-shrink:0;min-width:44px}
+.page-head h3{font-family:'NightSerif','Playfair Display',serif;font-size:19px;font-weight:600;color:var(--ink);letter-spacing:-.01em;line-height:1.2}
+.page-head .ph-preview{font-size:12px;color:var(--ink-muted);margin-top:2px}
+.page-toggle{
+  width:32px;height:32px;border-radius:50%;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+  background:var(--paper-dark);transition:all var(--spring);
+  font-size:18px;font-weight:300;color:var(--ink-muted);line-height:1;
 }
-.paper-card::after{
-  content:'';position:absolute;top:8px;right:12px;
-  width:28px;height:32px;border:1px solid rgba(180,150,100,.2);
-  border-radius:1px;opacity:.4;pointer-events:none;
+.page-card.open .page-toggle{transform:rotate(45deg);background:var(--ink);color:var(--paper)}
+
+/* Card body (collapsible) */
+.page-body{max-height:0;overflow:hidden;transition:max-height .7s cubic-bezier(.4,0,.2,1)}
+.page-card.open .page-body{max-height:500px}
+.page-body-inner{padding:0 26px 24px 80px}
+@media(max-width:768px){.page-body-inner{padding:0 16px 20px 16px}}
+.page-body-inner p,.page-body-inner li{font-size:13px;color:var(--ink-muted);line-height:1.9}
+.page-body-inner ul{list-style:none;padding:0;margin-top:8px}
+.page-body-inner li{padding:3px 0 3px 14px;position:relative}
+.page-body-inner li::before{content:'—';position:absolute;left:0;color:var(--ink-subtle);font-size:9px}
+.page-body-inner .highlight-box{
+  background:rgba(196,138,48,.06);border-left:2px solid var(--gold-dim);
+  padding:12px 16px;margin:12px 0;border-radius:0 4px 4px 0;
 }
-.paper-card:hover{
-  transform:translateY(-4px) scale(1.015) rotate(-.3deg);
-  box-shadow:var(--shadow-lift);
-}
-.paper-card:nth-child(even):hover{transform:translateY(-4px) scale(1.015) rotate(.3deg)}
+
+/* ===== SKILL BARS (inside expandable) ===== */
+.skill-row{display:flex;align-items:center;gap:12px;margin:6px 0}
+.skill-row .s-name{width:140px;font-size:13px;font-weight:600;color:var(--ink);flex-shrink:0}
+.skill-row .s-bar-wrap{flex:1;height:4px;background:var(--paper-dark);border-radius:2px;overflow:hidden}
+.skill-row .s-bar{height:100%;background:linear-gradient(90deg,var(--gold-dim),var(--gold-light));border-radius:2px;transition:width 1.4s cubic-bezier(.4,0,.2,1);width:0}
+.skill-row .s-pct{width:36px;font-size:11px;color:var(--gold-dim);font-weight:600;text-align:right;flex-shrink:0}
+
+/* ===== BRAND STAMPS ===== */
+.brands-grid{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
+.stamp{padding:10px 22px;background:var(--paper);border-radius:2px 6px 2px 5px;box-shadow:var(--shadow-paper);font-family:'NightSerif','Playfair Display',serif;font-size:13px;font-weight:600;color:var(--ink);transition:all var(--spring);cursor:default;text-align:center}
+.stamp:hover{transform:translateY(-3px) rotate(-.5deg);box-shadow:var(--shadow-lift)}
+.stamp.dark{background:#3a3020;color:var(--paper);box-shadow:0 2px 8px rgba(20,10,5,.35)}
+.stamp.dark:hover{background:#4a3a28}
 
 /* ===== HERO ===== */
-.hero{
-  min-height:100vh;display:flex;flex-direction:column;justify-content:center;
-  padding:120px 24px 80px;max-width:920px;margin:0 auto;position:relative;z-index:1;
-}
-.hero-ticket{
-  display:inline-flex;align-items:center;gap:8px;
-  padding:8px 18px;background:var(--paper);
-  border-radius:2px 8px 2px 6px;
-  box-shadow:var(--shadow-paper);
-  font-size:10px;font-weight:600;letter-spacing:.12em;
-  color:var(--gold-dim);text-transform:uppercase;
-  margin-bottom:32px;position:relative;
-  font-family:'Inter',sans-serif;
-}
-.hero-ticket::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--gold);opacity:.7}
-.hero h1{
-  font-family:'Playfair Display','ZCOOL XiaoWei',serif;
-  font-size:clamp(38px,7vw,72px);font-weight:800;letter-spacing:-.02em;
-  line-height:1.08;margin-bottom:20px;color:var(--paper);
-  text-shadow:0 2px 12px rgba(0,0,0,.5);
-}
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:120px 24px 80px;max-width:860px;margin:0 auto;position:relative;z-index:1}
+.hero .ticket{display:inline-flex;align-items:center;gap:8px;padding:8px 18px;background:var(--paper);border-radius:2px 8px 2px 6px;box-shadow:var(--shadow-paper);font-size:10px;font-weight:600;letter-spacing:.12em;color:var(--gold-dim);text-transform:uppercase;margin-bottom:28px}
+.hero .ticket::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--gold);opacity:.7}
+.hero .aka{font-size:15px;color:rgba(220,210,190,.4);margin-bottom:24px;font-style:italic;letter-spacing:.02em}
+.hero .aka span{margin:0 12px}
+.hero h1{font-family:'NightSerif','Playfair Display',serif;font-size:clamp(42px,8vw,80px);font-weight:800;letter-spacing:-.02em;line-height:1.06;margin-bottom:18px;color:var(--paper);text-shadow:0 2px 16px rgba(0,0,0,.5)}
 .hero h1 em{font-style:italic;color:var(--gold-light);font-weight:400}
-.hero .aka{font-size:14px;color:rgba(220,210,190,.45);margin-bottom:28px;font-style:italic}
-.hero .aka span{margin:0 10px}
-
-/* Music toggle */
-.music-btn{
-  position:fixed;bottom:28px;right:28px;z-index:200;
-  width:40px;height:40px;border-radius:50%;
-  background:var(--paper);border:none;cursor:pointer;
-  box-shadow:var(--shadow-paper);transition:all var(--spring);
-  display:flex;align-items:center;justify-content:center;
-  font-size:16px;opacity:.7;
-}
-.music-btn:hover{transform:scale(1.1);opacity:1}
-.music-btn.off{opacity:.35}
-.music-btn.off::after{
-  content:'';position:absolute;width:1.5px;height:18px;
-  background:var(--ink-muted);transform:rotate(-45deg);border-radius:1px;
-}
-.hero .tagline{
-  font-size:16px;color:rgba(230,220,200,.7);max-width:460px;
-  margin-bottom:44px;line-height:1.7;
-}
-.hero-stats{display:flex;gap:36px;flex-wrap:wrap}
-.hero-stat{
-  background:var(--paper);padding:16px 22px;border-radius:2px 6px 2px 5px;
-  box-shadow:var(--shadow-paper);transition:all var(--spring);
-  cursor:default;min-width:100px;
-}
+.hero .tagline{font-size:16px;color:rgba(230,220,200,.65);max-width:460px;margin-bottom:40px;line-height:1.7}
+.hero-stats{display:flex;gap:24px;flex-wrap:wrap}
+.hero-stat{background:var(--paper);padding:14px 20px;border-radius:2px 6px 2px 5px;box-shadow:var(--shadow-paper);transition:all var(--spring);cursor:default;min-width:90px}
 .hero-stat:hover{transform:translateY(-3px) rotate(-.5deg);box-shadow:var(--shadow-lift)}
 .hero-stat:nth-child(even):hover{transform:translateY(-3px) rotate(.5deg)}
-.hero-stat .num{
-  font-family:'Playfair Display',serif;
-  font-size:28px;font-weight:700;color:var(--gold-dim);
-}
-.hero-stat .lbl{font-size:10px;color:var(--ink-muted);letter-spacing:.06em;text-transform:uppercase;margin-top:4px}
-
-/* ===== ABOUT GRID ===== */
-.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
-@media(max-width:768px){.about-grid{grid-template-columns:1fr}}
-.about-card .card-num{
-  font-family:'Playfair Display',serif;font-size:36px;color:var(--gold-dim);opacity:.3;
-  position:absolute;top:8px;right:16px;pointer-events:none;
-}
-.about-card h4{font-family:'Playfair Display','ZCOOL XiaoWei',serif;font-size:16px;font-weight:600;margin-bottom:6px;color:var(--ink)}
-.about-card p{font-size:13px;color:var(--ink-muted);line-height:1.8}
-
-/* ===== SKILLS ===== */
-.skills-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px}
-.skill-card .skill-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
-.skill-card .skill-name{font-size:14px;font-weight:600;color:var(--ink)}
-.skill-card .skill-pct{font-size:12px;color:var(--gold-dim);font-weight:600}
-.skill-bar-wrap{height:3px;background:var(--paper-dark);border-radius:2px;overflow:hidden}
-.skill-bar-fill{height:100%;background:linear-gradient(90deg,var(--gold-dim),var(--gold-light));border-radius:2px;transition:width 1.2s cubic-bezier(.4,0,.2,1);width:0}
-.skill-card .skill-desc{font-size:12px;color:var(--ink-muted);margin-top:8px;line-height:1.6}
-
-/* ===== TIMELINE ===== */
-.timeline{position:relative;padding-left:28px}
-.timeline::before{
-  content:'';position:absolute;left:6px;top:0;bottom:0;
-  width:1.5px;background:linear-gradient(180deg,var(--gold-dim),var(--paper-dark),transparent);
-}
-.timeline-item{position:relative;margin-bottom:28px;padding-left:20px}
-.timeline-item::before{
-  content:'';position:absolute;left:-25px;top:6px;
-  width:8px;height:8px;border-radius:50%;
-  background:var(--gold);box-shadow:0 0 8px rgba(196,138,48,.3);
-}
-.timeline-date{font-size:10px;font-weight:600;letter-spacing:.1em;color:var(--gold-dim);text-transform:uppercase;margin-bottom:4px}
-.timeline-title{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:var(--ink);margin-bottom:3px}
-.timeline-role{font-size:12px;color:var(--ink-muted);margin-bottom:10px}
-.timeline-details{list-style:none;padding:0}
-.timeline-details li{font-size:12px;color:var(--ink-muted);padding:3px 0 3px 14px;position:relative;line-height:1.7}
-.timeline-details li::before{content:'—';position:absolute;left:0;color:var(--ink-subtle);font-size:9px}
-
-/* ===== BRANDS ===== */
-.brands-row{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-bottom:14px}
-.brand-stamp{
-  padding:10px 22px;background:var(--paper);
-  border-radius:2px 6px 2px 5px;
-  box-shadow:var(--shadow-paper);
-  font-family:'Playfair Display',serif;font-size:13px;font-weight:600;
-  color:var(--ink);letter-spacing:.01em;
-  transition:all var(--spring);cursor:default;
-  text-align:center;
-}
-.brand-stamp:hover{transform:translateY(-3px) rotate(-.5deg);box-shadow:var(--shadow-lift)}
-.brand-stamp.hl{
-  background:#3a3020;color:var(--paper);
-  box-shadow:0 2px 8px rgba(20,10,5,.35);
-}
-.brand-stamp.hl:hover{background:#4a3a28}
+.hero-stat .num{font-family:'NightSerif',serif;font-size:26px;font-weight:700;color:var(--gold-dim)}
+.hero-stat .lbl{font-size:10px;color:var(--ink-muted);letter-spacing:.06em;text-transform:uppercase;margin-top:2px}
 
 /* ===== CONTACT ===== */
-.contact-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px}
+.contact-row{display:flex;gap:12px;flex-wrap:wrap}
+.contact-card{flex:1;min-width:160px}
 .contact-card .cc-label{font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:var(--gold-dim);margin-bottom:4px}
 .contact-card .cc-val{font-size:13px;color:var(--ink);font-weight:500}
-.contact-card:hover .cc-val{color:#000}
+
+/* ===== MUSIC BTN ===== */
+.music-btn{position:fixed;bottom:24px;right:24px;z-index:200;width:38px;height:38px;border-radius:50%;background:var(--paper);border:none;cursor:pointer;box-shadow:var(--shadow-paper);transition:all var(--spring);display:flex;align-items:center;justify-content:center;font-size:15px;opacity:.65}
+.music-btn:hover{transform:scale(1.12);opacity:1}
+.music-btn.off{opacity:.3}.music-btn.off::after{content:'';position:absolute;width:1.5px;height:16px;background:var(--ink-muted);transform:rotate(-45deg);border-radius:1px}
 
 /* ===== RESUME BAR ===== */
-.resume-ticket{
-  background:var(--paper);border-radius:3px 8px 3px 7px;
-  box-shadow:var(--shadow-paper);padding:24px 28px;
-  display:flex;align-items:center;justify-content:space-between;
-  flex-wrap:wrap;gap:14px;margin-top:40px;
-}
+.resume-ticket{background:var(--paper);border-radius:3px 8px 3px 7px;box-shadow:var(--shadow-paper);padding:22px 26px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-top:40px}
 .resume-ticket p{font-size:13px;color:var(--ink-muted)}
-.resume-ticket strong{color:var(--ink);font-family:'Playfair Display',serif}
-.btn{
-  display:inline-flex;align-items:center;gap:6px;
-  padding:10px 24px;border-radius:2px 5px 2px 4px;
-  background:var(--ink);color:var(--paper);
-  font-size:12px;font-weight:600;cursor:pointer;
-  text-decoration:none;letter-spacing:.04em;
-  border:none;transition:all var(--spring);
-  font-family:'Inter',sans-serif;
-}
+.resume-ticket strong{color:var(--ink);font-family:'NightSerif','Playfair Display',serif}
+.btn{display:inline-flex;align-items:center;gap:6px;padding:10px 22px;border-radius:2px 5px 2px 4px;background:var(--ink);color:var(--paper);font-size:12px;font-weight:600;cursor:pointer;text-decoration:none;letter-spacing:.04em;border:none;transition:all var(--spring);font-family:inherit}
 .btn:hover{transform:translateY(-2px) rotate(-.3deg);box-shadow:0 4px 16px rgba(20,10,5,.35)}
 
 /* ===== FOOTER ===== */
-footer{
-  text-align:center;padding:40px 24px;position:relative;z-index:1;
-  color:rgba(200,180,150,.35);font-size:10px;letter-spacing:.06em;
-}
-footer .ft-icon{margin-bottom:10px;opacity:.25}
+footer{text-align:center;padding:36px 24px;position:relative;z-index:1;color:rgba(200,180,150,.3);font-size:10px;letter-spacing:.06em}
+footer .ft-icon{margin-bottom:8px;opacity:.2}
 
-/* ===== SCROLL REVEAL ===== */
-.reveal{opacity:0;transform:translateY(18px);transition:all .7s cubic-bezier(.4,0,.2,1)}
+/* ===== REVEAL ===== */
+.reveal{opacity:0;transform:translateY(16px);transition:all .7s cubic-bezier(.4,0,.2,1)}
 .reveal.on{opacity:1;transform:translateY(0)}
 
-/* ===== RESPONSIVE ===== */
 @media(max-width:768px){
-  nav{gap:18px;padding:12px 14px;flex-wrap:wrap}
-  nav a{font-size:10px;letter-spacing:.05em}
-  .hero h1{font-size:36px}
-  .hero-stats{gap:18px}
-  .about-grid{grid-template-columns:1fr}
-  .skills-grid{grid-template-columns:1fr}
-  .brands-row{gap:8px}
-  .brand-stamp{padding:8px 14px;font-size:12px}
-  .resume-ticket{flex-direction:column;text-align:center}
-  .contact-grid{grid-template-columns:1fr}
-  .cityscape .moon{top:4%;right:10%;width:40px;height:40px}
+  nav{gap:16px;padding:12px 10px;flex-wrap:wrap}
+  nav a{font-size:10px}
+  .hero h1{font-size:38px}
+  .hero-stats{gap:14px}
+  .page-head{padding:16px}
+  .page-body-inner{padding:0 14px 16px 14px}
+  .page-num{font-size:30px;min-width:34px}
+  .page-head h3{font-size:16px}
+  .skill-row .s-name{width:100px;font-size:12px}
 }
 </style>
 </head>
 <body>
 
-<!-- ===== NIGHT CITY ILLUSTRATION ===== -->
-<div class="cityscape">
-  <div class="sky"></div>
-  <div class="stars"></div>
-  <div class="moon"></div>
-  <div class="bg-buildings"></div>
-  <!-- Buildings -->
-  <div class="building b1"></div><div class="building b2"></div><div class="building b3"></div>
-  <div class="building b4"></div><div class="building b5"></div><div class="building b6"></div>
-  <div class="building b7"></div><div class="building b8"></div><div class="building b9"></div>
-  <div class="building b10"></div>
-  <!-- Clock tower -->
-  <div class="tower"></div><div class="tower-top"></div><div class="tower-spire"></div>
-  <div class="clock-face"></div>
-  <!-- Windows -->
-  <div class="windows">
-    <div class="win w1"></div><div class="win w2"></div><div class="win w3"></div>
-    <div class="win w4"></div><div class="win w5"></div><div class="win w6"></div>
-    <div class="win w7"></div><div class="win w8"></div><div class="win w9"></div>
-    <div class="win w10"></div><div class="win w11"></div><div class="win w12"></div>
-    <div class="win w13"></div><div class="win w14"></div><div class="win w15"></div>
-    <div class="win w16"></div><div class="win w17"></div><div class="win w18"></div>
-    <div class="win w19"></div><div class="win w20"></div>
-    <div class="win w21"></div><div class="win w22"></div><div class="win w23"></div>
-    <div class="win w24"></div><div class="win w25"></div>
-  </div>
-  <!-- Street lamps -->
+<!-- Cityscape -->
+<div class="city">
+  <div class="sky"></div><div class="stars"></div><div class="moon"></div>
+  <div class="bld b1"></div><div class="bld b2"></div><div class="bld b3"></div><div class="bld b4"></div><div class="bld b5"></div><div class="bld b6"></div><div class="bld b7"></div><div class="bld b8"></div><div class="bld b9"></div><div class="bld b10"></div>
+  <div class="tower"></div><div class="tower-top"></div><div class="tower-spire"></div><div class="clock-face"></div>
+  <div class="win w1"></div><div class="win w2"></div><div class="win w3"></div><div class="win w4"></div><div class="win w5"></div><div class="win w6"></div><div class="win w7"></div><div class="win w8"></div><div class="win w9"></div><div class="win w10"></div><div class="win w11"></div><div class="win w12"></div><div class="win w13"></div><div class="win w14"></div><div class="win w15"></div><div class="win w16"></div><div class="win w17"></div><div class="win w18"></div><div class="win w19"></div><div class="win w20"></div><div class="win ww1"></div><div class="win ww2"></div><div class="win ww3"></div><div class="win ww4"></div><div class="win ww5"></div>
   <div class="lamp lp1"></div><div class="lamp lp2"></div><div class="lamp lp3"></div><div class="lamp lp4"></div>
-  <!-- Wet street -->
-  <div class="street"></div>
-  <div class="reflection"></div>
-  <div class="fog"></div>
+  <div class="street"></div><div class="refl"></div><div class="fog"></div>
 </div>
 
-<!-- ===== NAV ===== -->
+<!-- Nav -->
 <nav>
-  <a href="#home">Home</a>
-  <a href="#about">About</a>
-  <a href="#skills">Skills</a>
-  <a href="#experience">Experience</a>
-  <a href="#brands">Brands</a>
-  <a href="#contact">Contact</a>
+  <a href="#home">Home</a><a href="#about">About</a><a href="#skills">Skills</a><a href="#experience">Experience</a><a href="#brands">Brands</a><a href="#contact">Contact</a>
 </nav>
 
-<!-- ===== HERO ===== -->
+<!-- Hero -->
 <section class="hero" id="home">
-  <div class="hero-ticket">Content Creator &amp; Film Editor</div>
-  <div class="aka">陈晨 / Chenchen &nbsp;·&nbsp; 战略计 / Zhanlueji &nbsp;·&nbsp; 哈利的屁股蛋</div>
+  <div class="ticket">Content Creator &amp; Film Editor</div>
+  <div class="aka">陈晨 / Chenchen <span>·</span> 战略计 / Zhanlueji <span>·</span> 哈利的屁股蛋</div>
   <h1>陈晨<br><em>Chenchen</em></h1>
-  <p class="tagline">
-    全平台内容创作者 · 电影宣发剪辑 · 视觉中国签约摄影师<br>
-    为环球影业、万达电影、猫眼、网易云音乐等品牌提供社媒创意内容
-  </p>
+  <p class="tagline">全平台内容创作者 · 电影宣发剪辑 · 视觉中国签约摄影师<br>为环球影业、万达电影、猫眼、网易云音乐等品牌提供社媒创意内容</p>
   <div class="hero-stats">
     <div class="hero-stat"><div class="num"><span class="counter" data-target="100000">0</span>+</div><div class="lbl">全网粉丝</div></div>
     <div class="hero-stat"><div class="num"><span class="counter" data-target="1000000">0</span>+</div><div class="lbl">累计赞藏</div></div>
-    <div class="hero-stat"><div class="num"><span class="counter" data-target="5">0</span> 年</div><div class="lbl">海外运营</div></div>
-    <div class="hero-stat"><div class="num"><span class="counter" data-target="16000">0</span>+</div><div class="lbl">YouTube订阅</div></div>
+    <div class="hero-stat"><div class="num"><span class="counter" data-target="5">0</span> 年</div><div class="lbl">海外运营经验</div></div>
+    <div class="hero-stat"><div class="num"><span class="counter" data-target="16000">0</span>+</div><div class="lbl">YouTube 订阅</div></div>
   </div>
 </section>
 
-<!-- ===== ABOUT ===== -->
+<!-- About -->
 <section id="about">
-  <div class="section-tag reveal">✦ Core Competencies</div>
-  <h2 class="section-title reveal" style="color:var(--paper)">个人优势</h2>
-  <p class="section-note reveal" style="color:rgba(220,210,190,.6)">五年深耕内容创作，从个人账号到顶级品牌合作，始终以视觉叙事为核心。</p>
-  <div class="about-grid">
-    <div class="paper-card about-card reveal">
-      <div class="card-num">01</div>
-      <h4>全平台运营实战</h4>
-      <p>统筹运营 Bilibili、小红书、YouTube、TikTok 等国内外主流平台，独立跑通选题、脚本、拍摄、后期全流程，全网粉丝累计近 10 万。</p>
+  <div class="s-tag reveal">✦ Core Competencies</div>
+  <h2 class="s-title reveal">个人优势</h2>
+  <p class="s-note reveal">五年深耕内容创作，从个人账号到顶级品牌，始终以视觉叙事为核心驱动力。</p>
+  <div class="page-stack">
+    <div class="page-card reveal" onclick="toggleCard(this)">
+      <div class="page-head">
+        <div class="ph-left"><span class="page-num">01</span><div><h3>全平台运营实战</h3><p class="ph-preview">Bilibili · 小红书 · YouTube · TikTok 多矩阵统筹</p></div></div>
+        <div class="page-toggle">+</div>
+      </div>
+      <div class="page-body"><div class="page-body-inner">
+        <p>统筹运营 Bilibili、小红书、YouTube、TikTok 等<strong>国内外主流平台</strong>，不仅独立跑通选题策划、脚本撰写、实拍执行、后期剪辑全流程，更擅长针对不同平台的算法逻辑与受众画像制定差异化内容策略。</p>
+        <div class="highlight-box">全网粉丝累计近 <strong>10 万</strong>，YouTube 频道突破 <strong>1.6 万订阅</strong>，实现跨平台内容生态矩阵。</div>
+        <p>核心能力在于将单一内容资产进行多平台适配分发，最大化内容复用率与传播效率。</p>
+      </div></div>
     </div>
-    <div class="paper-card about-card reveal">
-      <div class="card-num">02</div>
-      <h4>高爆发内容产出</h4>
-      <p>凭借敏锐的影视审美与视听语言把握，个人作品累计赞藏量突破 1,000,000+，具备产出现象级爆款内容的逻辑与能力。</p>
+    <div class="page-card reveal" onclick="toggleCard(this)">
+      <div class="page-head">
+        <div class="ph-left"><span class="page-num">02</span><div><h3>高爆发内容产出</h3><p class="ph-preview">累计赞藏 1,000,000+ · 现象级爆款逻辑</p></div></div>
+        <div class="page-toggle">+</div>
+      </div>
+      <div class="page-body"><div class="page-body-inner">
+        <p>凭借对影视节奏、画面张力与情绪曲线的敏锐把控，个人作品累计赞藏量突破 <strong>1,000,000+</strong>，具备持续产出现象级爆款内容的底层方法论。</p>
+        <div class="highlight-box">不只是「运气好出一款爆款」——而是理解爆款背后的<strong>叙事结构、节奏曲线、情绪触发点</strong>，可复制、可预测。</div>
+        <p>擅长类型：影视混剪、情绪短片、品牌宣传、社媒短视频。</p>
+      </div></div>
     </div>
-    <div class="paper-card about-card reveal">
-      <div class="card-num">03</div>
-      <h4>顶级品牌合作背书</h4>
-      <p>为环球影业、万达电影、猫眼、网易云音乐等机构制作社媒宣传视频，涵盖《阿凡达》、《魔法坏女巫》等多部全球知名 IP。</p>
+    <div class="page-card reveal" onclick="toggleCard(this)">
+      <div class="page-head">
+        <div class="ph-left"><span class="page-num">03</span><div><h3>顶级品牌合作背书</h3><p class="ph-preview">环球影业 · 万达电影 · 猫眼 · 网易云音乐</p></div></div>
+        <div class="page-toggle">+</div>
+      </div>
+      <div class="page-body"><div class="page-body-inner">
+        <p>曾直接为<strong>环球影业、万达电影、猫眼</strong>等头部平台及<strong>网易云音乐</strong>制作社媒宣传视频，涵盖多部全球知名 IP。</p>
+        <div class="highlight-box">合作影片：《阿凡达》《魔法坏女巫》《疯狂动物城》《忌日快乐》《死神来了》……</div>
+        <p>在严格遵守官方品牌调性的前提下，通过创意剪辑与叙事重构，显著提升影片在各大社媒平台的话题热度与互动数据。理解「品牌想传达什么」与「观众想看什么」之间的平衡点。</p>
+      </div></div>
     </div>
-    <div class="paper-card about-card reveal">
-      <div class="card-num">04</div>
-      <h4>跨文化传播能力</h4>
-      <p>5 年海外社媒独立运营经验，熟悉海外受众偏好、版权规则与 SEO 优化，英语可作为工作语言流畅沟通（雅思模考 6.0）。</p>
+    <div class="page-card reveal" onclick="toggleCard(this)">
+      <div class="page-head">
+        <div class="ph-left"><span class="page-num">04</span><div><h3>跨文化传播能力</h3><p class="ph-preview">5 年海外运营 · 英文工作语言 · SEO 优化</p></div></div>
+        <div class="page-toggle">+</div>
+      </div>
+      <div class="page-body"><div class="page-body-inner">
+        <p>拥有 <strong>5 年海外社交媒体独立运营经验</strong>，深入了解海外受众的内容消费偏好、平台版权规则（Fair Use、Content ID）与 SEO 优化策略。</p>
+        <div class="highlight-box">全英文撰写标题、描述、标签及评论区互动，英语具备 Professional Working Proficiency（雅思模考 6.0）。</div>
+        <p>理解中西方内容审美差异，能在两种文化语境中自如切换创作视角——既懂国内流量玩法，也懂海外内容生态。</p>
+      </div></div>
     </div>
   </div>
 </section>
 
-<!-- ===== SKILLS ===== -->
+<!-- Skills -->
 <section id="skills">
-  <div class="section-tag reveal">✦ Technical Skills</div>
-  <h2 class="section-title reveal" style="color:var(--paper)">专业技能</h2>
-  <p class="section-note reveal" style="color:rgba(220,210,190,.6)">各工具熟练度基于实际项目经验评估，悬停卡片查看详情。</p>
-  <div class="skills-grid">
-    <div class="paper-card skill-card reveal">
-      <div class="skill-top"><span class="skill-name">Premiere Pro</span><span class="skill-pct">95%</span></div>
-      <div class="skill-bar-wrap"><div class="skill-bar-fill" data-width="95"></div></div>
-      <div class="skill-desc">主力剪辑工具，精通多机位剪辑、动态链接、调色工作流</div>
+  <div class="s-tag reveal">✦ Technical Skills</div>
+  <h2 class="s-title reveal">专业技能</h2>
+  <p class="s-note reveal">点击展开查看各工具的详细熟练度与具体应用场景。</p>
+  <div class="page-stack">
+    <div class="page-card reveal" onclick="toggleCard(this)">
+      <div class="page-head">
+        <div class="ph-left"><span class="page-num">🎬</span><div><h3>视频后期工具链</h3><p class="ph-preview">Premiere Pro · After Effects · DaVinci Resolve · Topaz Video AI</p></div></div>
+        <div class="page-toggle">+</div>
+      </div>
+      <div class="page-body"><div class="page-body-inner">
+        <div class="skill-row"><span class="s-name">Premiere Pro</span><div class="s-bar-wrap"><div class="s-bar" data-width="95"></div></div><span class="s-pct">95%</span></div>
+        <p style="margin-bottom:12px">主力剪辑工具。精通多机位同步剪辑、动态链接 Ae、Lumetri 调色工作流、代理剪辑流程、多格式输出。日常项目均在 Pr 中完成全流程。</p>
+        <div class="skill-row"><span class="s-name">After Effects</span><div class="s-bar-wrap"><div class="s-bar" data-width="88"></div></div><span class="s-pct">88%</span></div>
+        <p style="margin-bottom:12px">动效设计与视觉合成。擅长表达式动画、动态图形模板（MOGRTs）、关键帧动画、粒子特效、绿幕抠像与合成。社媒宣传视频的视觉特效均在 Ae 完成。</p>
+        <div class="skill-row"><span class="s-name">DaVinci Resolve</span><div class="s-bar-wrap"><div class="s-bar" data-width="85"></div></div><span class="s-pct">85%</span></div>
+        <p style="margin-bottom:12px">专业调色与色彩管理。精通节点调色逻辑、HDR 工作流、色彩空间转换、LUT 设计与应用。所有电影宣发项目均使用达芬奇完成最终调色。</p>
+        <div class="skill-row"><span class="s-name">Topaz Video AI</span><div class="s-bar-wrap"><div class="s-bar" data-width="80"></div></div><span class="s-pct">80%</span></div>
+        <p>AI 画质增强工具。熟练运用降噪、锐化、慢动作插帧、老片修复、低分辨率素材放大等功能，显著提升素材可用性与视觉品质。</p>
+      </div></div>
     </div>
-    <div class="paper-card skill-card reveal">
-      <div class="skill-top"><span class="skill-name">After Effects</span><span class="skill-pct">88%</span></div>
-      <div class="skill-bar-wrap"><div class="skill-bar-fill" data-width="88"></div></div>
-      <div class="skill-desc">动效设计、表达式动画、动态图形、视觉合成</div>
-    </div>
-    <div class="paper-card skill-card reveal">
-      <div class="skill-top"><span class="skill-name">DaVinci Resolve</span><span class="skill-pct">85%</span></div>
-      <div class="skill-bar-wrap"><div class="skill-bar-fill" data-width="85"></div></div>
-      <div class="skill-desc">专业调色、色彩管理、HDR 工作流、节点调色</div>
-    </div>
-    <div class="paper-card skill-card reveal">
-      <div class="skill-top"><span class="skill-name">Topaz Video AI</span><span class="skill-pct">80%</span></div>
-      <div class="skill-bar-wrap"><div class="skill-bar-fill" data-width="80"></div></div>
-      <div class="skill-desc">AI 画质增强、降噪、慢动作插帧、老片修复</div>
-    </div>
-    <div class="paper-card skill-card reveal">
-      <div class="skill-top"><span class="skill-name">摄影 / 摄像</span><span class="skill-pct">82%</span></div>
-      <div class="skill-bar-wrap"><div class="skill-bar-fill" data-width="82"></div></div>
-      <div class="skill-desc">各型号无反/单反操作、灯光布控、构图与色彩理论</div>
-    </div>
-    <div class="paper-card skill-card reveal">
-      <div class="skill-top"><span class="skill-name">English</span><span class="skill-pct">75%</span></div>
-      <div class="skill-bar-wrap"><div class="skill-bar-fill" data-width="75"></div></div>
-      <div class="skill-desc">Professional Working Proficiency，五年英文运营实战</div>
+    <div class="page-card reveal" onclick="toggleCard(this)">
+      <div class="page-head">
+        <div class="ph-left"><span class="page-num">📷</span><div><h3>摄影摄像 & 语言能力</h3><p class="ph-preview">各型号无反/单反 · 灯光布控 · English Communication</p></div></div>
+        <div class="page-toggle">+</div>
+      </div>
+      <div class="page-body"><div class="page-body-inner">
+        <div class="skill-row"><span class="s-name">摄影 / 摄像</span><div class="s-bar-wrap"><div class="s-bar" data-width="82"></div></div><span class="s-pct">82%</span></div>
+        <p style="margin-bottom:12px">熟练操作各型号无反/单反相机，精通三点布光法、自然光利用、构图理论与色彩理论。视觉中国 500px 签约摄影师。</p>
+        <div class="skill-row"><span class="s-name">English</span><div class="s-bar-wrap"><div class="s-bar" data-width="75"></div></div><span class="s-pct">75%</span></div>
+        <p>Professional Working Proficiency。五年英文社媒运营实战经验，能流畅进行英文标题/描述撰写、评论区互动及商务邮件沟通。雅思模考 6.0。</p>
+      </div></div>
     </div>
   </div>
 </section>
 
-<!-- ===== EXPERIENCE ===== -->
+<!-- Experience -->
 <section id="experience">
-  <div class="section-tag reveal">✦ Professional Experience</div>
-  <h2 class="section-title reveal" style="color:var(--paper)">工作经历</h2>
-  <p class="section-note reveal" style="color:rgba(220,210,190,.6)">从个人创作者到顶级品牌合作。</p>
-  <div class="timeline">
-    <div class="timeline-item paper-card reveal">
-      <div class="timeline-date">至今</div>
-      <div class="timeline-title">个人自媒体主理人</div>
-      <div class="timeline-role">国内外多平台矩阵 · YouTube / TikTok / Bilibili / 小红书</div>
-      <ul class="timeline-details">
-        <li>独立运营 YouTube (1.6w+ 订阅)、TikTok 及国内多平台</li>
-        <li>全英文撰写标题、描述、SEO 关键词及评论区互动</li>
-        <li>深耕影视素材二次创作，全网累计百万级赞藏</li>
-      </ul>
+  <div class="s-tag reveal">✦ Professional Experience</div>
+  <h2 class="s-title reveal">工作经历</h2>
+  <p class="s-note reveal">从个人创作者到顶级品牌合作——内容质量是贯穿始终的核心。</p>
+  <div class="page-stack">
+    <div class="page-card reveal" onclick="toggleCard(this)">
+      <div class="page-head">
+        <div class="ph-left"><span class="page-num">01</span><div><h3>个人自媒体主理人</h3><p class="ph-preview">YouTube · TikTok · Bilibili · 小红书 · 全平台矩阵</p></div></div>
+        <div class="page-toggle">+</div>
+      </div>
+      <div class="page-body"><div class="page-body-inner">
+        <p style="color:var(--gold-dim);font-size:11px;text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px">至今</p>
+        <p>独立运营国内外多平台内容矩阵，从零搭建账号体系，精准把握各平台算法逻辑与内容生态差异。</p>
+        <ul>
+          <li>YouTube 频道突破 <strong>1.6 万订阅</strong>，累计播放量稳步增长</li>
+          <li>TikTok 多账号运营，熟悉短视频算法推荐机制与趋势捕捉</li>
+          <li>Bilibili / 小红书同步分发，根据国内受众调整选题与剪辑节奏</li>
+          <li>全英文 SEO 优化（标题/描述/标签），实现海外搜索流量稳健增长</li>
+          <li>深耕影视素材二次创作，全网累计 <strong>百万级赞藏</strong></li>
+        </ul>
+      </div></div>
     </div>
-    <div class="timeline-item paper-card reveal">
-      <div class="timeline-date">项目制合作</div>
-      <div class="timeline-title">商业电影宣发项目</div>
-      <div class="timeline-role">猫眼 · 万达电影 · 环球影业 · 网易云音乐</div>
-      <ul class="timeline-details">
-        <li>受邀对接顶级宣发平台及片方，负责电影社媒宣传短片的剪辑与二次创作</li>
-        <li>合作 IP：《阿凡达》《魔法坏女巫》《疯狂动物城》《忌日快乐》《死神来了》</li>
-        <li>在满足官方品牌调性基础上，通过创意剪辑显著提升话题热度与互动数据</li>
-      </ul>
+    <div class="page-card reveal" onclick="toggleCard(this)">
+      <div class="page-head">
+        <div class="ph-left"><span class="page-num">02</span><div><h3>商业电影宣发项目</h3><p class="ph-preview">猫眼 · 万达电影 · 环球影业 · 网易云音乐</p></div></div>
+        <div class="page-toggle">+</div>
+      </div>
+      <div class="page-body"><div class="page-body-inner">
+        <p style="color:var(--gold-dim);font-size:11px;text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px">项目制合作</p>
+        <p>受邀对接国内顶级宣发平台及好莱坞片方，负责电影社媒宣传短片的剪辑与二次创作。</p>
+        <ul>
+          <li>合作机构：<strong>猫眼、万达电影、环球影业、网易云音乐</strong></li>
+          <li>合作 IP：《阿凡达》《魔法坏女巫》《疯狂动物城》《忌日快乐》《死神来了》等</li>
+          <li>在满足品牌官方调性的基础上，通过创意剪辑与叙事重构显著提升话题热度</li>
+          <li>理解院线电影宣发周期与社媒内容节奏的配合逻辑</li>
+        </ul>
+      </div></div>
     </div>
-    <div class="timeline-item paper-card reveal">
-      <div class="timeline-date">至今</div>
-      <div class="timeline-title">视觉中国 500px · 签约摄影师</div>
-      <div class="timeline-role">高质量视觉内容供稿</div>
-      <ul class="timeline-details"><li>通过专业审美审核签约，作品具备商业授权资质</li></ul>
+    <div class="page-card reveal" onclick="toggleCard(this)">
+      <div class="page-head">
+        <div class="ph-left"><span class="page-num">03</span><div><h3>视觉中国 500px · 签约摄影师</h3><p class="ph-preview">商业授权 · 高质量视觉供稿</p></div></div>
+        <div class="page-toggle">+</div>
+      </div>
+      <div class="page-body"><div class="page-body-inner">
+        <p style="color:var(--gold-dim);font-size:11px;text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px">至今</p>
+        <p>通过视觉中国专业审美审核签约，作品具备商业授权资质。定期供稿高质量视觉内容，涵盖城市风光、自然景观、创意摄影等领域。</p>
+        <div class="highlight-box">签约意味着作品达到<strong>可商业变现的专业水准</strong>，同时也是审美能力的有力背书。</div>
+      </div></div>
     </div>
-    <div class="timeline-item paper-card reveal">
-      <div class="timeline-date">高中时期</div>
-      <div class="timeline-title">学生会宣传部核心成员</div>
-      <div class="timeline-role">校级活动的视觉记录</div>
-      <ul class="timeline-details"><li>独立主导并完成班级毕业纪念视频制作，获得极高评价</li></ul>
+    <div class="page-card reveal" onclick="toggleCard(this)">
+      <div class="page-head">
+        <div class="ph-left"><span class="page-num">04</span><div><h3>学生会宣传部 · 视觉叙事起点</h3><p class="ph-preview">校级活动记录 · 毕业纪念视频</p></div></div>
+        <div class="page-toggle">+</div>
+      </div>
+      <div class="page-body"><div class="page-body-inner">
+        <p style="color:var(--gold-dim);font-size:11px;text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px">高中时期</p>
+        <p>通过面试入选学生会宣传部核心成员，负责校级活动的视觉记录。独立主导并完成班级毕业纪念视频制作——从策划、拍摄到剪辑的全流程实践，获得师生极高评价。</p>
+        <div class="highlight-box">正是这段经历，种下了对<strong>视觉叙事</strong>的热爱。从那时起，一直在用镜头讲述故事。</div>
+      </div></div>
     </div>
   </div>
 </section>
 
-<!-- ===== BRANDS ===== -->
+<!-- Brands -->
 <section id="brands">
-  <div class="section-tag reveal" style="text-align:center;display:block">✦ Brand Collaborations</div>
-  <h2 class="section-title reveal" style="text-align:center;color:var(--paper)">合作品牌与 IP</h2>
-  <p class="section-note reveal" style="text-align:center;margin-left:auto;margin-right:auto;color:rgba(220,210,190,.6)">曾直接为以下机构及影片制作社媒宣传内容</p>
-  <div class="brands-row reveal">
-    <span class="brand-stamp hl">环球影业</span>
-    <span class="brand-stamp hl">万达电影</span>
-    <span class="brand-stamp hl">猫眼</span>
-    <span class="brand-stamp hl">网易云音乐</span>
-    <span class="brand-stamp hl">视觉中国 500px</span>
-  </div>
-  <div class="brands-row reveal">
-    <span class="brand-stamp">《阿凡达》</span>
-    <span class="brand-stamp">《魔法坏女巫》</span>
-    <span class="brand-stamp">《疯狂动物城》</span>
-    <span class="brand-stamp">《忌日快乐》</span>
-    <span class="brand-stamp">《死神来了》</span>
-  </div>
+  <div class="s-tag reveal" style="text-align:center;display:block">✦ Brand Collaborations</div>
+  <h2 class="s-title reveal" style="text-align:center">合作品牌与 IP</h2>
+  <p class="s-note reveal" style="text-align:center;margin-left:auto;margin-right:auto">曾直接为以下机构及影片制作社媒宣传内容</p>
+  <div class="brands-grid reveal"><span class="stamp dark">环球影业</span><span class="stamp dark">万达电影</span><span class="stamp dark">猫眼</span><span class="stamp dark">网易云音乐</span><span class="stamp dark">视觉中国 500px</span></div>
+  <div class="brands-grid reveal" style="margin-top:10px"><span class="stamp">《阿凡达》</span><span class="stamp">《魔法坏女巫》</span><span class="stamp">《疯狂动物城》</span><span class="stamp">《忌日快乐》</span><span class="stamp">《死神来了》</span></div>
 </section>
 
-<!-- ===== CONTACT ===== -->
+<!-- Contact -->
 <section id="contact">
-  <div class="section-tag reveal">✦ Get in Touch</div>
-  <h2 class="section-title reveal" style="color:var(--paper)">联系方式</h2>
-  <p class="section-note reveal" style="color:rgba(220,210,190,.6)">欢迎品牌合作、项目邀约与工作机会联系。</p>
-  <div class="contact-grid reveal">
-    <div class="paper-card contact-card">
+  <div class="s-tag reveal">✦ Get in Touch</div>
+  <h2 class="s-title reveal">联系方式</h2>
+  <p class="s-note reveal">欢迎品牌合作、项目邀约与工作机会联系。</p>
+  <div class="contact-row reveal">
+    <div class="page-card contact-card" style="flex:1;min-width:140px;cursor:default;padding:18px 20px">
       <div class="cc-label">邮箱</div><div class="cc-val">你的邮箱@example.com</div>
     </div>
-    <div class="paper-card contact-card">
+    <div class="page-card contact-card" style="flex:1;min-width:140px;cursor:default;padding:18px 20px">
       <div class="cc-label">TikTok / 抖音</div><div class="cc-val">哈利的屁股蛋</div>
     </div>
-    <div class="paper-card contact-card">
+    <div class="page-card contact-card" style="flex:1;min-width:140px;cursor:default;padding:18px 20px">
       <div class="cc-label">小红书</div><div class="cc-val">哈利的屁股蛋</div>
     </div>
-    <div class="paper-card contact-card">
+    <div class="page-card contact-card" style="flex:1;min-width:140px;cursor:default;padding:18px 20px">
       <div class="cc-label">YouTube / Bilibili</div><div class="cc-val">战略计 / zhanlueji</div>
     </div>
   </div>
   <div class="resume-ticket reveal">
-    <p><strong>下载简历</strong> · 完整的职业经历与作品展示</p>
-    <button class="btn" onclick="alert('简历将在后續添加')">⬇ Download Resume</button>
+    <p><strong>下载简历</strong> · 完整的职业经历与作品集</p>
+    <button class="btn" onclick="alert('简历将在后续添加！')">⬇ Download Resume</button>
   </div>
 </section>
 
 <button class="music-btn off" id="musicBtn" title="背景音乐" onclick="toggleMusic()">🎵</button>
-
 <audio id="bgm" loop preload="auto" src="bgm.mp3"></audio>
 
-<footer>
-  <div class="ft-icon">&#9670;</div>
-  &copy; 2026 陈晨 Chenchen. All rights reserved.
-</footer>
+<footer><div class="ft-icon">&#9670;</div>&copy; 2026 陈晨 Chenchen. All rights reserved.</footer>
 
 <script>
-// ===== SCROLL REVEAL =====
-const obs=new IntersectionObserver((entries)=>{
-  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');
-    e.target.querySelectorAll('.skill-bar-fill').forEach(b=>b.style.width=b.dataset.width+'%');
-    e.target.querySelectorAll('.counter[data-target]').forEach(c=>animateCounter(c));
-  }})
-},{threshold:.1});
-document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+// ===== PAPER SOUND ENGINE =====
+const AC=window.AudioContext||window.webkitAudioContext;let actx=null,paperBuffer=null;
+function ctx(){if(!actx)actx=new AC();return actx}
+
+// Preload paper sound
+fetch('paper.mp3').then(r=>r.arrayBuffer()).then(buf=>ctx().decodeAudioData(buf)).then(b=>{paperBuffer=b}).catch(()=>{})
+
+function playPaper(vol=.06,rate=1){
+  const a=ctx();
+  if(paperBuffer){const s=a.createBufferSource();s.buffer=paperBuffer;s.playbackRate.value=rate+.2*Math.random();const g=a.createGain();g.gain.value=vol;s.connect(g);g.connect(a.destination);s.start();return}
+  // Fallback: synthesised paper rustle
+  const buf=a.createBuffer(1,a.sampleRate*.04,a.sampleRate),d=buf.getChannelData(0);
+  for(let i=0;i<d.length;i++)d[i]=(Math.random()*2-1)*Math.exp(-i/(a.sampleRate*.008));
+  const s=a.createBufferSource();s.buffer=buf;const bp=a.createBiquadFilter();bp.type='bandpass';bp.frequency.value=2800;bp.Q.value=1.5;
+  const g=a.createGain();g.gain.setValueAtTime(vol,t);g.gain.exponentialRampToValueAtTime(.001,a.currentTime+.04);
+  s.connect(bp);bp.connect(g);g.connect(a.destination);s.start();s.stop(a.currentTime+.04)
+}
+
+// Attach sounds
+document.addEventListener('click',e=>{if(e.target.closest('.page-card,.stamp,.hero-stat,.btn,.contact-card'))playPaper(.05,.9)})
+document.querySelectorAll('.page-card,.stamp,.hero-stat,.btn,.contact-card').forEach(el=>{el.addEventListener('mouseenter',()=>playPaper(.02,1.3))})
+
+// ===== EXPANDABLE CARDS =====
+function toggleCard(card){
+  const wasOpen=card.classList.contains('open');
+  // Close all siblings
+  card.parentElement.querySelectorAll('.page-card').forEach(c=>c.classList.remove('open'));
+  // Toggle this one
+  if(!wasOpen){card.classList.add('open');playPaper(.07,.8);
+    // Animate skill bars inside
+    setTimeout(()=>card.querySelectorAll('.s-bar').forEach(b=>b.style.width=b.dataset.width+'%'),200)}
+  else{playPaper(.03,1.5)}
+}
 
 // ===== COUNTER =====
-function animateCounter(el){
-  if(el.dataset.anim)return;el.dataset.anim='1';
-  const tgt=parseInt(el.dataset.target),dur=1800,st=performance.now();
-  function up(now){
-    const p=Math.min((now-st)/dur,1),e=1-Math.pow(1-p,3),cur=Math.floor(e*tgt);
-    el.textContent=tgt>=1e5?(cur/1e4).toFixed(1)+'w':cur.toLocaleString();
-    if(p<1)requestAnimationFrame(up);
-    else el.textContent=tgt>=1e5?(tgt/1e4).toFixed(1)+'w':tgt.toLocaleString();
-  }
-  requestAnimationFrame(up);
-}
+function animCounter(el){if(el.dataset.done)return;el.dataset.done='1';const tgt=parseInt(el.dataset.target),dur=1800,st=performance.now();function up(now){const p=Math.min((now-st)/dur,1),e=1-Math.pow(1-p,3),cur=Math.floor(e*tgt);el.textContent=tgt>=1e5?(cur/1e4).toFixed(1)+'w':cur.toLocaleString();if(p<1)requestAnimationFrame(up);else el.textContent=tgt>=1e5?(tgt/1e4).toFixed(1)+'w':tgt.toLocaleString()}requestAnimationFrame(up)}
+setTimeout(()=>document.querySelectorAll('.counter[data-target]').forEach(c=>animCounter(c)),400)
 
-// Init counters immediately (hero stats)
-setTimeout(()=>document.querySelectorAll('.counter[data-target]').forEach(c=>animateCounter(c)),400);
+// ===== SCROLL REVEAL =====
+const obs=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('on')})},{threshold:.1})
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el))
 
-// ===== PAPER CLICK SOUNDS =====
-const AudioCtx=window.AudioContext||window.webkitAudioContext;
-let actx=null;
+// ===== MUSIC =====
+const bgm=document.getElementById('bgm'),mb=document.getElementById('musicBtn');let mo=false
+function toggleMusic(){ctx();if(mo){bgm.pause();mb.classList.add('off');mb.textContent='🎵'}else{bgm.play().catch(()=>{});mb.classList.remove('off');mb.textContent='♪'}mo=!mo}
+function firstPlay(){ctx();bgm.volume=.3;bgm.play().then(()=>{mo=true;mb.classList.remove('off');mb.textContent='♪'}).catch(()=>{});document.removeEventListener('click',firstPlay)}
+document.addEventListener('click',firstPlay,{once:true})
 
-function ensureCtx(){if(!actx)actx=new AudioCtx();return actx}
-
-function paperClick(){
-  const a=ensureCtx(),t=a.currentTime;
-  // Paper rustle - filtered noise burst
-  const buf=a.createBuffer(1,a.sampleRate*.04,a.sampleRate);
-  const d=buf.getChannelData(0);
-  for(let i=0;i<d.length;i++)d[i]=(Math.random()*2-1)*Math.exp(-i/(a.sampleRate*.008));
-  const src=a.createBufferSource();src.buffer=buf;
-  const bp=a.createBiquadFilter();bp.type='bandpass';
-  bp.frequency.setValueAtTime(2800,t);bp.Q.setValueAtTime(1.5,t);
-  const gn=a.createGain();gn.gain.setValueAtTime(.06,t);
-  gn.gain.exponentialRampToValueAtTime(.001,t+.04);
-  src.connect(bp);bp.connect(gn);gn.connect(a.destination);
-  src.start(t);src.stop(t+.04);
-  // Soft low tap
-  const o=a.createOscillator();const g2=a.createGain();
-  o.type='sine';o.frequency.setValueAtTime(180,t);
-  g2.gain.setValueAtTime(.03,t);g2.gain.exponentialRampToValueAtTime(.001,t+.03);
-  o.connect(g2);g2.connect(a.destination);
-  o.start(t);o.stop(t+.03);
-}
-
-function paperHover(){
-  const a=ensureCtx(),t=a.currentTime;
-  const buf=a.createBuffer(1,a.sampleRate*.025,a.sampleRate);
-  const d=buf.getChannelData(0);
-  for(let i=0;i<d.length;i++)d[i]=(Math.random()*2-1)*Math.exp(-i/(a.sampleRate*.005));
-  const src=a.createBufferSource();src.buffer=buf;
-  const bp=a.createBiquadFilter();bp.type='bandpass';
-  bp.frequency.setValueAtTime(3500,t);bp.Q.setValueAtTime(1,t);
-  const gn=a.createGain();gn.gain.setValueAtTime(.02,t);
-  gn.gain.exponentialRampToValueAtTime(.001,t+.025);
-  src.connect(bp);bp.connect(gn);gn.connect(a.destination);
-  src.start(t);src.stop(t+.025);
-}
-
-// Attach paper sounds to all interactive elements
-document.addEventListener('click',e=>{
-  const t=e.target.closest('a,button,.paper-card,.brand-stamp,.hero-stat,.contact-card');
-  if(t)paperClick();
-});
-document.querySelectorAll('.paper-card,.brand-stamp,.hero-stat,.contact-card,.btn').forEach(el=>{
-  el.addEventListener('mouseenter',()=>paperHover());
-});
-
-// ===== BACKGROUND MUSIC =====
-const bgm=document.getElementById('bgm');
-const musicBtn=document.getElementById('musicBtn');
-let musicOn=false;
-
-function toggleMusic(){
-  ensureCtx();
-  if(musicOn){bgm.pause();musicBtn.classList.add('off');musicBtn.textContent='🎵'}
-  else{bgm.play().catch(()=>{});musicBtn.classList.remove('off');musicBtn.textContent='♪'}
-  musicOn=!musicOn;
-}
-// Start music on first user interaction
-function firstPlay(){ensureCtx();bgm.volume=.35;bgm.play().then(()=>{musicOn=true;musicBtn.classList.remove('off');musicBtn.textContent='♪'}).catch(()=>{});document.removeEventListener('click',firstPlay)}
-document.addEventListener('click',firstPlay,{once:true});
-
-// Nav
-window.addEventListener('scroll',()=>{
-  const nav=document.querySelector('nav');
-  nav.style.boxShadow=window.scrollY>10?'0 1px 20px rgba(0,0,0,.5)':'none';
-});
+// Nav shadow
+window.addEventListener('scroll',()=>{document.querySelector('nav').style.boxShadow=window.scrollY>10?'0 1px 20px rgba(0,0,0,.5)':'none'})
 </script>
 </body>
 </html>
