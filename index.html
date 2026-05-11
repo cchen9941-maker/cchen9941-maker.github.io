@@ -6,15 +6,13 @@
 <meta name="description" content="陈晨 Chenchen — 全平台自媒体运营 / 电影宣发剪辑 / 视觉中国签约摄影师。合作环球影业、万达电影、猫眼、网易云音乐。">
 <title>陈晨 Chenchen · 内容创作者 & 电影剪辑</title>
 <style>
-@font-face{font-family:'NightSerif';src:url('font-heading.ttf') format('truetype');font-display:swap}
-@font-face{font-family:'AccentBrush';src:url('font-accent.ttf') format('truetype');font-display:swap}
-
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 :root{
   --sky-top:#0a0c1a;--sky-bot:#1a1e35;
   --paper:#f5efe3;--paper2:#ede6d8;--paper-dark:#e0d8c8;
   --ink:#3a3020;--ink-muted:#6b5e4a;--ink-subtle:#9a8d78;
-  --gold:#c48a30;--gold-dim:#a07028;--gold-light:#e8c860;
+  --gold:#c48a30;--gold-dim:#a07028;--gold-light:#e8c860;--gold-glow:rgba(232,200,96,.55);
+  --poster-blue:#103e62;--lantern:#f7c95d;--coral:#d86a48;
   --window-lit:#ffe8a0;--lamp:#ffd870;
   --shadow-paper:0 2px 8px rgba(20,10,5,.25),0 6px 20px rgba(20,10,5,.15);
   --shadow-lift:0 6px 16px rgba(20,10,5,.3),0 14px 36px rgba(20,10,5,.18);
@@ -24,8 +22,13 @@
 html{font-size:16px;-webkit-font-smoothing:antialiased;scroll-behavior:smooth;scroll-padding-top:80px}
 body{
   font-family:'Inter',-apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei',sans-serif;
-  background:var(--sky-top);color:var(--ink);line-height:1.7;overflow-x:hidden;
+  background:var(--sky-top);color:var(--ink);line-height:1.7;overflow-x:hidden;cursor:none;
 }
+body::before{content:'';position:fixed;inset:-28px;pointer-events:none;z-index:0;background:linear-gradient(180deg,rgba(5,8,18,.18),rgba(5,8,18,.72)),url('Aesthetic/background.jpg') center/cover no-repeat;filter:blur(10px) saturate(1.12) contrast(1.04);transform:scale(1.04);animation:bgDrift 24s ease-in-out infinite alternate}
+body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;background:radial-gradient(circle at 50% 32%,rgba(255,198,132,.18),transparent 18%),radial-gradient(circle at 18% 12%,rgba(255,224,142,.08),transparent 22%),linear-gradient(90deg,rgba(4,6,18,.82) 0%,rgba(4,6,18,.42) 35%,rgba(4,6,18,.48) 65%,rgba(4,6,18,.86) 100%),repeating-linear-gradient(92deg,rgba(255,255,255,.018) 0 1px,transparent 1px 16px);mix-blend-mode:screen}
+@keyframes bgDrift{from{transform:scale(1.04) translate3d(-8px,-4px,0)}to{transform:scale(1.08) translate3d(8px,6px,0)}}
+::selection{background:rgba(232,200,96,.32);color:var(--paper)}
+a,button,.page-card,.stamp,.hero-stat,.cc-item,.platform-item{cursor:none}
 ::-webkit-scrollbar{width:4px}
 ::-webkit-scrollbar-track{background:var(--sky-top)}
 ::-webkit-scrollbar-thumb{background:var(--ink-subtle);border-radius:2px}
@@ -33,13 +36,25 @@ body{
 /* ===== DUST PARTICLES CANVAS ===== */
 #dust{position:fixed;inset:0;pointer-events:none;z-index:9998}
 
+/* ===== CUSTOM CURSOR ===== */
+.cursor-dot,.cursor-ring{position:fixed;left:0;top:0;pointer-events:none;z-index:10000;opacity:0;transform:translate3d(-50%,-50%,0);transition:opacity .25s ease, width .22s ease, height .22s ease, background .22s ease, border-color .22s ease, mix-blend-mode .22s ease}
+.cursor-dot{width:9px;height:9px;border-radius:50%;background:rgba(255,236,178,.95);box-shadow:0 0 12px rgba(255,222,150,.95),0 0 28px rgba(255,222,150,.35)}
+.cursor-ring{width:30px;height:30px;border-radius:50%;border:1px solid rgba(255,236,178,.42);box-shadow:0 0 22px rgba(255,222,150,.16)}
+body.cursor-ready .cursor-dot,body.cursor-ready .cursor-ring{opacity:1}
+body.cursor-hover .cursor-dot{width:7px;height:7px;background:rgba(255,255,255,.28);box-shadow:0 0 10px rgba(255,255,255,.55);mix-blend-mode:difference}
+body.cursor-hover .cursor-ring{width:58px;height:58px;border-color:rgba(255,255,255,.3);background:rgba(255,255,255,.08);backdrop-filter:blur(3px);mix-blend-mode:difference}
+@media (hover:none),(pointer:coarse){body{cursor:auto}.cursor-dot,.cursor-ring{display:none}a,button,.page-card,.stamp,.hero-stat,.cc-item,.platform-item{cursor:auto}}
+
 /* ===== NIGHT CITYSCAPE ===== */
 .city{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
-.city .sky{position:absolute;inset:0;background:linear-gradient(180deg,#0a0c1a 0%,#0f1225 20%,#141830 45%,#1a1f38 70%,#1c2240 100%)}
+.city{opacity:.34;mix-blend-mode:multiply}
+.city .sky{position:absolute;inset:0;background:linear-gradient(180deg,#070912 0%,#0c1630 24%,#103e62 58%,#10182e 100%)}
+.city .sky::after{content:'';position:absolute;inset:0;background:repeating-linear-gradient(92deg,rgba(255,255,255,.025) 0 1px,transparent 1px 12px),repeating-linear-gradient(0deg,rgba(255,255,255,.018) 0 1px,transparent 1px 10px);opacity:.38}
 .city .stars{position:absolute;top:0;left:0;right:0;height:60%;
   background-image:radial-gradient(1px 1px at 10% 8%,rgba(255,250,235,.7),transparent),radial-gradient(1.5px 1.5px at 28% 12%,rgba(255,250,235,.5),transparent),radial-gradient(1px 1px at 42% 5%,rgba(255,250,235,.8),transparent),radial-gradient(1px 1px at 55% 18%,rgba(255,250,235,.4),transparent),radial-gradient(1.5px 1.5px at 68% 9%,rgba(255,250,235,.6),transparent),radial-gradient(1px 1px at 80% 6%,rgba(255,250,235,.7),transparent),radial-gradient(1px 1px at 88% 16%,rgba(255,250,235,.5),transparent),radial-gradient(1px 1px at 15% 22%,rgba(255,250,235,.35),transparent),radial-gradient(1px 1px at 48% 20%,rgba(255,250,235,.45),transparent),radial-gradient(1px 1px at 72% 14%,rgba(255,250,235,.55),transparent),radial-gradient(1px 1px at 93% 10%,rgba(255,250,235,.4),transparent)}
-.city .moon{position:absolute;top:7%;right:16%;width:56px;height:56px;background:radial-gradient(circle,#faf5e8 0%,#f0e8d0 60%,transparent 70%);border-radius:50%;opacity:.85;box-shadow:0 0 40px rgba(250,240,220,.15),0 0 80px rgba(250,240,220,.08)}
-.city .bld{position:absolute;bottom:25%;background:#12162a}
+.city .moon{position:absolute;top:7%;right:16%;width:70px;height:70px;background:radial-gradient(circle at 44% 42%,#fff8df 0%,#f2dcc4 48%,rgba(240,210,170,.65) 63%,transparent 72%);border-radius:50%;opacity:.9;box-shadow:0 0 44px rgba(250,220,170,.18),0 0 110px rgba(250,220,170,.12)}
+.city .moon::after{content:'';position:absolute;inset:12px;border-radius:50%;background:radial-gradient(circle at 24% 32%,rgba(87,110,132,.22),transparent 20%),radial-gradient(circle at 68% 58%,rgba(87,110,132,.16),transparent 24%)}
+.city .bld{position:absolute;bottom:25%;background:#11172b;box-shadow:inset 0 0 0 1px rgba(230,210,170,.06),0 -1px 0 rgba(255,240,190,.08)}
 .city .b1{left:2%;width:8%;height:30%;border-radius:2px 2px 0 0}.city .b2{left:11%;width:6%;height:38%;border-radius:2px 2px 0 0;background:#111428}
 .city .b3{left:18%;width:10%;height:25%;border-radius:3px 3px 0 0}.city .b4{left:29%;width:7%;height:42%;border-radius:2px 2px 0 0}
 .city .b5{left:37%;width:12%;height:32%;border-radius:2px 2px 0 0;background:#111528}.city .b6{left:50%;width:9%;height:28%;border-radius:3px 3px 0 0}
@@ -56,10 +71,11 @@ body{
 .city .street{position:absolute;bottom:0;left:0;right:0;height:25%;background:linear-gradient(180deg,rgba(20,24,40,.6) 0%,rgba(15,18,30,.85) 30%,#0d0f1e 100%)}
 .city .refl{position:absolute;bottom:5%;left:0;right:0;height:20%;background:linear-gradient(0deg,rgba(255,230,160,.06) 0%,transparent 40%),linear-gradient(90deg,transparent 0%,rgba(255,220,140,.04) 15%,transparent 20%,rgba(255,220,140,.05) 40%,transparent 50%,rgba(255,220,140,.03) 65%,transparent 70%,rgba(255,220,140,.04) 85%,transparent 100%)}
 .city .fog{position:absolute;bottom:20%;left:0;right:0;height:30%;background:linear-gradient(180deg,transparent 0%,rgba(160,170,190,.04) 50%,rgba(140,150,170,.06) 100%);filter:blur(20px)}
+.city::after{content:'';position:absolute;left:-4%;right:-4%;bottom:24%;height:20%;background:linear-gradient(90deg,transparent 0 7%,rgba(255,224,142,.28) 7.2% 7.5%,transparent 7.7% 16%,rgba(255,224,142,.2) 16.2% 16.6%,transparent 17% 34%,rgba(255,224,142,.24) 34.2% 34.5%,transparent 35% 55%,rgba(255,224,142,.18) 55.2% 55.6%,transparent 56% 74%,rgba(255,224,142,.22) 74.2% 74.6%,transparent 75%);filter:blur(.4px);opacity:.55}
 
 /* Watercolor wash overlay */
-.watercolor{position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.04;
-  background:radial-gradient(ellipse at 20% 50%,#8b6b4a 0%,transparent 50%),radial-gradient(ellipse at 80% 20%,#6b8b6b 0%,transparent 40%),radial-gradient(ellipse at 50% 80%,#4a6b8b 0%,transparent 45%);
+.watercolor{position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.1;
+  background:radial-gradient(ellipse at 18% 48%,#d86a48 0%,transparent 34%),radial-gradient(ellipse at 80% 20%,#e8c860 0%,transparent 30%),radial-gradient(ellipse at 50% 80%,#4a8bb0 0%,transparent 45%);
 }
 
 /* ===== SIDE BOOKMARK NAV ===== */
@@ -76,13 +92,13 @@ body{
 
 /* ===== NAV ===== */
 nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(10,12,26,.88);backdrop-filter:blur(12px);border-bottom:1px solid rgba(200,180,140,.08);display:flex;justify-content:center;gap:28px;padding:15px 20px}
-nav a{color:var(--ink-subtle);text-decoration:none;font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;transition:color var(--ease)}
-nav a:hover,nav a.active{color:#e8d8b0}
+nav a{color:var(--ink-subtle);text-decoration:none;font-family:'Inter',-apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei',sans-serif;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;transition:all var(--spring);padding:3px 10px;clip-path:polygon(0% 3px,4px 0%,98% 0%,100% 3px,100% 96%,97% 100%,3% 100%,0% 97%)}
+nav a:hover,nav a.active{color:#fff7df;background:rgba(255,255,255,.12);backdrop-filter:blur(16px) saturate(1.35);transform:rotate(-1deg) translateY(-1px);box-shadow:0 12px 34px rgba(0,0,0,.18),inset 0 0 0 1px rgba(255,255,255,.18)}
 
 /* ===== CONTENT ===== */
 section{padding:72px 24px;max-width:860px;margin:0 auto;position:relative;z-index:1}
 @media(max-width:768px){section{padding:48px 18px}}
-.s-tag{display:inline-block;font-size:10px;font-weight:600;letter-spacing:.15em;color:var(--gold);text-transform:uppercase;margin-bottom:8px}
+.s-tag{display:inline-block;font-family:'Inter',-apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei',sans-serif;font-size:10px;font-weight:700;letter-spacing:.15em;color:var(--gold-light);text-transform:uppercase;margin-bottom:8px}
 .s-title{font-family:'NightSerif','Playfair Display',serif;font-size:clamp(28px,4vw,40px);font-weight:700;letter-spacing:-.01em;margin-bottom:8px;line-height:1.2;color:var(--paper);position:relative}
 /* Sketch underline */
 .s-title::after{content:'';display:block;width:40px;height:2px;margin-top:6px;background:var(--gold-dim);opacity:.4;border-radius:1px}
@@ -91,13 +107,14 @@ section{padding:72px 24px;max-width:860px;margin:0 auto;position:relative;z-inde
 /* ===== TORN PAPER CARD ===== */
 .page-stack{display:flex;flex-direction:column;gap:16px}
 .page-card{
-  background:var(--paper);position:relative;cursor:pointer;
+  background:rgba(245,239,227,.72);position:relative;cursor:pointer;
+  backdrop-filter:blur(18px) saturate(1.22);-webkit-backdrop-filter:blur(18px) saturate(1.22);
   transition:all var(--spring);overflow:visible;
   background-image:url("data:image/svg+xml,%3Csvg width='100' height='100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23n)' opacity='.025'/%3E%3C/svg%3E");
   /* Torn paper edges */
   clip-path:polygon(0% 3px,3px 0%,97% 0%,100% 4px,100% 96%,98% 100%,2% 100%,0% 97%);
   border:none;
-  box-shadow:var(--shadow-paper),0 0 0 1px rgba(180,160,130,.2);
+  box-shadow:var(--shadow-paper),inset 0 0 0 1px rgba(255,255,255,.28),0 0 0 1px rgba(180,160,130,.16);
 }
 /* Torn edge variation */
 .page-card:nth-child(odd){clip-path:polygon(0% 2px,2px 0%,98% 0%,100% 3px,100% 98%,97% 100%,3% 100%,0% 97%)}
@@ -114,9 +131,9 @@ section{padding:72px 24px;max-width:860px;margin:0 auto;position:relative;z-inde
 .page-head{display:flex;align-items:center;justify-content:space-between;padding:22px 28px;gap:16px;position:relative;z-index:1}
 .page-head .ph-left{display:flex;align-items:center;gap:14px;flex:1;min-width:0}
 .page-num{font-family:'NightSerif',serif;font-size:42px;color:var(--gold-dim);opacity:.22;line-height:1;flex-shrink:0;min-width:44px}
-.page-head h3{font-family:'NightSerif','Playfair Display',serif;font-size:19px;font-weight:600;color:var(--ink);letter-spacing:-.01em;line-height:1.2}
+.page-head h3{font-family:'NightSerif','Georgia','Songti SC','SimSun',serif;font-size:19px;font-weight:700;color:var(--ink);letter-spacing:0;line-height:1.2}
 .page-head .ph-preview{font-size:12px;color:var(--ink-muted);margin-top:2px}
-.page-toggle{width:30px;height:30px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;background:var(--paper-dark);transition:all var(--spring);font-size:18px;font-weight:300;color:var(--ink-muted);line-height:1}
+.page-toggle{width:32px;height:30px;border-radius:0;clip-path:polygon(0% 4px,4px 0%,96% 0%,100% 5px,100% 94%,95% 100%,4% 100%,0% 96%);flex-shrink:0;display:flex;align-items:center;justify-content:center;background:var(--paper-dark);transition:all var(--spring);font-family:'Inter',sans-serif;font-size:18px;font-weight:500;color:var(--ink-muted);line-height:1}
 .page-card.open .page-toggle{transform:rotate(45deg);background:var(--ink);color:var(--paper)}
 
 /* Card body */
@@ -147,38 +164,81 @@ section{padding:72px 24px;max-width:860px;margin:0 auto;position:relative;z-inde
 .skill-row .s-bar{height:100%;background:linear-gradient(90deg,var(--gold-dim),var(--gold-light));border-radius:2px;transition:width 1.4s cubic-bezier(.4,0,.2,1);width:0}
 .skill-row .s-pct{width:36px;font-size:11px;color:var(--gold-dim);font-weight:600;text-align:right;flex-shrink:0}
 
-/* ===== PORTFOLIO GALLERY ===== */
-.portfolio-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px}
-.port-card{perspective:800px;height:200px}
-.port-card-inner{position:relative;width:100%;height:100%;transition:transform .7s cubic-bezier(.4,0,.2,1);transform-style:preserve-3d}
-.port-card:hover .port-card-inner{transform:rotateY(180deg)}
-.port-front,.port-back{position:absolute;inset:0;backface-visibility:hidden;border-radius:3px 8px 3px 7px;overflow:hidden;box-shadow:var(--shadow-paper)}
-.port-front{background:var(--paper);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px;background-image:url("data:image/svg+xml,%3Csvg width='100' height='100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23n)' opacity='.025'/%3E%3C/svg%3E")}
-.port-front .pf-icon{font-size:36px;margin-bottom:10px;opacity:.5}
-.port-front .pf-title{font-family:'NightSerif',serif;font-size:15px;font-weight:600;color:var(--ink);text-align:center}
-.port-front .pf-sub{font-size:11px;color:var(--ink-muted);margin-top:4px}
-.port-back{background:var(--ink);color:var(--paper);transform:rotateY(180deg);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px;text-align:center}
-.port-back h4{font-family:'NightSerif',serif;font-size:15px;font-weight:600;margin-bottom:6px}
-.port-back p{font-size:11px;opacity:.7;line-height:1.6;max-width:180px}
+/* ===== WORK PLAYER ===== */
+.portfolio-player{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(250px,.65fr);gap:18px;align-items:start}
+.player-frame{position:relative;min-height:460px;background:linear-gradient(180deg,#101733,#0b1024);clip-path:polygon(0% 7px,7px 0%,98% 0%,100% 6px,100% 96%,97% 100%,2% 100%,0% 97%);box-shadow:var(--shadow-lift);overflow:hidden;color:var(--paper);isolation:isolate}
+.player-video{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:rgba(4,6,18,.72);z-index:2;opacity:0;transition:opacity .45s ease}
+.player-frame.has-video .player-video{opacity:1}
+.player-frame.has-video .player-sky,.player-frame.has-video .player-scene,.player-frame.has-video .player-city,.player-frame.has-video .player-tower,.player-frame.has-video .player-lines{opacity:0}
+.player-frame::before{content:'';position:absolute;inset:18px;border:2px solid rgba(248,232,189,.42);clip-path:polygon(0% 5px,6px 0%,98% 1%,100% 7px,99% 96%,96% 100%,3% 99%,0% 95%);opacity:.72}
+.player-sky{position:absolute;inset:0;background:radial-gradient(circle at 18% 18%,rgba(255,238,178,.18),transparent 15%),linear-gradient(180deg,#08112a 0%,#123f62 58%,#0d1329 100%)}
+.player-sky::before{content:'';position:absolute;inset:0;background-image:radial-gradient(2px 2px at 12% 18%,rgba(255,248,220,.9),transparent),radial-gradient(1px 1px at 72% 20%,rgba(255,248,220,.7),transparent),radial-gradient(2px 2px at 48% 10%,rgba(255,248,220,.8),transparent),radial-gradient(1px 1px at 86% 34%,rgba(255,248,220,.6),transparent)}
+.player-city{position:absolute;left:0;right:0;bottom:0;height:42%;background:linear-gradient(90deg,#0a0d17 0 12%,transparent 12% 15%,#0a0d17 15% 28%,transparent 28% 31%,#0a0d17 31% 42%,transparent 42% 46%,#0a0d17 46% 62%,transparent 62% 66%,#0a0d17 66% 81%,transparent 81% 84%,#0a0d17 84% 100%)}
+.player-city::before{content:'';position:absolute;left:6%;right:8%;bottom:18%;height:48%;background:repeating-linear-gradient(90deg,rgba(255,225,138,.85) 0 4px,transparent 4px 24px);opacity:.55;filter:blur(.2px)}
+.player-tower{position:absolute;left:48%;bottom:30%;width:44px;height:46%;border:3px solid rgba(248,232,189,.72);border-bottom:0;transform:skewX(-3deg);box-shadow:inset 0 0 0 2px rgba(20,10,5,.18)}
+.player-tower::before{content:'';position:absolute;left:8px;right:8px;top:-30px;height:30px;border:3px solid rgba(248,232,189,.72);border-bottom:0;clip-path:polygon(50% 0,100% 100%,0 100%)}
+.player-tower::after{content:'';position:absolute;left:8px;top:18px;width:22px;height:22px;border:2px solid rgba(248,232,189,.8);border-radius:50%;background:rgba(255,250,230,.16)}
+.player-lines{position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent 0 8px,rgba(255,255,255,.018) 8px 9px),repeating-linear-gradient(90deg,transparent 0 18px,rgba(255,255,255,.018) 18px 19px);mix-blend-mode:screen}
+.player-scene{position:absolute;inset:0;opacity:.2;transform:translateX(-4%);background:linear-gradient(110deg,transparent 0 28%,rgba(255,220,130,.16) 29% 30%,transparent 31% 100%)}
+.player-frame.playing .player-scene{animation:filmSweep 2.8s linear infinite;opacity:.5}
+.player-frame.playing .player-city::before{animation:windowPulse 1.8s ease-in-out infinite}
+.play-button{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%) rotate(-2deg);z-index:3;width:118px;height:88px;border:0;background:var(--paper);color:var(--ink);clip-path:polygon(0% 6px,7px 0%,96% 0%,100% 7px,100% 94%,94% 100%,4% 100%,0% 95%);box-shadow:var(--shadow-lift);font-family:'Inter',sans-serif;font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;cursor:pointer;transition:all var(--spring)}
+.play-button::before{content:'▶';display:block;font-family:'NightSerif',serif;font-size:28px;line-height:1;margin-bottom:2px;color:var(--gold-dim)}
+.play-button:hover{transform:translate(-50%,-50%) rotate(1deg) scale(1.05)}
+.player-frame.playing .play-button{opacity:.18;transform:translate(-50%,-50%) scale(.92);pointer-events:none}
+.player-caption{position:absolute;left:34px;right:34px;bottom:30px;z-index:3}
+.player-frame.has-video .player-caption{background:linear-gradient(180deg,transparent,rgba(5,8,18,.76));left:0;right:0;bottom:0;padding:84px 34px 30px}
+.player-label{display:inline-block;background:rgba(245,239,227,.9);color:var(--ink);font-family:'Inter',sans-serif;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.1em;padding:6px 14px;margin-bottom:10px;clip-path:polygon(0% 3px,4px 0%,98% 0%,100% 4px,100% 95%,96% 100%,3% 100%,0% 96%)}
+.player-title{font-family:'NightSerif','Georgia','Songti SC','SimSun',serif;font-size:clamp(30px,5vw,52px);line-height:1.05;color:var(--paper);text-shadow:0 3px 16px rgba(0,0,0,.45)}
+.player-desc{font-size:13px;color:rgba(245,239,227,.72);max-width:520px;margin-top:10px}
+.work-panel{display:flex;flex-direction:column;gap:12px}
+.platform-card,.work-note{background:rgba(245,239,227,.68);backdrop-filter:blur(18px) saturate(1.25);-webkit-backdrop-filter:blur(18px) saturate(1.25);clip-path:polygon(0% 5px,6px 0%,98% 0%,100% 5px,100% 96%,96% 100%,3% 100%,0% 97%);box-shadow:var(--shadow-paper),inset 0 0 0 1px rgba(255,255,255,.28);padding:18px;position:relative}
+.platform-card h3,.work-note h3{font-family:'NightSerif','Georgia','Songti SC','SimSun',serif;font-size:22px;color:var(--ink);line-height:1.1;margin-bottom:10px}
+.platform-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.platform-grid.work-data{grid-template-columns:1fr}
+.platform-item{background:rgba(255,255,255,.18);backdrop-filter:blur(12px);padding:10px;clip-path:polygon(0% 3px,4px 0%,97% 0%,100% 4px,100% 96%,96% 100%,3% 100%,0% 97%);box-shadow:inset 0 0 0 1px rgba(255,255,255,.2)}
+.platform-item .metric-line{display:block;font-size:11px;color:var(--ink-muted);line-height:1.7;margin-top:5px}
+.platform-item strong{display:block;font-family:'NightSerif','Georgia','Songti SC','SimSun',serif;font-size:22px;color:var(--gold-dim);line-height:1}
+.platform-item span{font-size:11px;color:var(--ink-muted)}
+.work-list{display:grid;gap:10px}
+.work-tab{border:0;text-align:left;background:rgba(245,239,227,.66);backdrop-filter:blur(16px) saturate(1.25);-webkit-backdrop-filter:blur(16px) saturate(1.25);color:var(--ink);padding:14px 16px;clip-path:polygon(0% 5px,6px 0%,98% 0%,100% 5px,100% 96%,96% 100%,3% 100%,0% 97%);box-shadow:var(--shadow-paper),inset 0 0 0 1px rgba(255,255,255,.26);cursor:pointer;transition:all var(--spring);font-family:inherit}
+.work-tab:hover,.work-tab.active{transform:translateY(-3px) rotate(-.6deg);box-shadow:var(--shadow-lift),inset 0 0 0 1px rgba(255,255,255,.38);background:rgba(255,250,232,.78)}
+.work-tab.active{outline:2px solid rgba(196,138,48,.28)}
+.work-tab .sketch-icon{display:inline-flex;align-items:center;justify-content:center;width:34px;height:28px;margin-right:8px;background:var(--ink);color:var(--paper);clip-path:polygon(0% 5px,6px 0%,96% 0%,100% 5px,100% 94%,95% 100%,4% 100%,0% 96%);font-family:'Inter',sans-serif;font-size:10px;font-weight:800;text-transform:uppercase;vertical-align:middle}
+.work-tab strong{font-family:'NightSerif','Georgia','Songti SC','SimSun',serif;font-size:20px;vertical-align:middle}
+.work-tab span{display:block;margin-left:46px;margin-top:4px;font-size:11px;color:var(--ink-muted)}
+.platform-links{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.platform-links a{font-family:'Inter',sans-serif;font-size:12px;font-weight:800;color:var(--ink);text-decoration:none;background:rgba(255,255,255,.18);backdrop-filter:blur(12px);padding:8px 12px;clip-path:polygon(0% 3px,4px 0%,98% 0%,100% 4px,100% 95%,96% 100%,3% 100%,0% 96%);transition:all var(--spring);box-shadow:inset 0 0 0 1px rgba(255,255,255,.18)}
+.platform-links a:hover{transform:translateY(-2px) rotate(-1deg);background:var(--gold-light)}
+@keyframes filmSweep{from{transform:translateX(-60%)}to{transform:translateX(75%)}}
+@keyframes windowPulse{0%,100%{opacity:.38}50%{opacity:.8}}
 
 /* ===== BRANDS ===== */
 .brands-grid{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-bottom:10px}
-.stamp{padding:10px 22px;background:var(--paper);border-radius:2px 6px 2px 5px;box-shadow:var(--shadow-paper);font-family:'NightSerif','Playfair Display',serif;font-size:13px;font-weight:600;color:var(--ink);transition:all var(--spring);cursor:default;text-align:center;background-image:url("data:image/svg+xml,%3Csvg width='100' height='100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23n)' opacity='.02'/%3E%3C/svg%3E")}
+.stamp{padding:10px 22px;background:rgba(245,239,227,.68);backdrop-filter:blur(14px) saturate(1.2);-webkit-backdrop-filter:blur(14px) saturate(1.2);border-radius:2px 6px 2px 5px;box-shadow:var(--shadow-paper),inset 0 0 0 1px rgba(255,255,255,.24);font-family:'NightSerif','Playfair Display',serif;font-size:13px;font-weight:600;color:var(--ink);transition:all var(--spring);cursor:default;text-align:center;background-image:url("data:image/svg+xml,%3Csvg width='100' height='100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23n)' opacity='.02'/%3E%3C/svg%3E")}
 .stamp:hover{transform:translateY(-3px) rotate(-.5deg);box-shadow:var(--shadow-lift)}
-.stamp.dark{background:#3a3020;color:var(--paper);box-shadow:0 2px 8px rgba(20,10,5,.35)}
-.stamp.dark:hover{background:#4a3a28}
+.stamp.dark{background:rgba(38,30,24,.58);color:var(--paper);box-shadow:0 2px 8px rgba(20,10,5,.35),inset 0 0 0 1px rgba(255,255,255,.14)}
+.stamp.dark:hover{background:rgba(58,45,34,.72)}
+.brand-stage{position:relative;margin-top:18px;padding:34px 18px;overflow:hidden;clip-path:polygon(0% 7px,7px 0%,98% 0%,100% 5px,100% 96%,97% 100%,2% 100%,0% 97%);background:rgba(245,239,227,.46);backdrop-filter:blur(18px) saturate(1.25);-webkit-backdrop-filter:blur(18px) saturate(1.25);box-shadow:var(--shadow-paper),inset 0 0 0 1px rgba(255,255,255,.24)}
+.brand-stage::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 18% 22%,rgba(216,106,72,.18),transparent 20%),radial-gradient(circle at 78% 14%,rgba(16,62,98,.16),transparent 22%),repeating-linear-gradient(90deg,rgba(58,48,32,.08) 0 2px,transparent 2px 24px);opacity:.7;mix-blend-mode:multiply}
+.brand-stage::after{content:'';position:absolute;inset:12px;border:1px solid rgba(58,48,32,.14);pointer-events:none}
+.brand-stage .brands-grid{position:relative;z-index:1}
+.brand-caption{position:relative;z-index:1;text-align:center;font-size:12px;color:var(--ink-muted);margin-top:16px}
 
 /* ===== HERO ===== */
-.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:120px 24px 80px;max-width:860px;margin:0 auto;position:relative;z-index:1}
-.hero .ticket{display:inline-flex;align-items:center;gap:8px;padding:8px 18px;background:var(--paper);clip-path:polygon(0% 2px,2px 0%,98% 0%,100% 2px,100% 98%,97% 100%,3% 100%,0% 97%);font-size:10px;font-weight:600;letter-spacing:.12em;color:var(--gold-dim);text-transform:uppercase;margin-bottom:28px}
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:120px 24px 80px;max-width:1040px;margin:0 auto;position:relative;z-index:1}
+.hero>*{position:relative;z-index:2;max-width:560px}
+.hero::before{content:'';position:absolute;right:-20px;top:12%;width:min(42vw,390px);height:74%;background:radial-gradient(circle at 28% 18%,rgba(255,245,210,.92) 0 34px,transparent 36px),radial-gradient(circle at 18% 15%,rgba(255,245,210,.65) 0 2px,transparent 3px),radial-gradient(circle at 62% 10%,rgba(255,245,210,.55) 0 2px,transparent 3px),radial-gradient(circle at 80% 22%,rgba(255,245,210,.6) 0 1px,transparent 2px),linear-gradient(90deg,transparent 0 8%,#0b1020 8% 24%,transparent 24% 29%,#0b1020 29% 48%,transparent 48% 54%,#0b1020 54% 76%,transparent 76% 80%,#0b1020 80% 100%),linear-gradient(180deg,#0b1430,#123f62 58%,#0a0d18);clip-path:polygon(2% 1%,98% 0,100% 96%,96% 100%,3% 98%,0 4%);box-shadow:0 28px 70px rgba(0,0,0,.42),0 0 0 1px rgba(255,230,170,.14);opacity:.72}
+.hero::after{content:'CONTENT / CINEMA / VISUAL STORY';position:absolute;right:6px;bottom:18%;z-index:3;writing-mode:vertical-rl;color:rgba(245,239,227,.46);font-size:10px;letter-spacing:.24em}
+.hero .ticket{display:inline-flex;align-items:center;gap:8px;padding:8px 18px;background:rgba(245,239,227,.68);backdrop-filter:blur(16px) saturate(1.25);-webkit-backdrop-filter:blur(16px) saturate(1.25);clip-path:polygon(0% 2px,2px 0%,98% 0%,100% 2px,100% 98%,97% 100%,3% 100%,0% 97%);font-size:10px;font-weight:600;letter-spacing:.12em;color:var(--gold-dim);text-transform:uppercase;margin-bottom:28px;box-shadow:0 12px 28px rgba(0,0,0,.22),inset 0 0 0 1px rgba(255,255,255,.22)}
 .hero .ticket::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--gold);opacity:.7}
 .hero .aka{font-size:15px;color:rgba(220,210,190,.35);margin-bottom:20px;font-style:italic;letter-spacing:.02em}
 .hero .aka span{margin:0 10px}
-.hero h1{font-family:'NightSerif','Playfair Display',serif;font-size:clamp(44px,8vw,84px);font-weight:800;letter-spacing:-.02em;line-height:1.05;margin-bottom:18px;color:var(--paper);text-shadow:0 2px 16px rgba(0,0,0,.5)}
+.hero h1{font-family:'NightSerif','Playfair Display',serif;font-size:clamp(52px,8vw,96px);font-weight:800;letter-spacing:0;line-height:1.02;margin-bottom:18px;color:var(--paper);text-shadow:0 2px 16px rgba(0,0,0,.5),0 0 34px rgba(232,200,96,.08)}
 .hero h1 em{font-style:italic;color:var(--gold-light);font-weight:400}
 .hero .tagline{font-size:16px;color:rgba(230,220,200,.6);max-width:460px;margin-bottom:40px;line-height:1.7}
 .hero-stats{display:flex;gap:20px;flex-wrap:wrap}
-.hero-stat{background:var(--paper);padding:14px 20px;clip-path:polygon(0% 3px,3px 0%,97% 0%,100% 3px,100% 97%,98% 100%,2% 100%,0% 97%);box-shadow:var(--shadow-paper);transition:all var(--spring);cursor:default;min-width:90px}
+.hero-stat{background:rgba(245,239,227,.62);backdrop-filter:blur(16px) saturate(1.25);-webkit-backdrop-filter:blur(16px) saturate(1.25);padding:14px 20px;clip-path:polygon(0% 3px,3px 0%,97% 0%,100% 3px,100% 97%,98% 100%,2% 100%,0% 97%);box-shadow:var(--shadow-paper),0 0 34px rgba(232,200,96,.08),inset 0 0 0 1px rgba(255,255,255,.22);transition:all var(--spring);cursor:default;min-width:90px}
 .hero-stat:hover{transform:translateY(-3px) rotate(-.5deg);box-shadow:var(--shadow-lift)}
 .hero-stat:nth-child(even):hover{transform:translateY(-3px) rotate(.5deg)}
 .hero-stat .num{font-family:'NightSerif',serif;font-size:26px;font-weight:700;color:var(--gold-dim)}
@@ -186,49 +246,73 @@ section{padding:72px 24px;max-width:860px;margin:0 auto;position:relative;z-inde
 
 /* ===== CONTACT ===== */
 .contact-row{display:flex;gap:12px;flex-wrap:wrap}
-.cc-item{flex:1;min-width:140px;background:var(--paper);padding:18px 20px;clip-path:polygon(0% 3px,3px 0%,97% 0%,100% 3px,100% 97%,98% 100%,2% 100%,0% 97%);box-shadow:var(--shadow-paper);transition:all var(--spring);cursor:default}
+.cc-item{flex:1;min-width:140px;background:rgba(245,239,227,.68);backdrop-filter:blur(16px) saturate(1.25);-webkit-backdrop-filter:blur(16px) saturate(1.25);padding:18px 20px;clip-path:polygon(0% 3px,3px 0%,97% 0%,100% 3px,100% 97%,98% 100%,2% 100%,0% 97%);box-shadow:var(--shadow-paper),inset 0 0 0 1px rgba(255,255,255,.22);transition:all var(--spring);cursor:default}
 .cc-item:hover{transform:translateY(-3px);box-shadow:var(--shadow-lift)}
 .cc-item .cc-label{font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:var(--gold-dim);margin-bottom:4px}
 .cc-item .cc-val{font-size:13px;color:var(--ink);font-weight:500}
 
 /* ===== MUSIC BTN ===== */
-.music-btn{position:fixed;bottom:24px;right:24px;z-index:200;width:38px;height:38px;border-radius:50%;background:var(--paper);border:none;cursor:pointer;box-shadow:var(--shadow-paper);transition:all var(--spring);display:flex;align-items:center;justify-content:center;font-size:15px;opacity:.65}
+.music-btn{position:fixed;bottom:24px;right:24px;z-index:200;width:38px;height:38px;border-radius:50%;background:rgba(245,239,227,.58);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.22);cursor:pointer;box-shadow:var(--shadow-paper);transition:all var(--spring);display:flex;align-items:center;justify-content:center;font-size:15px;opacity:.65}
 .music-btn:hover{transform:scale(1.12);opacity:1}
 .music-btn.off{opacity:.3}.music-btn.off::after{content:'';position:absolute;width:1.5px;height:16px;background:var(--ink-muted);transform:rotate(-45deg);border-radius:1px}
 
 /* ===== RESUME BAR ===== */
-.resume-ticket{background:var(--paper);clip-path:polygon(0% 3px,3px 0%,97% 0%,100% 3px,100% 97%,98% 100%,2% 100%,0% 97%);box-shadow:var(--shadow-paper);padding:22px 28px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-top:40px}
+.resume-ticket{background:rgba(245,239,227,.68);backdrop-filter:blur(16px) saturate(1.25);-webkit-backdrop-filter:blur(16px) saturate(1.25);clip-path:polygon(0% 3px,3px 0%,97% 0%,100% 3px,100% 97%,98% 100%,2% 100%,0% 97%);box-shadow:var(--shadow-paper),inset 0 0 0 1px rgba(255,255,255,.22);padding:22px 28px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-top:40px}
 .resume-ticket p{font-size:13px;color:var(--ink-muted)}
 .resume-ticket strong{color:var(--ink);font-family:'NightSerif','Playfair Display',serif}
-.btn{display:inline-flex;align-items:center;gap:6px;padding:10px 22px;clip-path:polygon(0% 2px,2px 0%,98% 0%,100% 2px,100% 98%,97% 100%,3% 100%,0% 97%);background:var(--ink);color:var(--paper);font-size:12px;font-weight:600;cursor:pointer;text-decoration:none;letter-spacing:.04em;border:none;transition:all var(--spring);font-family:inherit}
+.btn{display:inline-flex;align-items:center;gap:6px;padding:10px 22px;clip-path:polygon(0% 2px,2px 0%,98% 0%,100% 2px,100% 98%,97% 100%,3% 100%,0% 97%);background:rgba(58,48,32,.78);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);color:var(--paper);font-size:12px;font-weight:600;cursor:pointer;text-decoration:none;letter-spacing:.04em;border:1px solid rgba(255,255,255,.18);transition:all var(--spring);font-family:inherit}
 .btn:hover{transform:translateY(-2px) rotate(-.3deg);box-shadow:0 4px 16px rgba(20,10,5,.35)}
 
 /* ===== FOOTER ===== */
 footer{text-align:center;padding:36px 24px;position:relative;z-index:1;color:rgba(200,180,150,.25);font-size:10px;letter-spacing:.06em}
 footer .ft-icon{margin-bottom:8px;opacity:.18}
 
+/* ===== AESTHETIC FLOATS ===== */
+.float-note{position:absolute;z-index:1;pointer-events:none;font-family:'NightSerif','Georgia',serif;color:rgba(248,232,189,.22);font-size:44px;line-height:1;transform:rotate(-8deg)}
+#about::before{content:'story';right:2%;top:8%}
+#experience::before{content:'reel';left:0;top:10%;transform:rotate(9deg)}
+#about::before,#experience::before{position:absolute;z-index:0;pointer-events:none;font-family:'NightSerif','Georgia',serif;color:rgba(248,232,189,.14);font-size:clamp(52px,9vw,108px);line-height:1}
+
 /* ===== REVEAL ===== */
 .reveal{opacity:0;transform:translateY(16px);transition:all .7s cubic-bezier(.4,0,.2,1)}
 .reveal.on{opacity:1;transform:translateY(0)}
+.page-card,.hero-stat,.stamp,.player-frame,.platform-card,.work-note,.work-tab,.cc-item,.resume-ticket{will-change:transform}
+.page-card:hover,.work-tab:hover,.stamp:hover,.cc-item:hover{filter:saturate(1.06)}
+.player-frame{animation:floatFrame 7s ease-in-out infinite}
+@keyframes floatFrame{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
 
 /* ===== RESPONSIVE ===== */
 @media(max-width:768px){
   nav{gap:16px;padding:12px 10px;flex-wrap:wrap}
   nav a{font-size:10px}
+  .hero{padding-top:132px;min-height:auto}
+  .hero::before{position:relative;right:auto;top:auto;width:100%;height:360px;order:10;margin-top:34px;opacity:.68}
+  .hero::after{display:none}
   .hero h1{font-size:38px}
   .hero-stats{gap:12px}
+  .hero-stat{flex:1 1 calc(50% - 12px);min-width:120px}
+  .portfolio-player{grid-template-columns:1fr}
+  .player-frame{min-height:390px}
   .page-head{padding:18px 16px}
   .page-body-inner{padding:0 16px 18px 16px}
   .page-num{font-size:30px;min-width:34px}
   .page-head h3{font-size:16px}
   .skill-row .s-name{width:90px;font-size:12px}
-  .portfolio-grid{grid-template-columns:1fr 1fr}
-  .port-card{height:150px}
   .side-nav{right:8px;gap:8px}
+}
+@media(max-width:520px){
+  nav{justify-content:flex-start;overflow-x:auto;flex-wrap:nowrap}
+  section{padding-left:16px;padding-right:16px}
+  .player-caption{left:22px;right:22px;bottom:22px}
+  .player-title{font-size:34px}
+  .platform-grid{grid-template-columns:1fr}
+  .contact-row{display:grid;grid-template-columns:1fr}
 }
 </style>
 </head>
 <body>
+<div class="cursor-dot" id="cursorDot"></div>
+<div class="cursor-ring" id="cursorRing"></div>
 
 <!-- Dust particles -->
 <canvas id="dust"></canvas>
@@ -304,7 +388,7 @@ footer .ft-icon{margin-bottom:8px;opacity:.18}
       <div class="page-head"><div class="ph-left"><span class="page-num">03</span><div><h3>顶级品牌合作背书</h3><p class="ph-preview">环球影业 · 万达电影 · 猫眼 · 网易云音乐</p></div></div><div class="page-toggle">+</div></div>
       <div class="page-body"><div class="page-body-inner">
         <p class="dropcap">曾直接为<strong>环球影业、万达电影、猫眼</strong>等头部平台及<strong>网易云音乐</strong>制作社媒宣传视频，涵盖多部全球知名 IP。</p>
-        <div class="highlight-box">合作影片：《阿凡达》《魔法坏女巫》《疯狂动物城》《忌日快乐》《死神来了》——每一部都是全球观众熟知的名字。</div>
+        <div class="highlight-box">合作影片：《阿凡达》《魔法坏女巫》《疯狂动物城》《忌日快乐》《死神来了》《坏蛋联盟》《马里奥银河》《侏罗纪世界》等——每一部都是全球观众熟知的名字。</div>
         <p>在严格遵守官方品牌调性的前提下，通过创意剪辑与叙事重构，显著提升影片在各大社媒平台的话题热度与互动数据。</p>
       </div></div>
     </div>
@@ -354,32 +438,64 @@ footer .ft-icon{margin-bottom:8px;opacity:.18}
 <section id="portfolio">
   <div class="s-tag reveal">✦ Selected Works</div>
   <h2 class="s-title reveal">作品集</h2>
-  <p class="s-note reveal">悬停卡片翻转查看详情。更多作品请前往各平台主页。</p>
-  <div class="portfolio-grid reveal">
-    <div class="port-card">
-      <div class="port-card-inner">
-        <div class="port-front"><div class="pf-icon">🎬</div><div class="pf-title">电影宣发剪辑</div><div class="pf-sub">环球影业 · 万达电影</div></div>
-        <div class="port-back"><h4>电影宣发剪辑</h4><p>为《阿凡达》《魔法坏女巫》等好莱坞大片制作社媒宣传短片，显著提升话题热度。</p></div>
+  <p class="s-note reveal">点击纸条切换展示主题，再从右侧平台入口前往真实作品主页。</p>
+  <div class="portfolio-player reveal">
+    <div class="player-frame playing" id="workPlayer">
+      <video class="player-video" id="workVideo" muted playsinline loop preload="metadata">
+        <source src="profolio/Modesta/𝕄𝕠𝕕𝕖𝕤𝕥𝕒 - 小红书.mp4" type="video/mp4">
+      </video>
+      <div class="player-sky"></div>
+      <div class="player-scene"></div>
+      <div class="player-city"></div>
+      <div class="player-tower"></div>
+      <div class="player-lines"></div>
+      <button class="play-button" type="button" onclick="openActiveWork()">open</button>
+      <div class="player-caption">
+        <span class="player-label" id="playerLabel">Cross-platform Hit</span>
+        <h3 class="player-title" id="playerTitle">Modesta</h3>
+        <p class="player-desc" id="playerDesc">同一支作品在小红书、抖音、TikTok、Bilibili、YouTube 多平台分发，其中抖音播放 528.5 万，TikTok 播放 336.4 万。</p>
       </div>
     </div>
-    <div class="port-card">
-      <div class="port-card-inner">
-        <div class="port-front"><div class="pf-icon">🎵</div><div class="pf-title">音乐内容创作</div><div class="pf-sub">网易云音乐合作</div></div>
-        <div class="port-back"><h4>音乐内容创作</h4><p>为网易云音乐制作视觉化音乐内容，融合旋律与影像的跨媒介叙事。</p></div>
+    <aside class="work-panel">
+      <div class="platform-card">
+        <h3 id="dataTitle">Modesta 数据</h3>
+        <div class="platform-grid work-data" id="workData">
+          <div class="platform-item"><strong>小红书</strong><span class="metric-line">播放 40.4 万 · 点赞 7.58 万 · 评论 575 · 收藏 2658</span></div>
+          <div class="platform-item"><strong>抖音</strong><span class="metric-line">播放 528.5 万 · 点赞 79.7 万 · 收藏 6.7 万 · 分享 6.2 万</span></div>
+          <div class="platform-item"><strong>TikTok</strong><span class="metric-line">播放 336.4 万 · 点赞 76 万 · 评论 1158 · 收藏 7.6 万</span></div>
+          <div class="platform-item"><strong>Bilibili</strong><span class="metric-line">播放 24.1 万 · 点赞 4.1 万 · 评论 190 · 投币 587 · 收藏 3023</span></div>
+          <div class="platform-item"><strong>YouTube</strong><span class="metric-line">播放 1.9 万</span></div>
+        </div>
       </div>
-    </div>
-    <div class="port-card">
-      <div class="port-card-inner">
-        <div class="port-front"><div class="pf-icon">▶️</div><div class="pf-title">YouTube 频道</div><div class="pf-sub">1.6w+ 订阅</div></div>
-        <div class="port-back"><h4>YouTube 频道</h4><p>独立运营影视二次创作频道，全英文 SEO 优化，累计百万级播放。</p></div>
+      <div class="work-list" id="workList">
+        <button class="work-tab active" type="button" data-title="Modesta" data-label="Cross-platform Hit" data-desc="同一支作品在小红书、抖音、TikTok、Bilibili、YouTube 多平台分发，其中抖音播放 528.5 万，TikTok 播放 336.4 万。" data-video="profolio/Modesta/𝕄𝕠𝕕𝕖𝕤𝕥𝕒 - 小红书.mp4" data-url="#">
+          <span class="sketch-icon">mp4</span><strong>Modesta</strong><span>抖音 528.5 万播放 / TikTok 336.4 万播放</span>
+        </button>
+        <button class="work-tab" type="button" data-title="电影宣发剪辑" data-label="Film Campaign" data-desc="为电影 IP 制作社媒宣传短片，用节奏、情绪和画面张力提升内容传播效率。" data-url="#">
+          <span class="sketch-icon">play</span><strong>电影宣发</strong><span>环球影业 / 万达电影 / 猫眼 / 多个 IP</span>
+        </button>
+        <button class="work-tab" type="button" data-title="YouTube 频道" data-label="YouTube" data-desc="独立运营影视二次创作频道，英文 SEO、封面包装和标题策略共同驱动内容增长。" data-url="#">
+          <span class="sketch-icon">yt</span><strong>YouTube</strong><span>1.6w+ 订阅 / 海外内容运营</span>
+        </button>
+        <button class="work-tab" type="button" data-title="Bilibili / 小红书内容" data-label="CN Platforms" data-desc="面向国内内容生态做选题、标题、节奏和视觉包装适配，让同一内容资产在多平台传播。" data-url="#">
+          <span class="sketch-icon">cn</span><strong>国内平台</strong><span>Bilibili / 小红书 / 抖音</span>
+        </button>
+        <button class="work-tab" type="button" data-title="TikTok 短视频矩阵" data-label="TikTok" data-desc="熟悉短视频推荐机制与趋势捕捉，把影视内容拆解成适合快速传播的短视频单元。" data-url="#">
+          <span class="sketch-icon">tk</span><strong>TikTok</strong><span>短视频账号矩阵</span>
+        </button>
       </div>
-    </div>
-    <div class="port-card">
-      <div class="port-card-inner">
-        <div class="port-front"><div class="pf-icon">📷</div><div class="pf-title">签约摄影</div><div class="pf-sub">视觉中国 500px</div></div>
-        <div class="port-back"><h4>签约摄影</h4><p>通过视觉中国专业审核签约，作品具备商业授权资质，高质量视觉供稿。</p></div>
+      <div class="work-note">
+        <h3>作品链接</h3>
+        <p>把你的小红书、抖音、TikTok、Bilibili、YouTube 链接发给我后，我会把这里的占位入口换成真实跳转；YouTube / Bilibili 单条视频也可以进一步做内嵌播放。</p>
+        <div class="platform-links">
+          <a href="#" target="_blank" rel="noopener">小红书</a>
+          <a href="#" target="_blank" rel="noopener">抖音</a>
+          <a href="#" target="_blank" rel="noopener">TikTok</a>
+          <a href="#" target="_blank" rel="noopener">Bilibili</a>
+          <a href="#" target="_blank" rel="noopener">YouTube</a>
+        </div>
       </div>
-    </div>
+    </aside>
   </div>
 </section>
 
@@ -402,7 +518,7 @@ footer .ft-icon{margin-bottom:8px;opacity:.18}
       <div class="page-body"><div class="page-body-inner">
         <p style="color:var(--gold-dim);font-size:11px;text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px">项目制合作</p>
         <p class="dropcap">受邀对接国内顶级宣发平台及好莱坞片方，负责电影社媒宣传短片的剪辑与二次创作。</p>
-        <ul><li>合作机构：<strong>猫眼、万达电影、环球影业、网易云音乐</strong></li><li>合作 IP：《阿凡达》《魔法坏女巫》《疯狂动物城》《忌日快乐》《死神来了》等</li><li>在满足品牌官方调性的基础上，通过创意剪辑与叙事重构显著提升话题热度</li><li>理解院线电影宣发周期与社媒内容节奏的配合逻辑</li></ul>
+        <ul><li>合作机构：<strong>猫眼、万达电影、环球影业、网易云音乐</strong></li><li>合作 IP：《阿凡达》《魔法坏女巫》《疯狂动物城》《忌日快乐》《死神来了》《坏蛋联盟》《马里奥银河》《侏罗纪世界》等</li><li>在满足品牌官方调性的基础上，通过创意剪辑与叙事重构显著提升话题热度</li><li>理解院线电影宣发周期与社媒内容节奏的配合逻辑</li></ul>
       </div></div>
     </div>
     <div class="page-card reveal" onclick="toggleCard(this)">
@@ -414,10 +530,10 @@ footer .ft-icon{margin-bottom:8px;opacity:.18}
       </div></div>
     </div>
     <div class="page-card reveal" onclick="toggleCard(this)">
-      <div class="page-head"><div class="ph-left"><span class="page-num">04</span><div><h3>学生会宣传部 · 起点</h3><p class="ph-preview">校级活动记录 · 毕业纪念视频</p></div></div><div class="page-toggle">+</div></div>
+      <div class="page-head"><div class="ph-left"><span class="page-num">04</span><div><h3>学生时期 · 视觉创作起点</h3><p class="ph-preview">活动记录 · 毕业纪念视频 · 早期影像实践</p></div></div><div class="page-toggle">+</div></div>
       <div class="page-body"><div class="page-body-inner">
-        <p style="color:var(--gold-dim);font-size:11px;text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px">高中时期</p>
-        <p>通过面试入选学生会宣传部核心成员，负责校级活动的视觉记录。独立主导并完成班级毕业纪念视频制作——从策划、拍摄到剪辑的全流程实践，获得师生极高评价。</p>
+        <p style="color:var(--gold-dim);font-size:11px;text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px">学生时期</p>
+        <p>在学生时期开始系统接触视觉记录与影像制作，参与活动影像记录，并独立主导完成毕业纪念视频——从策划、拍摄到剪辑的全流程实践，获得身边同学与老师的积极反馈。</p>
         <div class="highlight-box">正是这段经历，种下了对<strong>视觉叙事</strong>的热爱。从那时起，一直在用镜头讲述故事。</div>
       </div></div>
     </div>
@@ -429,8 +545,11 @@ footer .ft-icon{margin-bottom:8px;opacity:.18}
   <div class="s-tag reveal" style="text-align:center;display:block">✦ Brand Collaborations</div>
   <h2 class="s-title reveal" style="text-align:center">合作品牌与 IP</h2>
   <p class="s-note reveal" style="text-align:center;margin-left:auto;margin-right:auto">曾直接为以下机构及影片制作社媒宣传内容</p>
-  <div class="brands-grid reveal"><span class="stamp dark">环球影业</span><span class="stamp dark">万达电影</span><span class="stamp dark">猫眼</span><span class="stamp dark">网易云音乐</span><span class="stamp dark">视觉中国 500px</span></div>
-  <div class="brands-grid reveal"><span class="stamp">《阿凡达》</span><span class="stamp">《魔法坏女巫》</span><span class="stamp">《疯狂动物城》</span><span class="stamp">《忌日快乐》</span><span class="stamp">《死神来了》</span></div>
+  <div class="brand-stage reveal">
+    <div class="brands-grid"><span class="stamp dark">环球影业</span><span class="stamp dark">万达电影</span><span class="stamp dark">猫眼</span><span class="stamp dark">网易云音乐</span><span class="stamp dark">视觉中国 500px</span></div>
+    <div class="brands-grid"><span class="stamp">《阿凡达》</span><span class="stamp">《魔法坏女巫》</span><span class="stamp">《疯狂动物城》</span><span class="stamp">《忌日快乐》</span><span class="stamp">《死神来了》</span><span class="stamp">《坏蛋联盟》</span><span class="stamp">《马里奥银河》</span><span class="stamp">《侏罗纪世界》</span></div>
+    <p class="brand-caption">这些名称不只是经历列表，更是你已经进入商业内容链路的证明。</p>
+  </div>
 </section>
 
 <!-- Contact -->
@@ -439,7 +558,7 @@ footer .ft-icon{margin-bottom:8px;opacity:.18}
   <h2 class="s-title reveal">联系方式</h2>
   <p class="s-note reveal">欢迎品牌合作、项目邀约与工作机会联系。</p>
   <div class="contact-row reveal">
-    <div class="cc-item"><div class="cc-label">邮箱</div><div class="cc-val">你的邮箱@example.com</div></div>
+    <div class="cc-item"><div class="cc-label">邮箱</div><div class="cc-val">cchen9941@gmail.com</div></div>
     <div class="cc-item"><div class="cc-label">TikTok / 抖音</div><div class="cc-val">哈利的屁股蛋</div></div>
     <div class="cc-item"><div class="cc-label">小红书</div><div class="cc-val">哈利的屁股蛋</div></div>
     <div class="cc-item"><div class="cc-label">YouTube / Bilibili</div><div class="cc-val">战略计 / zhanlueji</div></div>
@@ -451,25 +570,45 @@ footer .ft-icon{margin-bottom:8px;opacity:.18}
 </section>
 
 <button class="music-btn off" id="musicBtn" title="背景音乐" onclick="toggleMusic()">🎵</button>
-<audio id="bgm" loop preload="auto" src="bgm.mp3"></audio>
+<audio id="bgm" loop preload="auto" src="audio/Teeny Tiny Hooligans (5).mp3"></audio>
 
 <footer><div class="ft-icon">&#9670;</div>&copy; 2026 陈晨 Chenchen. All rights reserved.</footer>
 
 <script>
+// ===== CUSTOM CURSOR =====
+const cursorDot=document.getElementById('cursorDot'),cursorRing=document.getElementById('cursorRing');
+let cX=innerWidth/2,cY=innerHeight/2,rX=cX,rY=cY;
+function moveCursor(e){
+  cX=e.clientX;cY=e.clientY;document.body.classList.add('cursor-ready');
+  cursorDot.style.transform=`translate3d(${cX}px,${cY}px,0) translate(-50%,-50%)`;
+}
+function renderCursor(){
+  rX+=(cX-rX)*.18;rY+=(cY-rY)*.18;
+  cursorRing.style.transform=`translate3d(${rX}px,${rY}px,0) translate(-50%,-50%)`;
+  requestAnimationFrame(renderCursor);
+}
+if(matchMedia('(hover:hover) and (pointer:fine)').matches){
+  window.addEventListener('mousemove',moveCursor);
+  renderCursor();
+  document.addEventListener('mouseover',e=>{if(e.target.closest('a,button,.page-card,.stamp,.hero-stat,.cc-item,.platform-item,.work-tab,.music-btn'))document.body.classList.add('cursor-hover')});
+  document.addEventListener('mouseout',e=>{if(e.target.closest('a,button,.page-card,.stamp,.hero-stat,.cc-item,.platform-item,.work-tab,.music-btn'))document.body.classList.remove('cursor-hover')});
+}
+
 // ===== DUST PARTICLES =====
 const dc=document.getElementById('dust'),dx=dc.getContext('2d');
 let dusts=[],dW,dH;
 function resizeDust(){dW=dc.width=innerWidth;dH=dc.height=innerHeight}
 resizeDust();window.addEventListener('resize',resizeDust);
 // Seed dust
-for(let i=0;i<40;i++)dusts.push({x:Math.random()*dW,y:Math.random()*dH,r:.3+Math.random()*1.5,vx:(Math.random()-.5)*.15,vy:-(.1+Math.random()*.25),o:.1+Math.random()*.35,phase:Math.random()*Math.PI*2});
+for(let i=0;i<92;i++)dusts.push({x:Math.random()*dW,y:Math.random()*dH,r:.35+Math.random()*1.9,vx:(Math.random()-.5)*.22,vy:-(.08+Math.random()*.32),o:.08+Math.random()*.38,phase:Math.random()*Math.PI*2,h:Math.random()});
 function animDust(t){
   dx.clearRect(0,0,dW,dH);
   dusts.forEach(d=>{
-    d.x+=d.vx+Math.sin(t*.001+d.phase)*.08;d.y+=d.vy;
+    d.x+=d.vx+Math.sin(t*.001+d.phase)*.12;d.y+=d.vy;
     if(d.x<0)d.x=dW;if(d.x>dW)d.x=0;if(d.y<-10)d.y=dH+10;if(d.y>dH+10)d.y=-10;
     dx.beginPath();dx.arc(d.x,d.y,d.r,0,Math.PI*2);
-    dx.fillStyle=`rgba(255,240,210,${(d.o*.5+Math.sin(t*.002+d.phase)*.15).toFixed(2)})`;dx.fill();
+    const warm=d.h>.65?'255,222,150':'255,240,210';
+    dx.fillStyle=`rgba(${warm},${Math.max(.02,d.o*.55+Math.sin(t*.002+d.phase)*.16).toFixed(2)})`;dx.fill();
   });
   requestAnimationFrame(animDust);
 }
@@ -478,7 +617,7 @@ requestAnimationFrame(animDust);
 // ===== PAPER SOUND ENGINE =====
 const AC=window.AudioContext||window.webkitAudioContext;let actx=null,pb=null;
 function ctx(){if(!actx)actx=new AC();return actx}
-fetch('paper.mp3').then(r=>r.arrayBuffer()).then(b=>ctx().decodeAudioData(b)).then(b=>{pb=b}).catch(()=>{})
+fetch('sound/liecio-crumping-paper-109585.mp3').then(r=>r.arrayBuffer()).then(b=>ctx().decodeAudioData(b)).then(b=>{pb=b}).catch(()=>{})
 function playPaper(v=.06,r=1){
   const a=ctx();
   if(pb){const s=a.createBufferSource();s.buffer=pb;s.playbackRate.value=r+.2*Math.random();const g=a.createGain();g.gain.value=v;s.connect(g);g.connect(a.destination);s.start();return}
@@ -488,8 +627,9 @@ function playPaper(v=.06,r=1){
   const g=a.createGain();g.gain.setValueAtTime(v,a.currentTime);g.gain.exponentialRampToValueAtTime(.001,a.currentTime+.04);
   src.connect(bp);bp.connect(g);g.connect(a.destination);src.start();src.stop(a.currentTime+.04)
 }
-document.addEventListener('click',e=>{if(e.target.closest('.page-card,.stamp,.hero-stat,.btn,.cc-item,.port-card'))playPaper(.05,.9)})
-document.querySelectorAll('.page-card,.stamp,.hero-stat,.btn,.cc-item,.port-card').forEach(el=>{el.addEventListener('mouseenter',()=>playPaper(.02,1.3))})
+document.addEventListener('click',e=>{if(e.target.closest('.page-card,.stamp,.hero-stat,.btn,.cc-item'))playPaper(.05,.9)})
+document.addEventListener('click',e=>{if(e.target.closest('.work-tab,.play-button,.platform-item'))playPaper(.06,.85)})
+document.querySelectorAll('.page-card,.stamp,.hero-stat,.btn,.cc-item,.work-tab,.play-button,.platform-item').forEach(el=>{el.addEventListener('mouseenter',()=>playPaper(.02,1.3))})
 
 // ===== EXPANDABLE CARDS =====
 function toggleCard(card){
@@ -499,6 +639,46 @@ function toggleCard(card){
     setTimeout(()=>card.querySelectorAll('.s-bar').forEach(b=>b.style.width=b.dataset.width+'%'),200)}
   else playPaper(.03,1.5)
 }
+
+// ===== WORK PLAYER =====
+let activeWorkUrl='#';
+const workVideo=document.getElementById('workVideo');
+const workPlayer=document.getElementById('workPlayer');
+const defaultData=document.getElementById('workData').innerHTML;
+document.querySelectorAll('.work-tab').forEach(tab=>{
+  tab.addEventListener('click',()=>{
+    document.querySelectorAll('.work-tab').forEach(t=>t.classList.remove('active'));
+    tab.classList.add('active');
+    document.getElementById('playerTitle').textContent=tab.dataset.title;
+    document.getElementById('playerLabel').textContent=tab.dataset.label;
+    document.getElementById('playerDesc').textContent=tab.dataset.desc;
+    activeWorkUrl=tab.dataset.url||'#';
+    if(tab.dataset.video){
+      if(workVideo.getAttribute('src')!==tab.dataset.video) workVideo.src=tab.dataset.video;
+      workPlayer.classList.add('has-video','playing');
+      workVideo.play().catch(()=>{});
+      document.getElementById('dataTitle').textContent='Modesta 数据';
+      document.getElementById('workData').innerHTML=defaultData;
+    }else{
+      workVideo.pause();
+      workPlayer.classList.remove('has-video');
+      document.getElementById('dataTitle').textContent='平台与数据';
+      document.getElementById('workData').innerHTML='<div class="platform-item"><strong>10w+</strong><span class="metric-line">全网粉丝</span></div><div class="platform-item"><strong>100w+</strong><span class="metric-line">累计赞藏</span></div><div class="platform-item"><strong>1.6w+</strong><span class="metric-line">YouTube 订阅</span></div><div class="platform-item"><strong>5 年</strong><span class="metric-line">海外运营经验</span></div>';
+      workPlayer.classList.remove('playing');
+      void workPlayer.offsetWidth;
+      workPlayer.classList.add('playing');
+    }
+  })
+})
+function openActiveWork(){
+  playPaper(.07,.8);
+  if(workPlayer.classList.contains('has-video')){
+    if(workVideo.paused) workVideo.play().catch(()=>{}); else workVideo.pause();
+  }else if(activeWorkUrl&&activeWorkUrl!=='#') window.open(activeWorkUrl,'_blank','noopener');
+  else alert('把作品链接发给我后，这里会跳转到对应平台。');
+}
+workPlayer.classList.add('has-video');
+workVideo.play().catch(()=>{});
 
 // ===== COUNTER =====
 function animCounter(el){if(el.dataset.done)return;el.dataset.done='1';const tgt=parseInt(el.dataset.target),dur=1800,st=performance.now();function up(now){const p=Math.min((now-st)/dur,1),e=1-Math.pow(1-p,3),cur=Math.floor(e*tgt);el.textContent=tgt>=1e5?(cur/1e4).toFixed(1)+'w':cur.toLocaleString();if(p<1)requestAnimationFrame(up);else el.textContent=tgt>=1e5?(tgt/1e4).toFixed(1)+'w':tgt.toLocaleString()}requestAnimationFrame(up)}
