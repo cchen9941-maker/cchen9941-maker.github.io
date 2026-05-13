@@ -189,10 +189,27 @@ section{padding:100px 28px;max-width:1000px;margin:0 auto;position:relative;z-in
 .platform-card h3,.work-note h3{font-family:'NightSerif','Georgia','Songti SC','SimSun',serif;font-size:22px;color:var(--ink);line-height:1.1;margin-bottom:10px}
 .platform-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .platform-grid.work-data{grid-template-columns:1fr}
-.platform-item{background:rgba(255,255,255,.18);backdrop-filter:blur(12px);padding:10px;clip-path:polygon(0% 3px,4px 0%,97% 0%,100% 4px,100% 96%,96% 100%,3% 100%,0% 97%);box-shadow:inset 0 0 0 1px rgba(255,255,255,.2)}
-.platform-item .metric-line{display:block;font-size:11px;color:var(--ink-muted);line-height:1.7;margin-top:5px}
-.platform-item strong{display:block;font-family:'NightSerif','Georgia','Songti SC','SimSun',serif;font-size:22px;color:var(--gold-dim);line-height:1}
-.platform-item span{font-size:11px;color:var(--ink-muted)}
+.platform-item{background:rgba(255,255,255,.18);backdrop-filter:blur(12px);padding:14px 16px;clip-path:polygon(0% 3px,4px 0%,97% 0%,100% 4px,100% 96%,96% 100%,3% 100%,0% 97%);box-shadow:inset 0 0 0 1px rgba(255,255,255,.2);transition:all var(--spring);cursor:default}
+.platform-item:hover{transform:translateY(-2px);box-shadow:inset 0 0 0 1px rgba(255,255,255,.35),var(--shadow-lift)}
+.platform-item .pf-name{font-size:13px;font-weight:700;color:var(--ink);margin-bottom:10px;font-family:'NightSerif','Georgia',serif;letter-spacing:.02em}
+/* Metric rows */
+.metrics-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.metric{text-align:left}
+.metric .m-num{font-family:'NightSerif','Georgia',serif;font-size:26px;font-weight:700;line-height:1.1;transition:all .6s ease}
+.metric .m-label{font-size:10px;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-muted);margin-top:2px}
+/* Color-coded numbers */
+.m-num.plays{color:#4a8bb0}
+.m-num.likes{color:#d86a48}
+.m-num.saves{color:#c48a30}
+.m-num.comments{color:#5a7a4a}
+.m-num.shares{color:#8b5a9e}
+.m-num.subs{color:#c48a30}
+
+/* Hover pulse */
+.platform-item:hover .m-num{transform:scale(1.08)}
+.platform-item:hover .m-num.plays{text-shadow:0 0 18px rgba(74,139,176,.3)}
+.platform-item:hover .m-num.likes{text-shadow:0 0 18px rgba(216,106,72,.3)}
+.platform-item:hover .m-num.saves{text-shadow:0 0 18px rgba(196,162,48,.3)}
 .work-list{display:grid;gap:10px}
 .work-tab{border:0;text-align:left;background:rgba(245,239,227,.66);backdrop-filter:blur(16px) saturate(1.25);-webkit-backdrop-filter:blur(16px) saturate(1.25);color:var(--ink);padding:14px 16px;clip-path:polygon(0% 5px,6px 0%,98% 0%,100% 5px,100% 96%,96% 100%,3% 100%,0% 97%);box-shadow:var(--shadow-paper),inset 0 0 0 1px rgba(255,255,255,.26);cursor:pointer;transition:all var(--spring);font-family:inherit}
 .work-tab:hover,.work-tab.active{transform:translateY(-3px) rotate(-.6deg);box-shadow:var(--shadow-lift),inset 0 0 0 1px rgba(255,255,255,.38);background:rgba(255,250,232,.78)}
@@ -486,9 +503,7 @@ footer .ft-icon{margin-bottom:8px;opacity:.18}
   <p class="s-note reveal">点击纸条切换展示主题，再从右侧平台入口前往真实作品主页。</p>
   <div class="portfolio-player reveal">
     <div class="player-frame playing" id="workPlayer">
-      <video class="player-video" id="workVideo" muted playsinline loop preload="metadata">
-        <source src="profolio/Modesta/𝕄𝕠𝕕𝕖𝕤𝕥𝕒 - 小红书.mp4" type="video/mp4">
-      </video>
+      <video class="player-video" id="workVideo" muted playsinline loop preload="metadata" src="profolio/Modesta/modesta.mp4"></video>
       <div class="player-sky"></div>
       <div class="player-scene"></div>
       <div class="player-city"></div>
@@ -503,17 +518,17 @@ footer .ft-icon{margin-bottom:8px;opacity:.18}
     </div>
     <aside class="work-panel">
       <div class="platform-card">
-        <h3 id="dataTitle">Modesta 数据</h3>
+        <h3 id="dataTitle">Modesta · 数据表现</h3>
         <div class="platform-grid work-data" id="workData">
-          <div class="platform-item"><strong>小红书</strong><span class="metric-line">播放 40.4 万 · 点赞 7.58 万 · 评论 575 · 收藏 2658</span></div>
-          <div class="platform-item"><strong>抖音</strong><span class="metric-line">播放 528.5 万 · 点赞 79.7 万 · 收藏 6.7 万 · 分享 6.2 万</span></div>
-          <div class="platform-item"><strong>TikTok</strong><span class="metric-line">播放 336.4 万 · 点赞 76 万 · 评论 1158 · 收藏 7.6 万</span></div>
-          <div class="platform-item"><strong>Bilibili</strong><span class="metric-line">播放 24.1 万 · 点赞 4.1 万 · 评论 190 · 投币 587 · 收藏 3023</span></div>
-          <div class="platform-item"><strong>YouTube</strong><span class="metric-line">播放 1.9 万</span></div>
+          <div class="platform-item"><div class="pf-name">小红书</div><div class="metrics-grid"><div class="metric"><div class="m-num plays counter" data-target="404000">0</div><div class="m-label">播放</div></div><div class="metric"><div class="m-num likes counter" data-target="75800">0</div><div class="m-label">点赞</div></div><div class="metric"><div class="m-num comments counter" data-target="575">0</div><div class="m-label">评论</div></div><div class="metric"><div class="m-num saves counter" data-target="2658">0</div><div class="m-label">收藏</div></div></div></div>
+          <div class="platform-item"><div class="pf-name">抖音</div><div class="metrics-grid"><div class="metric"><div class="m-num plays counter" data-target="5285000">0</div><div class="m-label">播放</div></div><div class="metric"><div class="m-num likes counter" data-target="797000">0</div><div class="m-label">点赞</div></div><div class="metric"><div class="m-num saves counter" data-target="67000">0</div><div class="m-label">收藏</div></div><div class="metric"><div class="m-num shares counter" data-target="62000">0</div><div class="m-label">分享</div></div></div></div>
+          <div class="platform-item"><div class="pf-name">TikTok</div><div class="metrics-grid"><div class="metric"><div class="m-num plays counter" data-target="3364000">0</div><div class="m-label">播放</div></div><div class="metric"><div class="m-num likes counter" data-target="760000">0</div><div class="m-label">点赞</div></div><div class="metric"><div class="m-num comments counter" data-target="1158">0</div><div class="m-label">评论</div></div><div class="metric"><div class="m-num saves counter" data-target="76000">0</div><div class="m-label">收藏</div></div></div></div>
+          <div class="platform-item"><div class="pf-name">Bilibili</div><div class="metrics-grid"><div class="metric"><div class="m-num plays counter" data-target="241000">0</div><div class="m-label">播放</div></div><div class="metric"><div class="m-num likes counter" data-target="41000">0</div><div class="m-label">点赞</div></div><div class="metric"><div class="m-num comments counter" data-target="190">0</div><div class="m-label">评论</div></div><div class="metric"><div class="m-num saves counter" data-target="3023">0</div><div class="m-label">收藏</div></div></div></div>
+          <div class="platform-item"><div class="pf-name">YouTube</div><div class="metrics-grid"><div class="metric"><div class="m-num plays counter" data-target="19000">0</div><div class="m-label">播放</div></div></div></div>
         </div>
       </div>
       <div class="work-list" id="workList">
-        <button class="work-tab active" type="button" data-title="Modesta" data-label="Cross-platform Hit" data-desc="同一支作品在小红书、抖音、TikTok、Bilibili、YouTube 多平台分发，其中抖音播放 528.5 万，TikTok 播放 336.4 万。" data-video="profolio/Modesta/𝕄𝕠𝕕𝕖𝕤𝕥𝕒 - 小红书.mp4" data-url="#">
+        <button class="work-tab active" type="button" data-title="Modesta" data-label="Cross-platform Hit" data-desc="同一支作品在小红书、抖音、TikTok、Bilibili、YouTube 多平台分发，其中抖音播放 528.5 万，TikTok 播放 336.4 万。" data-video="profolio/Modesta/modesta.mp4" data-url="#">
           <span class="sketch-icon">mp4</span><strong>Modesta</strong><span>抖音 528.5 万播放 / TikTok 336.4 万播放</span>
         </button>
         <button class="work-tab" type="button" data-title="电影宣发剪辑" data-label="Film Campaign" data-desc="为电影 IP 制作社媒宣传短片，用节奏、情绪和画面张力提升内容传播效率。" data-url="#">
@@ -702,13 +717,13 @@ document.querySelectorAll('.work-tab').forEach(tab=>{
       if(workVideo.getAttribute('src')!==tab.dataset.video) workVideo.src=tab.dataset.video;
       workPlayer.classList.add('has-video','playing');
       workVideo.play().catch(()=>{});
-      document.getElementById('dataTitle').textContent='Modesta 数据';
+      document.getElementById('dataTitle').textContent='Modesta · 数据表现';
       document.getElementById('workData').innerHTML=defaultData;
     }else{
       workVideo.pause();
       workPlayer.classList.remove('has-video');
       document.getElementById('dataTitle').textContent='平台与数据';
-      document.getElementById('workData').innerHTML='<div class="platform-item"><strong>10w+</strong><span class="metric-line">全网粉丝</span></div><div class="platform-item"><strong>100w+</strong><span class="metric-line">累计赞藏</span></div><div class="platform-item"><strong>1.6w+</strong><span class="metric-line">YouTube 订阅</span></div><div class="platform-item"><strong>5 年</strong><span class="metric-line">海外运营经验</span></div>';
+      document.getElementById('workData').innerHTML='<div class="platform-item"><div class="pf-name">全平台</div><div class="metrics-grid"><div class="metric"><div class="m-num likes counter" data-target="100000">0</div><div class="m-label">全网粉丝</div></div><div class="metric"><div class="m-num likes counter" data-target="1000000">0</div><div class="m-label">累计赞藏</div></div><div class="metric"><div class="m-num subs counter" data-target="16000">0</div><div class="m-label">YouTube订阅</div></div><div class="metric"><div class="m-num plays counter" data-target="5">0</div><div class="m-label">海外运营(年)</div></div></div></div>'; setTimeout(()=>document.querySelectorAll('#workData .counter[data-target]').forEach(c=>animCounter(c)),100);
       workPlayer.classList.remove('playing');
       void workPlayer.offsetWidth;
       workPlayer.classList.add('playing');
@@ -727,7 +742,10 @@ workVideo.play().catch(()=>{});
 
 // ===== COUNTER =====
 function animCounter(el){if(el.dataset.done)return;el.dataset.done='1';const tgt=parseInt(el.dataset.target),dur=1800,st=performance.now();function up(now){const p=Math.min((now-st)/dur,1),e=1-Math.pow(1-p,3),cur=Math.floor(e*tgt);el.textContent=tgt>=1e5?(cur/1e4).toFixed(1)+'w':cur.toLocaleString();if(p<1)requestAnimationFrame(up);else el.textContent=tgt>=1e5?(tgt/1e4).toFixed(1)+'w':tgt.toLocaleString()}requestAnimationFrame(up)}
-setTimeout(()=>document.querySelectorAll('.counter[data-target]').forEach(c=>animCounter(c)),400)
+setTimeout(()=>document.querySelectorAll('.counter[data-target]').forEach(c=>animCounter(c)),400);
+// Also animate portfolio metric counters when they become visible
+const metricObs=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting)e.target.querySelectorAll('.counter[data-target]').forEach(c=>animCounter(c))})},{threshold:.3});
+const dataPanel=document.getElementById('workData');if(dataPanel)metricObs.observe(dataPanel);
 
 // ===== SCROLL REVEAL =====
 const obs=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('on')})},{threshold:.08,rootMargin:'0px 0px -30px 0px'})
